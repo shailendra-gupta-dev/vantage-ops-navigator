@@ -1,0 +1,102 @@
+// Figma node 7:1845 — Assets screen content (renders inside app-layout__content router-outlet)
+@reference "../../../styles.scss";
+
+.assets-page {
+  @apply flex items-center justify-center p-[30px] min-h-full;
+
+  &__card {
+    @apply flex flex-col items-start shrink-0;
+    background: #1e293b;
+    border: 1px solid rgba(100, 116, 139, 0.2);
+    border-radius: 15px;
+    width: 480px;
+    max-width: 480px;
+    padding: 31px;
+  }
+
+  &__card-icon-wrap {
+    @apply flex flex-col items-center w-full;
+  }
+
+  &__card-icon {
+    @apply flex items-center justify-center text-[24px];
+    background: rgba(79, 70, 229, 0.1);
+    border: 1px solid rgba(79, 70, 229, 0.2);
+    border-radius: 15px;
+    width: 52.5px;
+    height: 52.5px;
+  }
+
+  &__card-title-wrap {
+    @apply flex flex-col items-center w-full;
+    padding-top: 15px;
+  }
+
+  &__card-title {
+    @apply text-center font-bold;
+    color: #e2e8f0;
+    font-size: 18px;
+    line-height: 27px;
+    margin: 0;
+  }
+
+  &__card-desc {
+    @apply text-center w-full;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 19.5px;
+    padding-top: 8px;
+    max-width: 418px;
+    align-self: center;
+    margin: 0;
+  }
+
+  &__card-infobox-wrap {
+    @apply w-full;
+    padding-top: 20px;
+  }
+
+  &__card-infobox {
+    @apply w-full;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 15.25px;
+    padding: 16px;
+  }
+
+  &__card-infobox-heading {
+    @apply font-semibold;
+    color: #64748b;
+    font-size: 11px;
+    letter-spacing: 0.44px;
+    line-height: 16.5px;
+    margin: 0;
+  }
+
+  &__card-list {
+    @apply list-none m-0 p-0;
+    padding-top: 8px;
+  }
+
+  &__card-list-item {
+    @apply flex;
+    gap: 7.5px;
+
+    & + & {
+      padding-top: 7.5px;
+    }
+  }
+
+  &__card-bullet {
+    @apply shrink-0;
+    color: #334155;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  &__card-list-item > span:last-child {
+    color: #475569;
+    font-size: 12px;
+    line-height: 18px;
+  }
+}

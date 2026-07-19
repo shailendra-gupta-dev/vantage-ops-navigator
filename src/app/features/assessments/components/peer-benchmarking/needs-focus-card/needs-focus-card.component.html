@@ -1,0 +1,18 @@
+<!-- Card C: Needs Focus (Lifecycle) -->
+<div class="assessments-page__rank-card">
+  <div class="assessments-page__rank-card-header">
+    <div class="assessments-page__rank-icon-wrap assessments-page__rank-icon-wrap--amber">
+      <img src="assets/icons/warning-icon.svg" alt="" class="assessments-page__rank-icon" aria-hidden="true">
+    </div>
+    <div class="assessments-page__rank-labels">
+      <span class="assessments-page__rank-label">Needs Focus</span>
+      <span class="assessments-page__rank-value">Lifecycle</span>
+    </div>
+  </div>
+  @defer (on idle) {
+    <div echarts class="assessments-page__chart" [options]="chartOpt()"></div>
+  } @placeholder {
+    <div class="assessments-page__chart"></div>
+  }
+  <p class="assessments-page__rank-footnote">11% of devices are EoL or EoS. Closing this gap moves overall rank to top 18%.</p>
+</div>

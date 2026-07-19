@@ -1,0 +1,37 @@
+<div class="app-layout">
+
+  <!-- ── Sidebar ─────────────────────────────────────────────────────────── -->
+  <app-sidebar
+    [currentRole]="currentRole()"
+    [navConfig]="navConfig()"
+    [profile]="profile()"
+  />
+
+  <!-- ── Main column ────────────────────────────────────────────────────── -->
+  <div class="app-layout__main">
+
+    <app-header
+      [currentRole]="currentRole()"
+      [profile]="profile()"
+      [pageTitle]="pageTitle()"
+      (roleChange)="currentRole.set($event)"
+      (searchOpen)="searchOpen.set(true)"
+    />
+
+    <app-contract-pulse-strip />
+
+    <main class="app-layout__content" role="main">
+      <router-outlet />
+    </main>
+
+    <app-footer />
+
+  </div>
+
+  <!-- Spotlight overlay — outside .app-layout__main so fixed covers full viewport -->
+  <app-spotlight-search
+    [isOpen]="searchOpen()"
+    (closed)="searchOpen.set(false)"
+  />
+
+</div>

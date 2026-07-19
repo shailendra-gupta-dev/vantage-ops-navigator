@@ -1,0 +1,95 @@
+<div class="contract-lifecycle">
+  <!-- Panel 1: Service Contract -->
+  <div class="contract-lifecycle__panel">
+    <div class="contract-lifecycle__panel-header">
+      <h3 class="contract-lifecycle__panel-title">Service Contract</h3>
+    </div>
+    <div class="contract-lifecycle__table-wrap">
+      <table class="contract-lifecycle__table">
+        <thead class="contract-lifecycle__thead">
+          <tr>
+            <th class="contract-lifecycle__th">Contract ID</th>
+            <th class="contract-lifecycle__th">Type</th>
+            <th class="contract-lifecycle__th">Status</th>
+            <th class="contract-lifecycle__th">Coverage Start</th>
+            <th class="contract-lifecycle__th">Coverage End</th>
+            <th class="contract-lifecycle__th">Days Remaining</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="contract-lifecycle__row">
+            <td class="contract-lifecycle__td contract-lifecycle__td--mono">C-2025-044</td>
+            <td class="contract-lifecycle__td">SNTC</td>
+            <td class="contract-lifecycle__td">
+              <span class="contract-lifecycle__status contract-lifecycle__status--{{ device().contractStatus }}">
+                {{ statusLabel() }}
+              </span>
+            </td>
+            <td class="contract-lifecycle__td">Jan 1, 2025</td>
+            <td class="contract-lifecycle__td">
+              @if (device().contractExpiry) {
+                {{ formatDate(device().contractExpiry!) }}
+              }
+            </td>
+            <td class="contract-lifecycle__td">
+              @if (contractDaysRemaining() !== null) {
+                <span class="contract-lifecycle__days"
+                      [class.contract-lifecycle__days--warning]="contractDaysRemaining()! <= 180"
+                      [class.contract-lifecycle__days--critical]="contractDaysRemaining()! <= 90">
+                  {{ contractDaysRemaining() }}d
+                </span>
+              }
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="contract-lifecycle__panel-footer">
+      <button class="contract-lifecycle__renew-btn" type="button">Renew Contract</button>
+    </div>
+  </div>
+
+  <!-- Panel 2: End of Life Timeline -->
+  <div class="contract-lifecycle__panel">
+    <h3 class="contract-lifecycle__panel-title">End of Life Timeline</h3>
+    <div class="contract-lifecycle__timeline">
+      <div class="contract-lifecycle__timeline-track">
+        @for (m of milestones(); track m.label; let i = $index; let last = $last) {
+          <div class="contract-lifecycle__milestone">
+            <div class="contract-lifecycle__milestone-node contract-lifecycle__milestone-node--{{ m.urgency }}"></div>
+            @if (!last) {
+              <div class="contract-lifecycle__milestone-line"></div>
+            }
+          </div>
+        }
+      </div>
+      <div class="contract-lifecycle__timeline-labels">
+        @for (m of milestones(); track m.label) {
+          <div class="contract-lifecycle__milestone-label">
+            <span class="contract-lifecycle__milestone-name">{{ m.label }}</span>
+            <span class="contract-lifecycle__milestone-date contract-lifecycle__milestone-date--{{ m.urgency }}">{{ m.date }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel 3: Recommended Migration -->
+  <div class="contract-lifecycle__panel">
+    <h3 class="contract-lifecycle__panel-title">Recommended Migration Path</h3>
+    <div class="contract-lifecycle__migration">
+      <div class="contract-lifecycle__migration-row">
+        <span class="contract-lifecycle__migration-label">Recommended Platform</span>
+        <span class="contract-lifecycle__migration-value">Meridian Vertex 9500X Series</span>
+      </div>
+      <div class="contract-lifecycle__migration-links">
+        <a class="contract-lifecycle__migration-link" href="#" target="_blank" rel="noopener noreferrer">
+          View Migration Guide →
+        </a>
+        <a class="contract-lifecycle__migration-link" href="#" target="_blank" rel="noopener noreferrer">
+          View Support Advisory →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

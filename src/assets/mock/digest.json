@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": "dig-001",
+      "type": "advisory",
+      "title": "CVE-2026-2047 affects 12 of your devices",
+      "subtitle": "Critical · Published Wednesday 11:30 AM",
+      "severity": "critical",
+      "publishedAt": "2026-06-08T11:30:00Z",
+      "route": "/assessments/timeline"
+    },
+    {
+      "id": "dig-002",
+      "type": "ldos",
+      "title": "3 devices crossed into 90-day LDOS window",
+      "subtitle": "SW-NYC-ACCESS-04, 05, and 1 more",
+      "severity": "high",
+      "publishedAt": "2026-06-09T08:00:00Z",
+      "route": "/assets/inventory"
+    },
+    {
+      "id": "dig-003",
+      "type": "contract",
+      "title": "Contract C-2024-881 now expires in 87 days",
+      "subtitle": "18 devices affected",
+      "severity": "high",
+      "publishedAt": "2026-06-08T00:00:00Z",
+      "route": "/planning/contracts"
+    },
+    {
+      "id": "dig-004",
+      "type": "case",
+      "title": "Support Case #8821044 — resolution notes added",
+      "subtitle": "Engineer: K. Ramirez",
+      "severity": "info",
+      "publishedAt": "2026-06-09T14:22:00Z",
+      "route": "/support/cases"
+    }
+  ]
+}

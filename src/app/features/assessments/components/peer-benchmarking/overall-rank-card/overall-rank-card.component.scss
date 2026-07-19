@@ -1,0 +1,167 @@
+@reference "../../../../../../styles.scss";
+
+.assessments-page {
+  // Shared rank card container — also applies to best-dimension-card and needs-focus-card
+  // via ViewEncapsulation.None global scope
+  &__rank-card {
+    @apply flex flex-col items-start flex-1;
+    background: #1e293b;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 15.25px;
+    min-width: 0;
+    padding: 12.25px 16px;
+  }
+
+  // Shared rank card header styles — used by all three rank cards
+  &__rank-card-header {
+    @apply flex items-center w-full;
+    gap: 7.5px;
+  }
+
+  &__rank-icon-wrap {
+    @apply flex items-center justify-center shrink-0;
+    border-radius: 11.25px;
+    border-style: solid;
+    border-width: 1px;
+    height: 26.25px;
+    padding: 1px;
+    width: 26.25px;
+
+    &--indigo {
+      background: rgba(79, 70, 229, 0.15);
+      border-color: rgba(79, 70, 229, 0.25);
+    }
+
+    &--emerald {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+
+    &--amber {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.25);
+    }
+  }
+
+  &__rank-icon {
+    @apply block;
+    width: 13px;
+    height: 13px;
+  }
+
+  &__rank-labels {
+    @apply flex flex-col items-start;
+  }
+
+  &__rank-label {
+    @apply font-normal whitespace-nowrap;
+    color: #64748b;
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  &__rank-value {
+    @apply font-bold whitespace-nowrap;
+    color: #e2e8f0;
+    font-size: 15px;
+    line-height: 15px;
+  }
+
+  &__rank-value-row {
+    @apply flex items-center;
+    gap: 5.625px;
+  }
+
+  &__rank-badge {
+    @apply font-semibold whitespace-nowrap;
+    font-size: 11px;
+    line-height: 16.5px;
+
+    &--emerald { color: #10b981; }
+  }
+
+  &__rank-trend {
+    @apply flex items-center;
+    gap: 1.875px;
+  }
+
+  &__trend-icon {
+    @apply block;
+    width: 10px;
+    height: 10px;
+  }
+
+  &__trend-value {
+    @apply font-normal whitespace-nowrap;
+    color: #10b981;
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  &__rank-footnote {
+    @apply font-normal m-0;
+    color: #475569;
+    font-size: 10px;
+    line-height: 15px;
+    padding-top: 7.5px;
+    width: 100%;
+  }
+
+  // Card A — progress bar
+  &__progress-wrap {
+    @apply w-full;
+    padding-top: 11.25px;
+  }
+
+  &__progress-track {
+    @apply relative w-full;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 9999px;
+    height: 7.5px;
+  }
+
+  &__progress-fill {
+    @apply absolute left-0 top-0 h-full;
+    background: linear-gradient(to right, #334155, #4f46e5);
+    border-radius: 9999px;
+    width: 72%;
+  }
+
+  &__progress-thumb {
+    @apply absolute;
+    background: #0f172a;
+    border: 2px solid #7c86ff;
+    border-radius: 9999px;
+    box-shadow: 0 0 8px rgba(79, 70, 229, 0.7);
+    height: 13px;
+    left: 72%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 13px;
+  }
+
+  &__progress-scale {
+    @apply flex items-start justify-between w-full;
+    padding-top: 5.625px;
+  }
+
+  &__progress-end {
+    @apply font-normal whitespace-nowrap;
+    color: #334155;
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  &__progress-mid {
+    @apply font-normal whitespace-nowrap;
+    color: #475569;
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  &__progress-highlight {
+    @apply font-semibold;
+    color: #a5b4fc;
+    font-size: 10px;
+  }
+}

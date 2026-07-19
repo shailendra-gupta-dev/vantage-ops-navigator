@@ -1,0 +1,83 @@
+/* ─── Tailwind v4 — single import replaces @tailwind base/components/utilities ─── */
+@import "tailwindcss";
+
+/* ─── Google Fonts ─────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ─── Design tokens — @theme replaces tailwind.config.ts in v4 ─────────────────── */
+/* All tokens generate Tailwind utility classes automatically.                       */
+/* e.g. --color-bg-base → bg-bg-base, text-bg-base, border-bg-base                 */
+@theme {
+
+  /* Background colours */
+  --color-bg-base: #0A1030;
+  --color-bg-surface: #10192B;
+  --color-bg-elevated: #152035;
+  --color-bg-overlay: #0C1323;
+
+  /* Brand colours */
+  --color-brand-blue: #0784D1;
+  --color-brand-blue-lt: #32A2EA;
+
+  /* Text colours */
+  --color-text-primary: #F0F4FA;
+  --color-text-secondary: #99ADC7;
+  --color-text-muted: #5C6F88;
+
+  /* Border colours */
+  --color-border-subtle: #1E324F;
+  --color-border-default: #324E73;
+
+  /* Status colours */
+  --color-status-critical: #EF4444;
+  --color-status-high: #F49E19;
+  --color-status-medium: #F7D000;
+  --color-status-good: #10BE8B;
+  --color-status-info: #3CA9F8;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Border radius */
+  --radius-card: 14px;
+  --radius-badge: 6px;
+  --radius-pill: 999px;
+
+}
+
+/* ─── Global base styles ────────────────────────────────────────────────────────── */
+:root {
+  color-scheme: dark;
+
+  /* ── Semantic aliases used by device-detail components ── */
+  --color-critical:     #E11D48;
+  --color-critical-bg:  rgba(225, 29, 72, 0.12);
+
+  --color-high:         #F97316;
+
+  --color-warning:      #F59E0B;
+  --color-warning-bg:   rgba(245, 158, 11, 0.10);
+
+  --color-success:      #10B981;
+
+  --color-info:         #38BDF8;
+
+  --color-accent:       #6366F1;
+  --color-accent-bg:    rgba(99, 102, 241, 0.15);
+
+  /* subtle border used on all dark-surface cards */
+  --color-border:       rgba(148, 163, 184, 0.14);
+
+  /* table header / nested surface */
+  --color-bg-surface-3: rgba(255, 255, 255, 0.03);
+}
+
+body {
+  @apply bg-bg-base text-text-primary font-sans;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}

@@ -1,0 +1,57 @@
+<div class="device-header">
+  <nav class="device-header__breadcrumb" aria-label="Breadcrumb">
+    <a class="device-header__breadcrumb-back" routerLink="/assets" aria-label="Back to Assets">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+        <path d="M8 10.5L3.5 6.5L8 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Assets
+    </a>
+    <span class="device-header__breadcrumb-sep" aria-hidden="true">/</span>
+    <a class="device-header__breadcrumb-link" routerLink="/assets">Device Search</a>
+    <span class="device-header__breadcrumb-sep" aria-hidden="true">/</span>
+    <span class="device-header__breadcrumb-current">{{ device().name }}</span>
+  </nav>
+
+  <div class="device-header__hero">
+    <div class="device-header__identity">
+      <div class="device-header__icon-wrap device-header__icon-wrap--{{ device().healthStatus }}">
+        <img src="assets/icons/desktop-icon-white.svg" alt="" class="device-header__icon" aria-hidden="true">
+      </div>
+      <div class="device-header__meta">
+        <div class="device-header__name-row">
+          <h1 class="device-header__name">{{ device().name }}</h1>
+          <span class="device-header__badge device-header__badge--{{ device().healthStatus }}">
+            <span class="device-header__badge-dot" aria-hidden="true"></span>
+            {{ healthLabel() }}
+          </span>
+        </div>
+        <p class="device-header__subtitle">
+          {{ device().productFamily }}
+          <span class="device-header__sep" aria-hidden="true">·</span>
+          {{ device().location }}
+          <span class="device-header__sep" aria-hidden="true">·</span>
+          {{ device().role }}
+          <span class="device-header__sep" aria-hidden="true">·</span>
+          <span class="device-header__ip">{{ device().ipAddress }}</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="device-header__actions">
+      <button class="device-header__action-btn" type="button">
+        <img src="assets/icons/headset-icon.svg" alt="" aria-hidden="true">
+        Open Support Case
+      </button>
+      <button class="device-header__action-btn" type="button">
+        <img src="assets/icons/ticket-icon.svg" alt="" aria-hidden="true">
+        Create Ticket
+      </button>
+      <button class="device-header__action-btn" type="button">
+        <img src="assets/icons/download-icon.svg" alt="" aria-hidden="true">
+        Export Report
+      </button>
+    </div>
+  </div>
+
+  <div class="device-header__divider" role="separator"></div>
+</div>

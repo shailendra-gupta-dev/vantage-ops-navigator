@@ -1,0 +1,146 @@
+// Figma node: 7:1254 — Sidebar
+// Width: 240px | bg: #0b1120 | border-right: rgba(148,163,184,0.08)
+
+// Required in Tailwind v4: tells @apply where @theme tokens are defined
+@reference "../../../../styles.scss";
+
+.sidebar {
+  @apply flex flex-col w-[240px] h-full bg-bg-base border-r border-border-subtle shrink-0;
+
+  // ── Logo ────────────────────────────────────────────────────────────────
+  &__logo {
+    @apply flex items-center h-[68px] border-b border-border-subtle shrink-0;
+  }
+
+  &__logo-link {
+    @apply flex items-center no-underline;
+  }
+
+  // Figma: real brand mark replaces placeholder circle — h-36px, auto width
+  &__logo-img {
+    height: 64px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  // ── Nav ─────────────────────────────────────────────────────────────────
+  &__nav {
+    @apply flex flex-col flex-1 overflow-y-auto overflow-x-hidden py-2 gap-0.5;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  &__section {
+    @apply px-2;
+
+    // Left active indicator
+    &--active > .sidebar__item--section {
+      @apply bg-bg-surface;
+    }
+  }
+
+  // Top-level nav item — Figma: rounded-[11.25px], px-[9.375px] py-[5.625px]
+  &__item {
+    @apply flex items-center gap-2.5 px-2.5 py-1.5 rounded-xl w-full
+           text-text-secondary no-underline cursor-pointer transition-colors duration-150;
+
+    &:hover {
+      @apply bg-bg-elevated text-text-primary;
+    }
+
+    &--active {
+      @apply text-text-primary;
+
+    }
+
+    &--section {
+      @apply text-[13px] font-normal;
+    }
+  }
+
+  // Pre-colored Figma icons — active/inactive variant chosen in TS, no CSS opacity needed
+  &__item-icon {
+    @apply flex items-center justify-center size-4 shrink-0;
+
+    img { @apply block; }
+  }
+
+  &__item-label {
+    @apply flex-1 whitespace-nowrap;
+  }
+
+  &__item-arrow {
+    @apply flex items-center shrink-0 opacity-50;
+  }
+
+  // ── Badges ──────────────────────────────────────────────────────────────
+  // Figma: LIVE — bg #10b981, white, 9px semibold, tracking 0.36px, rounded-[3.75px]
+  &__badge {
+    @apply inline-flex items-center px-1.5 py-0.5 rounded-badge
+           text-[9px] font-semibold tracking-[0.04em] leading-none;
+
+    &--live {
+      @apply bg-status-good text-white;
+    }
+
+    &--dev {
+      @apply bg-bg-elevated text-text-muted;
+    }
+  }
+
+  // Figma: "In Dev" — inline muted label, 9px, #475569
+  &__inline-badge {
+    @apply text-[9px] font-medium text-text-muted whitespace-nowrap;
+  }
+
+  // ── Children ────────────────────────────────────────────────────────────
+  // Figma: border-l rgba(79,70,229,0.25), pl-[10.375px], mt-[1.875px]
+  &__children {
+    @apply list-none m-0 pl-[15px] pt-0.5;
+    border-left: 1px solid rgba(79, 70, 229, 0.25);
+    margin-left: 22px;
+  }
+
+  &__child {
+    @apply flex items-center justify-between px-2 py-1 rounded-[3.75px] w-full
+           text-[12px] font-medium text-text-secondary no-underline
+           transition-colors duration-150 cursor-pointer;
+
+    &:hover {
+      @apply text-text-primary;
+    }
+
+    &--active {
+      @apply text-text-primary;
+    }
+  }
+
+  &__child-label {
+    @apply whitespace-nowrap;
+  }
+
+  // ── User profile strip ───────────────────────────────────────────────────
+  // Figma: bottom strip, avatar + name (Inter) + role (10px, #475569)
+  &__profile {
+    @apply flex items-center gap-2.5 px-4 py-3 border-t border-border-subtle shrink-0;
+  }
+
+  &__avatar {
+    @apply flex items-center justify-center size-7 rounded-full bg-brand-blue
+           text-white text-[11px] font-semibold shrink-0;
+  }
+
+  &__profile-info {
+    @apply flex flex-col leading-none gap-0.5 overflow-hidden;
+  }
+
+  &__profile-name {
+    @apply text-text-primary text-[12px] font-medium truncate;
+  }
+
+  &__profile-role {
+    @apply text-text-muted text-[10px] font-normal truncate;
+  }
+}

@@ -1,0 +1,26 @@
+@reference "../../../../styles.scss";
+
+.app-layout {
+  @apply grid h-dvh overflow-hidden;
+  grid-template-columns: 240px 1fr;
+
+  &__main {
+    @apply flex flex-col overflow-hidden bg-bg-base;
+  }
+
+  &__content {
+    @apply flex-1 overflow-y-auto;
+  }
+
+  &__placeholder {
+    @apply flex items-center px-4 shrink-0
+           border-border-subtle text-text-muted text-[11px] font-medium
+           tracking-[0.06em] uppercase bg-bg-overlay;
+
+    span { @apply opacity-50; }
+
+    &--header { @apply h-[45px] border-b; }
+    &--pulse  { @apply h-[38px] border-b; }
+    &--footer { @apply h-[34px] border-t; }
+  }
+}

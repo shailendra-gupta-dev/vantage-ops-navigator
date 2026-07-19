@@ -1,0 +1,115 @@
+@if (isOpen()) {
+  <div class="spotlight" role="dialog" aria-modal="true" aria-label="Device search" (click)="close()">
+
+    <div class="spotlight__panel" cdkTrapFocus [cdkTrapFocusAutoCapture]="true" (click)="$event.stopPropagation()">
+
+      <!-- Input row -->
+      <div class="spotlight__input-row">
+        <img src="assets/icons/search-icon-purple.svg" alt="" class="spotlight__search-icon" aria-hidden="true">
+        <input
+          #searchInput
+          class="spotlight__input"
+          type="search"
+          [value]="query()"
+          (input)="onQueryChange($any($event.target).value)"
+          (keydown)="onKeyDown($event)"
+          placeholder="Search devices by name, IP, location…"
+          autocomplete="off"
+          aria-label="Search devices"
+        >
+        @if (query().length > 0) {
+          <button type="button" class="spotlight__clear-btn" (click)="clearQuery()" aria-label="Clear search">
+            <img src="assets/icons/close-icon.svg" alt="" class="spotlight__clear-icon" aria-hidden="true">
+          </button>
+        }
+        <kbd class="spotlight__esc-kbd">ESC</kbd>
+      </div>
+
+      @if (results().length > 0) {
+
+        <!-- Results list -->
+        <div class="spotlight__results" role="listbox" aria-label="Search results">
+          @for (device of results(); track device.id; let i = $index) {
+            <div
+              class="spotlight__result"
+              [class.spotlight__result--active]="activeIndex() === i"
+              role="option"
+              [attr.aria-selected]="activeIndex() === i"
+              (click)="openResult(device)"
+              (mouseenter)="activeIndex.set(i)"
+            >
+              <div class="spotlight__result-icon-wrap spotlight__result-icon-wrap--{{ device.healthStatus }}">
+                <img src="assets/icons/assets-icon-inactive.svg" alt="" class="spotlight__result-icon" aria-hidden="true">
+              </div>
+              <div class="spotlight__result-body">
+                <div class="spotlight__result-title-row">
+                  <span class="spotlight__result-name">{{ device.name }}</span>
+                  <span class="spotlight__result-badge spotlight__result-badge--{{ device.healthStatus }}">
+                    • {{ healthLabel(device.healthStatus) }}
+                  </span>
+                </div>
+                <p class="spotlight__result-subtitle">{{ device.productFamily }} · {{ device.location }} · {{ device.role }}</p>
+                <div class="spotlight__result-meta">
+                  <span class="spotlight__meta-item">
+                    <img src="assets/icons/shield-inactive.svg" alt="" class="spotlight__meta-icon" [class.spotlight__meta-icon--critical]="device.criticalAdvisoryCount > 0" aria-hidden="true">
+                    <span class="spotlight__meta-advisories" [class.spotlight__meta-advisories--critical]="device.criticalAdvisoryCount > 0">
+                      @if (device.criticalAdvisoryCount > 0) {
+                        {{ device.criticalAdvisoryCount }} critical
+                        @if (device.highAdvisoryCount > 0) { , {{ device.highAdvisoryCount }} high }
+                      } @else if (device.highAdvisoryCount > 0) {
+                        {{ device.highAdvisoryCount }} high
+                      } @else {
+                        0 advisories
+                      }
+                    </span>
+                  </span>
+                  <span class="spotlight__meta-sep">·</span>
+                  <span class="spotlight__meta-item">
+                    <img src="assets/icons/ok-icon.svg" alt="" class="spotlight__meta-icon spotlight__meta-icon--contract" aria-hidden="true">
+                    <span>Contract {{ device.contractStatus === 'active' ? 'Active' : device.contractStatus }}{{ device.contractExpiry ? ' · ' + formatExpiry(device.contractExpiry) : '' }}</span>
+                  </span>
+                  <span class="spotlight__meta-sep">·</span>
+                  <span class="spotlight__meta-item">
+                    <img src="assets/icons/in-progress-icon.svg" alt="" class="spotlight__meta-icon" aria-hidden="true">
+                    <span>{{ device.daysToLdos !== null ? 'LDOS in ' + device.daysToLdos + 'd' : 'No LDOS' }}</span>
+                  </span>
+                </div>
+              </div>
+              <button type="button" class="spotlight__open-btn" (click)="openResult(device)">↵ Open</button>
+            </div>
+          }
+        </div>
+
+        <!-- Footer keyboard hint bar -->
+        <div class="spotlight__footer">
+          <span class="spotlight__footer-count">{{ results().length }} result{{ results().length === 1 ? '' : 's' }} for "{{ query() }}"</span>
+          <div class="spotlight__footer-hints">
+            <span class="spotlight__footer-hint">↑↓ navigate</span>
+            <span class="spotlight__footer-dot">·</span>
+            <span class="spotlight__footer-hint">↵ open</span>
+            <span class="spotlight__footer-dot">·</span>
+            <span class="spotlight__footer-hint">ESC close</span>
+          </div>
+        </div>
+
+      } @else {
+
+        <!-- Idle / empty body -->
+        <div class="spotlight__empty-body">
+          <div class="spotlight__empty-icon-circle">
+            <img src="assets/icons/search-icon-purple.svg" alt="" class="spotlight__empty-icon" aria-hidden="true">
+          </div>
+          <p class="spotlight__empty-hint">Type 2+ characters to search devices, IPs, or product families</p>
+          <div class="spotlight__pills">
+            <button type="button" class="spotlight__pill">chi-core</button>
+            <button type="button" class="spotlight__pill">10.44.2</button>
+            <button type="button" class="spotlight__pill">Vertex</button>
+            <button type="button" class="spotlight__pill">NYC</button>
+          </div>
+        </div>
+
+      }
+
+    </div>
+  </div>
+}

@@ -1,0 +1,168 @@
+// Figma node 7:1550 — Network Digest
+// bg #1e293b | border rgba(148,163,184,0.12) | rounded-[15.25px]
+
+@reference "../../../../../styles.scss";
+
+.network-digest {
+  @apply flex flex-col overflow-hidden;
+  background: #1e293b;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 15.25px;
+
+  // ── Header ─────────────────────────────────────────────────────────────────
+  // Figma: border-b, px-[15px], pt-[11.25px], pb-[12.25px]
+  &__header {
+    @apply flex items-center justify-between shrink-0;
+    padding: 11.25px 15px 12.25px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  }
+
+  &__header-left {
+    @apply flex items-center;
+    gap: 7.5px;
+  }
+
+  &__icon {
+    font-size: 16px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  &__header-info {
+    @apply flex flex-col;
+  }
+
+  // Figma: font-semibold 14px #e2e8f0
+  &__title {
+    @apply block font-semibold;
+    font-size: 14px;
+    color: #e2e8f0;
+  }
+
+  // Figma: 11px regular #64748b pt-[2px]
+  &__subtitle {
+    @apply block;
+    font-size: 11px;
+    color: #64748b;
+    padding-top: 2px;
+  }
+
+  // Figma: bg #e11d48 rounded-full h-[18.75px] px-[7.5px] white bold 10px
+  &__new-badge {
+    @apply font-bold text-white;
+    background: #e11d48;
+    height: 18.75px;
+    border-radius: 999px;
+    padding: 0 7.5px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  // ── Items ──────────────────────────────────────────────────────────────────
+  &__items {
+    @apply flex flex-col flex-1;
+  }
+
+  // Figma: border-b rgba(148,163,184,0.12) | flex gap-[11.25px] | px-[15px] | pt/pb-[11.25px/12.25px]
+  &__item {
+    @apply flex items-start;
+    gap: 11.25px;
+    padding: 11.25px 15px 12.25px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+
+    &--last {
+      border-bottom: none;
+    }
+  }
+
+  &__item-emoji {
+    font-size: 14px;
+    line-height: 1;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+
+  &__item-body {
+    @apply flex flex-col flex-1 min-w-0;
+  }
+
+  &__item-meta {
+    @apply flex items-center;
+    gap: 7.5px;
+  }
+
+  // Figma: severity-colored bg | h-[17.25px] rounded-[3.75px] px-[5.63px] | white bold 9px tracking-[0.45px]
+  &__item-badge {
+    @apply text-white font-bold;
+    font-size: 9px;
+    height: 17.25px;
+    border-radius: 3.75px;
+    padding: 0 5.63px;
+    display: inline-flex;
+    align-items: center;
+    letter-spacing: 0.45px;
+    flex-shrink: 0;
+  }
+
+  // Figma: #475569 10px regular
+  &__item-time {
+    font-size: 10px;
+    color: #475569;
+  }
+
+  // Figma: #cbd5e1 13px medium leading-[16.9px] pt-[1.875px]
+  &__item-title {
+    @apply m-0 font-medium;
+    font-size: 13px;
+    color: #cbd5e1;
+    line-height: 16.9px;
+    padding-top: 1.875px;
+  }
+
+  // Figma: #64748b 11px regular leading-[16.5px] pt-[2px]
+  &__item-subtitle {
+    @apply m-0;
+    font-size: 11px;
+    color: #64748b;
+    line-height: 16.5px;
+    padding-top: 2px;
+  }
+
+  // ── Footer ─────────────────────────────────────────────────────────────────
+  // Figma: border-t | flex items-center justify-between | px-[15px] pt-[10.375px] pb-[9.375px]
+  &__footer {
+    @apply flex items-center justify-between shrink-0;
+    padding: 10.375px 15px 9.375px;
+    border-top: 1px solid rgba(148, 163, 184, 0.12);
+  }
+
+  // Figma: #475569 11px medium gap-[3.75px]
+  &__show-older {
+    @apply flex items-center cursor-pointer;
+    gap: 3.75px;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 500;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  // Figma: bg rgba(79,70,229,0.15) border rgba(79,70,229,0.25) rounded-[11.25px]
+  // px-[12.25px] py-[6.625px] gap-[5.625px] #a5b4fc 11px medium
+  &__mark-seen {
+    @apply flex items-center cursor-pointer;
+    gap: 5.625px;
+    padding: 6.625px 12.25px;
+    border-radius: 11.25px;
+    background: rgba(79, 70, 229, 0.15);
+    border: 1px solid rgba(79, 70, 229, 0.25);
+    color: #a5b4fc;
+    font-size: 11px;
+    font-weight: 500;
+
+    img { @apply shrink-0; }
+  }
+}

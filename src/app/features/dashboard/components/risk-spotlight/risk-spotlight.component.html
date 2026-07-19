@@ -1,0 +1,111 @@
+<!-- Figma node 7:1459 — Risk Spotlight card -->
+<div class="risk-spotlight">
+
+  <!-- Gradient accent line across top -->
+  <div class="risk-spotlight__accent-bar" aria-hidden="true"></div>
+
+  @if (top(); as adv) {
+    <div class="risk-spotlight__body">
+
+      <!-- ── Header row ───────────────────────────────────────────────────── -->
+      <div class="risk-spotlight__header">
+        <div class="risk-spotlight__title-group">
+
+          <!-- Icon circle -->
+          <div class="risk-spotlight__icon-wrap" aria-hidden="true">
+            <img src="assets/icons/warning-icon.svg" alt="" width="18" height="18" />
+          </div>
+
+          <!-- Badge + title -->
+          <div class="risk-spotlight__title-block">
+            <div class="risk-spotlight__badge-row">
+              <span class="risk-spotlight__severity-badge">{{ severityLabel() }}</span>
+              <span class="risk-spotlight__urgency-label">Act Today</span>
+            </div>
+            <h2 class="risk-spotlight__title">{{ adv.title }}</h2>
+          </div>
+
+        </div>
+
+        <!-- Active exploit pill -->
+        @if (adv.activeExploit) {
+          <div class="risk-spotlight__exploit-pill">
+            <span class="risk-spotlight__exploit-dot" aria-hidden="true"></span>
+            <span>Active exploit</span>
+          </div>
+        }
+      </div>
+
+      <!-- ── Meta row ─────────────────────────────────────────────────────── -->
+      <div class="risk-spotlight__meta">
+        <span class="risk-spotlight__meta-item">
+          <img src="assets/icons/desktop-icon-red.svg" alt="" aria-hidden="true" width="14" height="14" />
+          {{ adv.affectedDeviceCount }} devices affected
+        </span>
+        <span class="risk-spotlight__meta-item">
+          <img src="assets/icons/in-progress-icon.svg" alt="" aria-hidden="true" width="14" height="14" />
+          @if (adv.patchAvailableAt) {
+            Patch available {{ adv.daysSincePatch }} days ago
+          } @else {
+            No patch available yet
+          }
+        </span>
+        <span class="risk-spotlight__meta-item">
+          <img src="assets/icons/wifi-icon.svg" alt="" aria-hidden="true" width="14" height="14" />
+          @if (adv.activeExploit) {
+            Active exploitation since {{ exploitDate() }}
+          } @else {
+            No known active exploitation
+          }
+        </span>
+      </div>
+
+      <!-- ── CVSS row ─────────────────────────────────────────────────────── -->
+      <div class="risk-spotlight__cvss-row">
+        <span class="risk-spotlight__cvss-label">CVSS Score</span>
+        <div class="risk-spotlight__cvss-track">
+          <div class="risk-spotlight__cvss-fill" [style.width]="cvssBarWidth()"></div>
+        </div>
+        <span class="risk-spotlight__cvss-score">{{ adv.cvss }}</span>
+        <div class="risk-spotlight__cvss-attrs">
+          <span>
+            <span class="risk-spotlight__attr-key">Attack Vector:</span>
+            <span class="risk-spotlight__attr-val"> Network</span>
+          </span>
+          <span>
+            <span class="risk-spotlight__attr-key">Complexity:</span>
+            <span class="risk-spotlight__attr-val"> Low</span>
+          </span>
+          <span>
+            <span class="risk-spotlight__attr-key">Privileges:</span>
+            <span class="risk-spotlight__attr-val"> None</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- ── CTA row ──────────────────────────────────────────────────────── -->
+      <div class="risk-spotlight__cta-row">
+        <button class="risk-spotlight__btn-primary" type="button">
+          <img src="assets/icons/desktop-icon-white.svg" alt="" aria-hidden="true" width="14" height="14" />
+          View Affected Devices
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="white"
+               stroke-width="1.083" stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true">
+            <path d="M4.875 9.75L8.125 6.5L4.875 3.25"/>
+          </svg>
+        </button>
+        <button class="risk-spotlight__btn-secondary" type="button">
+          <img src="assets/icons/open-book-icon.svg" alt="" aria-hidden="true" width="13" height="13" />
+          See Patch Instructions
+        </button>
+        <span class="risk-spotlight__spacer"></span>
+        <span class="risk-spotlight__last-checked">
+          <img src="assets/icons/completed-icon.svg" alt="" aria-hidden="true" width="13" height="13" />
+          Last checked 4 min ago
+        </span>
+      </div>
+
+    </div>
+  }
+
+</div>

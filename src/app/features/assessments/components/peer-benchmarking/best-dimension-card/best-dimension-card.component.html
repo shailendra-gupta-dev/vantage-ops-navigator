@@ -1,0 +1,24 @@
+<!-- Card B: Best Dimension (Coverage) -->
+<div class="assessments-page__rank-card">
+  <div class="assessments-page__rank-card-header">
+    <div class="assessments-page__rank-icon-wrap assessments-page__rank-icon-wrap--emerald">
+      <img src="assets/icons/stocks-up-icon.svg" alt="" class="assessments-page__rank-icon" aria-hidden="true">
+    </div>
+    <div class="assessments-page__rank-labels">
+      <span class="assessments-page__rank-label">Best Dimension</span>
+      <div class="assessments-page__rank-value-row">
+        <span class="assessments-page__rank-value">Coverage</span>
+        <span class="assessments-page__rank-badge assessments-page__rank-badge--emerald">91st %ile</span>
+        <div class="assessments-page__rank-trend">
+          <img src="assets/icons/stocks-up-icon.svg" alt="" class="assessments-page__trend-icon" aria-hidden="true">
+          <span class="assessments-page__trend-value">+12</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  @defer (on idle) {
+    <div echarts class="assessments-page__chart" [options]="chartOpt()"></div>
+  } @placeholder {
+    <div class="assessments-page__chart"></div>
+  }
+</div>

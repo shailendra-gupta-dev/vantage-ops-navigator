@@ -1,0 +1,113 @@
+<div class="info-panel">
+  <div class="info-panel__grid">
+    <!-- Left: Device Identity -->
+    <div class="info-panel__card">
+      <h3 class="info-panel__card-title">Device Identity</h3>
+      <dl class="info-panel__dl">
+        <div class="info-panel__row">
+          <dt class="info-panel__dt">Hostname</dt>
+          <dd class="info-panel__dd">{{ device().name }}</dd>
+        </div>
+        @if (detail()) {
+          <div class="info-panel__row">
+            <dt class="info-panel__dt">Serial Number</dt>
+            <dd class="info-panel__dd info-panel__dd--mono">{{ detail()!.serialNumber }}</dd>
+          </div>
+        }
+        <div class="info-panel__row">
+          <dt class="info-panel__dt">Platform / Model</dt>
+          <dd class="info-panel__dd">{{ device().productFamily }}</dd>
+        </div>
+        <div class="info-panel__row">
+          <dt class="info-panel__dt">IOS Version</dt>
+          <dd class="info-panel__dd info-panel__dd--mono">{{ device().softwareVersion }}</dd>
+        </div>
+        @if (detail()) {
+          <div class="info-panel__row">
+            <dt class="info-panel__dt">MAC Address</dt>
+            <dd class="info-panel__dd info-panel__dd--mono">{{ detail()!.macAddress }}</dd>
+          </div>
+        }
+        <div class="info-panel__row">
+          <dt class="info-panel__dt">Primary IP</dt>
+          <dd class="info-panel__dd info-panel__dd--mono">{{ device().ipAddress }}</dd>
+        </div>
+        @if (detail()) {
+          <div class="info-panel__row">
+            <dt class="info-panel__dt">Management IP</dt>
+            <dd class="info-panel__dd info-panel__dd--mono">{{ detail()!.managementIp }}</dd>
+          </div>
+        }
+        <div class="info-panel__row">
+          <dt class="info-panel__dt">Site / Location</dt>
+          <dd class="info-panel__dd">{{ device().location }}</dd>
+        </div>
+        <div class="info-panel__row">
+          <dt class="info-panel__dt">Network Layer</dt>
+          <dd class="info-panel__dd">{{ device().role }}</dd>
+        </div>
+        @if (detail()) {
+          <div class="info-panel__row">
+            <dt class="info-panel__dt">Last Synced</dt>
+            <dd class="info-panel__dd">{{ relativeTime(detail()!.lastSynced) }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+
+    <!-- Right: Config & Health -->
+    <div class="info-panel__card">
+      <h3 class="info-panel__card-title">Config &amp; Health</h3>
+      @if (detail(); as d) {
+        <dl class="info-panel__dl">
+          <div class="info-panel__row">
+            <dt class="info-panel__dt">Config Hash</dt>
+            <dd class="info-panel__dd info-panel__dd--mono">{{ d.configHash }}</dd>
+          </div>
+          <div class="info-panel__row">
+            <dt class="info-panel__dt">Uptime</dt>
+            <dd class="info-panel__dd">{{ d.uptime }}</dd>
+          </div>
+          <div class="info-panel__row info-panel__row--bar">
+            <dt class="info-panel__dt">CPU Utilization</dt>
+            <dd class="info-panel__dd">
+              <div class="info-panel__bar-wrap">
+                <div class="info-panel__bar">
+                  <div
+                    class="info-panel__bar-fill info-panel__bar-fill--{{ utilLevel(d.cpuUtilization) }}"
+                    [style.width.%]="d.cpuUtilization">
+                  </div>
+                </div>
+                <span class="info-panel__bar-pct">{{ d.cpuUtilization }}%</span>
+              </div>
+            </dd>
+          </div>
+          <div class="info-panel__row info-panel__row--bar">
+            <dt class="info-panel__dt">Memory Utilization</dt>
+            <dd class="info-panel__dd">
+              <div class="info-panel__bar-wrap">
+                <div class="info-panel__bar">
+                  <div
+                    class="info-panel__bar-fill info-panel__bar-fill--{{ utilLevel(d.memoryUtilization) }}"
+                    [style.width.%]="d.memoryUtilization">
+                  </div>
+                </div>
+                <span class="info-panel__bar-pct">{{ d.memoryUtilization }}%</span>
+              </div>
+            </dd>
+          </div>
+          <div class="info-panel__row">
+            <dt class="info-panel__dt">Interface Count</dt>
+            <dd class="info-panel__dd">{{ d.interfaceCount }}</dd>
+          </div>
+          <div class="info-panel__row">
+            <dt class="info-panel__dt">Last Config Change</dt>
+            <dd class="info-panel__dd">{{ formatDateTime(d.lastConfigChange) }}</dd>
+          </div>
+        </dl>
+      } @else {
+        <p class="info-panel__no-data">Detailed config data not available</p>
+      }
+    </div>
+  </div>
+</div>

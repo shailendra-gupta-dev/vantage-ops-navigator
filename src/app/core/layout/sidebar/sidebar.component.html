@@ -1,0 +1,88 @@
+<aside class="sidebar">
+
+  <!-- ── Logo ───────────────────────────────────────────────────────────── -->
+  <div class="sidebar__logo">
+    <a routerLink="/" class="sidebar__logo-link" aria-label="Vantage Ops Navigator home">
+      <!-- Figma: sidebar logo area node 7:1256 — full brand mark -->
+      <img src="assets/logo/vantage-ops-navigator-logo.svg"
+           class="sidebar__logo-img"
+           alt="Vantage Ops Navigator"
+           height="36" />
+    </a>
+  </div>
+
+  <!-- ── Nav ────────────────────────────────────────────────────────────── -->
+  <nav class="sidebar__nav" aria-label="Main navigation">
+    @for (section of navConfig(); track section.id) {
+      @if (section.roles.includes(currentRole())) {
+
+        <!-- Top-level section button -->
+        <div class="sidebar__section"
+             [class.sidebar__section--active]="isActive(section.path)()">
+          <a [routerLink]="section.path"
+             class="sidebar__item sidebar__item--section"
+             [class.sidebar__item--active]="isActive(section.path)()">
+
+            <!-- Icon — pre-colored Figma asset: active (indigo) / inactive (slate) -->
+            <span class="sidebar__item-icon" aria-hidden="true">
+              <img [src]="getNavIconSrc(section.icon, isActive(section.path)())"
+                   width="16" height="16" alt="" />
+            </span>
+
+            <!-- Label -->
+            <span class="sidebar__item-label">{{ section.label }}</span>
+
+            <!-- Badge -->
+            @if (section.badge && section.badge !== 'none') {
+              <span class="sidebar__badge"
+                    [class.sidebar__badge--live]="section.badge === 'live'"
+                    [class.sidebar__badge--dev]="section.badge === 'dev'">
+                {{ section.badge === 'live' ? 'LIVE' : 'DEV' }}
+              </span>
+            }
+
+            <!-- Expand arrow (sections with children) -->
+            @if (section.children.length) {
+              <span class="sidebar__item-arrow" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor">
+                  <path d="M2 4l3.5 3.5L9 4"/>
+                </svg>
+              </span>
+            }
+          </a>
+
+          <!-- Child items -->
+          @if (section.children.length && isActive(section.path)()) {
+            <ul class="sidebar__children" role="list">
+              @for (child of section.children; track child.id) {
+                @if (child.roles.includes(currentRole())) {
+                  <li>
+                    <a [routerLink]="child.path"
+                       class="sidebar__child"
+                       [class.sidebar__child--active]="isChildActive(child.path)()">
+                      <span class="sidebar__child-label">{{ child.label }}</span>
+                      @if (child.badge === 'dev') {
+                        <span class="sidebar__inline-badge">In Dev</span>
+                      }
+                    </a>
+                  </li>
+                }
+              }
+            </ul>
+          }
+        </div>
+
+      }
+    }
+  </nav>
+
+  <!-- ── User profile strip ─────────────────────────────────────────────── -->
+  <div class="sidebar__profile">
+    <div class="sidebar__avatar" aria-hidden="true">{{ profile().initials }}</div>
+    <div class="sidebar__profile-info">
+      <span class="sidebar__profile-name">{{ profile().name }}</span>
+      <span class="sidebar__profile-role">{{ profile().role }}</span>
+    </div>
+  </div>
+
+</aside>

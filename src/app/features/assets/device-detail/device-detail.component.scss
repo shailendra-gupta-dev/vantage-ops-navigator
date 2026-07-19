@@ -1,0 +1,54 @@
+@reference "../../../../styles.scss";
+
+.device-detail {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &__body {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-top: 0;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 16px;
+    margin-top: 16px;
+  }
+
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__skeleton {
+    border-radius: 12px;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+
+    &--header { height: 120px; }
+    &--stats  { height: 100px; margin-top: 20px; }
+    &--body   { height: 400px; margin-top: 12px; }
+  }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

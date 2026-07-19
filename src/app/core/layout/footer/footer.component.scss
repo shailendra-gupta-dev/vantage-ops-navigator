@@ -1,0 +1,94 @@
+@reference "../../../../styles.scss";
+
+// Figma: Footer — border-t rgba(148,163,184,0.12) | px-[18.75px] pt-[10.375px] pb-[9.375px] | gap-[22.5px]
+.app-footer {
+  @apply flex items-center shrink-0 border-t border-border-subtle;
+  background: rgba(15, 23, 42, 0.95);
+  padding: 10.375px 18.75px 9.375px;
+  gap: 22.5px;
+
+  // ── Left ───────────────────────────────────────────────────────────────────
+  &__left {
+    @apply flex items-center shrink-0;
+    gap: 11.25px;
+  }
+
+  // Figma: Inter Regular 11px #334155
+  &__copyright {
+    @apply text-[11px] font-normal whitespace-nowrap;
+    color: #334155;
+  }
+
+  // Figma: JetBrains Mono Bold 10px #6366f1 | bg rgba(79,70,229,0.1) | h-[18.75px] | rounded-[3.75px]
+  &__version {
+    @apply text-[10px] font-bold font-mono rounded-[3.75px] whitespace-nowrap;
+    background: rgba(79, 70, 229, 0.1);
+    color: #6366f1;
+    height: 18.75px;
+    padding: 0 5.63px;
+    display: inline-flex;
+    align-items: center;
+    letter-spacing: 0.4px;
+  }
+
+  &__poc {
+    @apply text-text-muted text-[11px] whitespace-nowrap;
+  }
+
+  // ── Centre links ───────────────────────────────────────────────────────────
+  // Figma: Inter Medium 11px #475569 | gap-[11.25px]
+  &__links {
+    @apply flex items-center flex-1 justify-center flex-wrap;
+    gap: 11.25px;
+  }
+
+  // Figma: imgIcon26–30 icon (11px, opacity-60) + text side by side | gap-[3.75px]
+  &__link {
+    @apply inline-flex items-center gap-[3.75px] text-text-muted text-[11px] font-medium
+           whitespace-nowrap cursor-pointer transition-colors duration-150 no-underline;
+
+    img { opacity: 0.6; }
+
+    &:hover { @apply text-text-secondary; }
+  }
+
+  // ── Right status ───────────────────────────────────────────────────────────
+  &__status {
+    @apply flex items-center shrink-0;
+    gap: 7.5px;
+  }
+
+  &__indicator {
+    @apply flex items-center text-[10px] font-medium;
+    gap: 4px;
+
+    &--good { @apply text-status-good; }
+    &--warn { @apply text-status-high; }
+    &--crit { @apply text-status-critical; }
+  }
+
+  &__dot {
+    @apply rounded-full inline-block;
+    width: 5px;
+    height: 5px;
+    background: currentColor;
+  }
+
+  &__synced {
+    @apply inline-flex items-center gap-[3.75px] text-text-muted text-[10px] whitespace-nowrap;
+
+    img { opacity: 0.5; }
+  }
+
+  // Figma: JetBrains Mono Regular 10px #334155
+  &__time {
+    @apply text-[10px] font-mono whitespace-nowrap;
+    color: #334155;
+  }
+
+  // Shared separator
+  &__sep {
+    color: #1e293b;
+    @apply text-[11px];
+  }
+}

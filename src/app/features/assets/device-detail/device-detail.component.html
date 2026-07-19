@@ -1,0 +1,29 @@
+<div class="device-detail">
+  @if (device()) {
+    <app-device-detail-header [device]="device()!" />
+
+    <div class="device-detail__body">
+      <div class="device-detail__content">
+        <app-device-health-stats [device]="device()!" />
+        <app-device-tabs
+          [device]="device()!"
+          [advisories]="advisories()"
+          [deviceDetail]="deviceDetail()"
+          [activityLog]="activityLog()" />
+      </div>
+
+      <aside class="device-detail__sidebar">
+        <app-device-actions-sidebar
+          [device]="device()!"
+          [relatedContracts]="relatedContracts()"
+          [relatedDevices]="relatedDevices()" />
+      </aside>
+    </div>
+  } @else {
+    <div class="device-detail__loading" aria-busy="true" aria-label="Loading device details">
+      <div class="device-detail__skeleton device-detail__skeleton--header"></div>
+      <div class="device-detail__skeleton device-detail__skeleton--stats"></div>
+      <div class="device-detail__skeleton device-detail__skeleton--body"></div>
+    </div>
+  }
+</div>

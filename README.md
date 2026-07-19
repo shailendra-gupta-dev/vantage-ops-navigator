@@ -1,59 +1,132 @@
-# VantageOpsNavigator
+# Vantage Ops Navigator
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.0.
+A network operations dashboard concept for tracking device health, security advisories, support contracts, and peer benchmarking across a fleet of network devices — built with Angular 22 using standalone components, Signals, and zoneless change detection.
 
-## Development server
+This is a personal portfolio project backed by mock JSON data (no real backend). All company names, product families, and vendor references (e.g. "Meridian Networks", "MeridianOS", "Vertex", "Aegis") are fictional; any resemblance to real products is for realism only. This project is not affiliated with, endorsed by, or built for any real vendor.
 
-To start a local development server, run:
+## Features
 
-```bash
-ng serve
-```
+- **Dashboard** — critical risk spotlight, a rolling network digest feed, and a health scorecard across four dimensions
+- **Assets** — searchable device inventory with a device detail view (health stats, advisory table, contract lifecycle, activity log, related devices)
+- **Assessments** — peer benchmarking (percentile ranking, network health radar, best/needs-focus dimensions, cohort context)
+- **Spotlight search** (⌘K) — global search overlay across devices and nav destinations
+- **Role-based navigation** — the sidebar, and the pages it exposes, change live as you switch between Engineer / Manager / Admin / Partner roles
+- Server-side rendering via `@angular/ssr` + Express
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Tech stack
 
-## Code scaffolding
+| | |
+|---|---|
+| Framework | Angular 22 — standalone components, Signals, zoneless change detection |
+| Styling | Tailwind CSS v4 (`@theme` tokens) + SCSS (BEM) |
+| Charts | ECharts via `ngx-echarts` |
+| Data | Static JSON under `src/assets/mock/`, fetched via `HttpClient` + `toSignal` |
+| Testing | Vitest |
+| SSR | `@angular/ssr` + Express |
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Getting started
 
 ```bash
-ng build
+npm install
+npm start        # ng serve — http://localhost:4200
+npm run build    # ng build — output in dist/
+npm test         # ng test — Vitest
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Project structure
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
+```
+src/app/
+  core/
+    layout/       # AppLayoutComponent + Sidebar, Header, Footer, RoleSwitcher, SpotlightSearch, ContractPulseStrip
+    models/        # Shared TypeScript interfaces (Device, Advisory, NavSection, ...)
+    stores/        # Signal-based state (contracts, digest, risk, role, search)
+    utils/         # Chart helpers
+  features/
+    dashboard/     # Risk spotlight, network digest, health scorecard
+    assets/        # Device search + device-detail (tabs: advisories, details, contracts, activity)
+    assessments/   # Peer benchmarking
+src/assets/
+  mock/            # JSON fixtures the app is entirely driven by
+  icons/, logo/
 ```
 
-## Running end-to-end tests
+## Navigation framework
 
-For end-to-end (e2e) testing, run:
+The sidebar isn't hardcoded — it's driven entirely by a declarative, role-filtered nav config, so adding, removing, or reordering nav destinations (including gating them by role) never touches component templates.
 
-```bash
-ng e2e
+**1. The config is data**, a JSON tree fetched at runtime (`src/assets/mock/nav.config.json`):
+
+```json
+{
+  "id": "assets",
+  "label": "Assets",
+  "icon": "assets",
+  "path": "/assets",
+  "roles": ["admin", "engineer", "manager", "partner"],
+  "badge": "live",
+  "children": [
+    { "id": "device-search", "label": "Device Search", "path": "/assets", "roles": [...] },
+    { "id": "coverage-gap", "label": "Coverage Gap", "path": "/assets/coverage-gap", "roles": [...], "badge": "dev" }
+  ]
+}
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+**2. The shape is a typed contract** (`src/app/core/models/index.ts`):
 
-## Additional Resources
+```ts
+export interface NavSection {
+  id: string;
+  label: string;
+  icon: string;
+  path: string;
+  roles: UserRole[];
+  badge?: BadgeStatus;       // 'live' | 'dev' | 'none' — flags shipped vs in-progress destinations
+  children: NavChild[];
+}
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+export interface NavChild {
+  id: string;
+  label: string;
+  path: string;
+  roles: UserRole[];
+  badge?: BadgeStatus;
+}
+```
+
+**3. `AppLayoutComponent` loads it once** and exposes it as a signal, alongside the current role:
+
+```ts
+readonly navConfig = toSignal(
+  this.http.get<{ navigation: NavSection[] }>('assets/mock/nav.config.json')
+    .pipe(map(res => res.navigation)),
+  { initialValue: [] as NavSection[] },
+);
+readonly currentRole = signal<UserRole>('engineer');
+```
+
+**4. `SidebarComponent` renders it reactively**, filtering every section and every child independently by role:
+
+```html
+@for (section of navConfig(); track section.id) {
+  @if (section.roles.includes(currentRole())) {
+    ...
+    @for (child of section.children; track child.id) {
+      @if (child.roles.includes(currentRole())) { ... }
+    }
+  }
+}
+```
+
+Switching roles (via `RoleSwitcherComponent`, whose `roleChange` output bubbles up through the header to the layout's `currentRole` signal) instantly recomputes what's visible — no manual re-fetch, no extra subscriptions, since everything downstream of the signal reacts on its own.
+
+**5. Other conventions baked into the framework:**
+- **Active-state resolution** is derived from router events (`toSignal` over `NavigationEnd`), with `startsWith` matching for parent sections and exact-segment matching for children — so `/assets` doesn't falsely light up while viewing `/assets/devices/dev-001`.
+- **Icons are resolved by convention**, not hardcoded per item: `getNavIconSrc(icon, active)` maps a nav item's `icon` slug to `assets/icons/{icon}-icon-{active|inactive}.svg`, decoupling the config from asset file naming.
+- **A standalone `RoleStore`** (`core/stores/role.store.ts`, `providedIn: 'root'`) exposes role state as an injectable signal — available for components outside the layout tree to read/set role, though `AppLayoutComponent` currently keeps its own local signal rather than injecting it.
+
+The result: shipping a new nav destination — including one that's role-gated or marked "in dev" — is a JSON edit, not a template change.
+
+## License
+
+All rights reserved. This code is public for portfolio/reference purposes; no license is granted for reuse.

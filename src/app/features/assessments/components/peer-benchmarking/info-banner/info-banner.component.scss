@@ -1,0 +1,42 @@
+@reference "../../../../../../styles.scss";
+
+.assessments-page {
+  &__info-banner {
+    @apply flex items-start shrink-0 w-full;
+    background: rgba(79, 70, 229, 0.06);
+    border: 1px solid rgba(79, 70, 229, 0.12);
+    border-radius: 11.25px;
+    gap: 9.375px;
+    padding: 12.25px 16px;
+  }
+
+  &__info-icon-wrap {
+    @apply flex items-start shrink-0;
+    padding-top: 1px;
+  }
+
+  &__info-icon {
+    @apply block;
+    height: 14px;
+    width: 14px;
+  }
+
+  &__info-text {
+    @apply flex flex-col items-start;
+  }
+
+  &__info-headline {
+    @apply font-medium whitespace-nowrap m-0;
+    color: #cbd5e1;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  &__info-body {
+    @apply font-normal m-0;
+    color: #475569;
+    font-size: 11px;
+    line-height: 16.5px;
+    padding-top: 2px;
+  }
+}

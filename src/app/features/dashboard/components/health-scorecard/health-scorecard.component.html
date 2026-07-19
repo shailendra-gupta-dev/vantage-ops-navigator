@@ -1,0 +1,77 @@
+<!-- Figma node 7:1626 — Health Scorecard: 4-column grid, ECharts visualizations -->
+<div class="health-scorecard">
+
+  <!-- ── Header ───────────────────────────────────────────────────────────── -->
+  <div class="health-scorecard__header">
+    <div class="health-scorecard__header-left">
+      <span class="health-scorecard__heading">Health Scorecard</span>
+      <span class="health-scorecard__in-dev">
+        <img src="assets/icons/caution-board-icon.svg" alt="" aria-hidden="true" width="9" height="9" />
+        IN DEV
+      </span>
+    </div>
+    <span class="health-scorecard__header-desc">
+      Your network's health across four dimensions
+    </span>
+  </div>
+
+  <!-- ── 4-panel grid ───────────────────────────────────────────────────── -->
+  <div class="health-scorecard__panels">
+
+    <!-- Panel 1: Security — Grade Gauge Chart -->
+    <div class="health-scorecard__panel health-scorecard__panel--border-r">
+      @defer (on idle) {
+        <div echarts class="health-scorecard__chart health-scorecard__chart--security" [options]="securityChartOpt()"></div>
+      } @placeholder {
+        <div class="health-scorecard__chart health-scorecard__chart--security"></div>
+      }
+      <div class="health-scorecard__panel-label">Security</div>
+      <div class="health-scorecard__panel-sub">{{ securitySubtitle() }}</div>
+    </div>
+
+    <!-- Panel 2: Lifecycle — Stacked Bar + HTML legend -->
+    <div class="health-scorecard__panel health-scorecard__panel--border-r">
+      @defer (on idle) {
+        <div echarts class="health-scorecard__chart health-scorecard__chart--lifecycle" [options]="lifecycleChartOpt()"></div>
+      } @placeholder {
+        <div class="health-scorecard__chart health-scorecard__chart--lifecycle"></div>
+      }
+      <div class="health-scorecard__legend">
+        <span class="health-scorecard__legend-dot health-scorecard__legend-dot--active"></span>
+        <span class="health-scorecard__legend-label">Active</span>
+        <span class="health-scorecard__legend-dot health-scorecard__legend-dot--near-eos"></span>
+        <span class="health-scorecard__legend-label">Near EoS</span>
+        <span class="health-scorecard__legend-dot health-scorecard__legend-dot--eol"></span>
+        <span class="health-scorecard__legend-label">EoL</span>
+        <span class="health-scorecard__legend-dot health-scorecard__legend-dot--unknown"></span>
+        <span class="health-scorecard__legend-label">Unknown</span>
+      </div>
+      <div class="health-scorecard__panel-label">Lifecycle</div>
+      <div class="health-scorecard__panel-sub">{{ lifecycleSubtitle() }}</div>
+    </div>
+
+    <!-- Panel 3: Coverage — Doughnut Chart -->
+    <div class="health-scorecard__panel health-scorecard__panel--border-r">
+      @defer (on idle) {
+        <div echarts class="health-scorecard__chart health-scorecard__chart--coverage" [options]="coverageChartOpt()"></div>
+      } @placeholder {
+        <div class="health-scorecard__chart health-scorecard__chart--coverage"></div>
+      }
+      <div class="health-scorecard__panel-label">Coverage</div>
+      <div class="health-scorecard__panel-sub">{{ coverageStats().pct }}% of devices covered</div>
+    </div>
+
+    <!-- Panel 4: Connectivity — Smoothed Line Chart -->
+    <div class="health-scorecard__panel">
+      @defer (on idle) {
+        <div echarts class="health-scorecard__chart health-scorecard__chart--connectivity" [options]="connectivityChartOpt()"></div>
+      } @placeholder {
+        <div class="health-scorecard__chart health-scorecard__chart--connectivity"></div>
+      }
+      <div class="health-scorecard__panel-label">Connectivity</div>
+      <div class="health-scorecard__panel-sub">7-day avg uptime 99.4%</div>
+    </div>
+
+  </div>
+
+</div>

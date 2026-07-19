@@ -1,0 +1,50 @@
+<!-- Figma node 7:1393 — h-[45px] flex items-center justify-between px-[18.75px] -->
+<header class="app-header">
+
+  <!-- Left — breadcrumb: Figma gap-[7.5px] | logo / separator / page-title pattern -->
+  <div class="app-header__breadcrumb">
+    <span class="app-header__breadcrumb-page">Vantage Ops Navigator</span>
+    <span class="app-header__breadcrumb-sep" aria-hidden="true">/</span>
+    <span class="app-header__breadcrumb-page">{{ pageTitle() }}</span>
+  </div>
+
+  <!-- Right — Figma gap-[11.25px]: search · bell · role-switcher · avatar -->
+  <div class="app-header__actions">
+
+    <!-- Search pill — Figma: bg rgba(30,41,59,0.8) | border | rounded-[11.25px] | px-[12.25px] py-[6.625px] -->
+    <button class="app-header__search" type="button" (click)="searchOpen.emit()"
+            aria-label="Open search">
+      <svg class="app-header__search-icon" width="13" height="13" viewBox="0 0 13 13"
+           fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="5.5" cy="5.5" r="4.5"/>
+        <path d="M9.5 9.5L12 12" stroke-linecap="round"/>
+      </svg>
+      <span class="app-header__search-text">Search devices…</span>
+      <!-- ⌘K badge — Figma: imgIcon8 (9px) + "K" | bg rgba(79,70,229,0.2) | rounded-[3.75px] | text #818cf8 -->
+      <kbd class="app-header__search-kbd">
+        <img src="assets/icons/macos-command-key-icon.svg"
+             class="app-header__search-kbd-img"
+             alt="" aria-hidden="true" height="9" />K
+      </kbd>
+    </button>
+
+    <!-- Bell — Figma: imgIcon9 size-[30px] rounded-[11.25px] | dot bg #e11d48 -->
+    <button class="app-header__bell" type="button" aria-label="Notifications">
+      <img src="assets/icons/bell-icon.svg" alt="" aria-hidden="true" height="16" />
+      <span class="app-header__bell-dot" aria-label="New notifications"></span>
+    </button>
+
+    <!-- Role switcher -->
+    <app-role-switcher
+      [selectedRole]="currentRole()"
+      (roleChange)="roleChange.emit($event)"
+    />
+
+    <!-- Avatar — Figma: size-[30px] rounded-full bg-brand-blue -->
+    <div class="app-header__avatar" aria-label="User profile">
+      {{ profile().initials }}
+    </div>
+
+  </div>
+
+</header>

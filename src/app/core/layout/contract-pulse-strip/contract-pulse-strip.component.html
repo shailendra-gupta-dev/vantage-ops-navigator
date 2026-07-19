@@ -1,0 +1,40 @@
+<!-- Figma node 7:1425 — ContractPulseStrip -->
+@if (!isDismissed()) {
+  <div class="pulse-strip">
+
+    <!-- Left — label -->
+    <!-- Figma: warning icon 12px + Inter Medium 11px #64748b tracking-[0.44px] -->
+    <div class="pulse-strip__label">
+      <!-- Figma: imgIcon11 — warning icon 12x12 -->
+      <img src="assets/icons/warning-icon.svg"
+           class="pulse-strip__label-icon"
+           alt="" aria-hidden="true" width="12" height="12" />
+      <span>CONTRACT PULSE</span>
+    </div>
+
+    <!-- Pills -->
+    <!-- Figma: red bg rgba(225,29,72,0.18) border rgba(225,29,72,0.4) | amber rgba(245,158,11,0.15/0.35) | green similar -->
+    <div class="pulse-strip__pills">
+      @for (contract of contracts(); track contract.id) {
+        <div class="pulse-strip__pill"
+             [class.pulse-strip__pill--red]="contract.urgency === 'red'"
+             [class.pulse-strip__pill--amber]="contract.urgency === 'amber'"
+             [class.pulse-strip__pill--green]="contract.urgency === 'green'">
+          <span class="pulse-strip__pill-dot" aria-hidden="true"></span>
+          <span class="pulse-strip__pill-label">{{ contract.label }}</span>
+          <span class="pulse-strip__pill-days">{{ contract.daysLeft }}d</span>
+        </div>
+      }
+    </div>
+
+    <!-- Dismiss -->
+    <button class="pulse-strip__dismiss" type="button" (click)="dismiss()"
+            aria-label="Dismiss contract pulse">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+           stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <path d="M2 2l8 8M10 2l-8 8"/>
+      </svg>
+    </button>
+
+  </div>
+}

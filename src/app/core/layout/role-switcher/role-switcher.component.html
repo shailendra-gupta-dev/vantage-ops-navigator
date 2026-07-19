@@ -1,0 +1,36 @@
+<div class="role-switcher">
+
+  <button class="role-switcher__trigger" (click)="toggle()" type="button"
+          [attr.aria-expanded]="isOpen()" aria-haspopup="listbox">
+    <span class="role-switcher__dot" aria-hidden="true"></span>
+    <span class="role-switcher__label">{{ selectedRole() | titlecase }}</span>
+    <span class="role-switcher__chevron" aria-hidden="true">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor">
+        <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5"
+              fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </button>
+
+  @if (isOpen()) {
+    <ul class="role-switcher__menu" role="listbox" [attr.aria-label]="'Select role'">
+      @for (role of roles; track role) {
+        <li class="role-switcher__option"
+            [class.role-switcher__option--active]="role === selectedRole()"
+            role="option"
+            [attr.aria-selected]="role === selectedRole()"
+            (click)="select(role)">
+          <span class="role-switcher__option-label">{{ role | titlecase }}</span>
+          @if (role === selectedRole()) {
+            <svg class="role-switcher__check" width="12" height="12" viewBox="0 0 12 12"
+                 fill="currentColor" aria-hidden="true">
+              <path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5"
+                    fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          }
+        </li>
+      }
+    </ul>
+  }
+
+</div>

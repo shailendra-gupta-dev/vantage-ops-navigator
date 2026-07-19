@@ -1,0 +1,61 @@
+<!-- Figma: Footer — px-[18.75px] pt-[10.375px] pb-[9.375px] gap-[22.5px] -->
+<footer class="app-footer">
+
+  <!-- Left — copyright + version -->
+  <div class="app-footer__left">
+    <span class="app-footer__copyright">© 2026 Vantage Ops</span>
+    <span class="app-footer__sep" aria-hidden="true">·</span>
+    <!-- Figma: JetBrains Mono Bold 10px #6366f1 | bg rgba(79,70,229,0.1) | rounded-[3.75px] | px-[5.63px] h-[18.75px] -->
+    <span class="app-footer__version">v3.6.9-rc</span>
+    <span class="app-footer__sep" aria-hidden="true">·</span>
+    <span class="app-footer__poc">POC Demo</span>
+  </div>
+
+  <!-- Centre — nav links -->
+  <!-- Figma: imgIcon26–30 (11px opacity-60) + Inter Medium 11px #475569 | gap-[11.25px] -->
+  <nav class="app-footer__links" aria-label="Footer navigation">
+    <a class="app-footer__link">
+      <img src="assets/icons/notebook-icon.svg" alt="" aria-hidden="true" width="11" height="11" />
+      Documentation
+    </a>
+    <a class="app-footer__link">
+      <img src="assets/icons/open-book-icon.svg" alt="" aria-hidden="true" width="11" height="11" />
+      API Reference
+    </a>
+    <a class="app-footer__link">
+      <img src="assets/icons/support-icon.svg" alt="" aria-hidden="true" width="11" height="11" />
+      Support
+    </a>
+    <a class="app-footer__link">
+      <img src="assets/icons/privacy-icon.svg" alt="" aria-hidden="true" width="11" height="11" />
+      Privacy Policy
+    </a>
+    <a class="app-footer__link">
+      <img src="assets/icons/changelog-icon.svg" alt="" aria-hidden="true" width="11" height="11" />
+      Changelog
+    </a>
+  </nav>
+
+  <!-- Right — live status indicators -->
+  <div class="app-footer__status">
+    <span class="app-footer__indicator app-footer__indicator--good">
+      <span class="app-footer__dot" aria-hidden="true"></span>API
+    </span>
+    <span class="app-footer__indicator app-footer__indicator--good">
+      <span class="app-footer__dot" aria-hidden="true"></span>Data Sync
+    </span>
+    <span class="app-footer__indicator app-footer__indicator--good">
+      <span class="app-footer__dot" aria-hidden="true"></span>Alerts
+    </span>
+    <span class="app-footer__sep" aria-hidden="true">·</span>
+    <!-- Figma: refresh icon before synced timestamp -->
+    <span class="app-footer__synced">
+      <img src="assets/icons/refresh-icon.svg" alt="" aria-hidden="true" width="10" height="10" />
+      Synced 2m ago
+    </span>
+    <span class="app-footer__sep" aria-hidden="true">·</span>
+    <!-- Figma: JetBrains Mono Regular 10px #334155 -->
+    <time class="app-footer__time" aria-live="off">{{ currentTime() }}</time>
+  </div>
+
+</footer>

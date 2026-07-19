@@ -1,0 +1,39 @@
+<!-- Figma node 7:2163 / 7:2372 — Assessments / Peer Benchmarking -->
+<div class="assessments-page">
+
+  <!-- Section 1: Header row -->
+  <div class="assessments-page__header">
+    <div class="assessments-page__header-left">
+      <h1 class="assessments-page__title">Peer Benchmarking</h1>
+      <div class="assessments-page__in-dev">
+        <img src="assets/icons/caution-board-icon.svg" alt="" class="assessments-page__in-dev-icon" aria-hidden="true">
+        <span class="assessments-page__in-dev-text">IN DEV</span>
+      </div>
+    </div>
+    <div class="assessments-page__header-filters">
+      <div class="assessments-page__filter-pill assessments-page__filter-pill--active">Financial Services</div>
+      <div class="assessments-page__filter-pill">5000+ emp</div>
+      <div class="assessments-page__filter-pill">Americas</div>
+    </div>
+  </div>
+
+  <!-- Section 2: Cohort context bar -->
+  <app-cohort-context-bar />
+
+  <!-- Section 3: Rank cards -->
+  <div class="assessments-page__rank-cards">
+    <app-overall-rank-card />
+    <app-best-dimension-card />
+    <app-needs-focus-card />
+  </div>
+
+  <!-- Section 4: Charts row -->
+  <div class="assessments-page__charts">
+    <app-network-health-radar />
+    <app-percentile-ranking />
+  </div>
+
+  <!-- Section 5: Info banner -->
+  <app-info-banner />
+
+</div>

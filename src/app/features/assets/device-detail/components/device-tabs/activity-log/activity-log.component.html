@@ -1,0 +1,26 @@
+<div class="activity-log">
+  @if (events().length === 0) {
+    <p class="activity-log__empty">No activity recorded yet.</p>
+  } @else {
+    <ol class="activity-log__list">
+      @for (event of events(); track event.id; let last = $last) {
+        <li class="activity-log__item">
+          <div class="activity-log__track">
+            <div class="activity-log__dot activity-log__dot--{{ event.type }}"></div>
+            @if (!last) {
+              <div class="activity-log__line"></div>
+            }
+          </div>
+          <div class="activity-log__body">
+            <time class="activity-log__time" [dateTime]="event.timestamp">
+              {{ formatTimestamp(event.timestamp) }}
+            </time>
+            <p class="activity-log__title">{{ event.title }}</p>
+            <p class="activity-log__desc">{{ event.description }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+    <button class="activity-log__load-more" type="button">Load older events</button>
+  }
+</div>

@@ -1,0 +1,35 @@
+<div class="device-tabs">
+  <div class="device-tabs__bar" role="tablist" aria-label="Device information tabs">
+    @for (tab of tabs(); track tab.id) {
+      <button
+        class="device-tabs__tab"
+        [class.device-tabs__tab--active]="activeTab() === tab.id"
+        role="tab"
+        [attr.aria-selected]="activeTab() === tab.id"
+        (click)="activeTab.set(tab.id)"
+        type="button">
+        {{ tab.label }}
+        @if (tab.badge) {
+          <span class="device-tabs__badge">{{ tab.badge }}</span>
+        }
+      </button>
+    }
+  </div>
+
+  <div class="device-tabs__content" role="tabpanel">
+    @switch (activeTab()) {
+      @case ('advisories') {
+        <app-advisory-table [device]="device()" [advisories]="advisories()" />
+      }
+      @case ('device-details') {
+        <app-device-info-panel [device]="device()" [detail]="deviceDetail()" />
+      }
+      @case ('contract-lifecycle') {
+        <app-contract-lifecycle [device]="device()" />
+      }
+      @case ('activity-log') {
+        <app-activity-log [events]="activityLog()" />
+      }
+    }
+  </div>
+</div>

@@ -8,10 +8,14 @@
   "projects": {
     "vantage-ops-navigator": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "von",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -22,10 +26,15 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "server": "src/main.server.ts",
             "outputMode": "server",

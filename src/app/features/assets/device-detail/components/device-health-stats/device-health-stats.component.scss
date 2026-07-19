@@ -1,0 +1,123 @@
+@reference "../../../../../../styles.scss";
+
+.health-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 10px;
+  margin-top: 16px;
+
+  &__card {
+    background: var(--color-bg-surface);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: border-color 150ms ease;
+
+    &:hover {
+      border-color: rgba(148, 163, 184, 0.22);
+    }
+  }
+
+  &__value {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+
+    &--critical { color: var(--color-critical); }
+    &--warning  { color: var(--color-warning); }
+    &--healthy  { color: var(--color-success); }
+  }
+
+  &__label {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
+  &__sublabel {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+
+  &__breakdown {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+
+  &__dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    &--critical { background: var(--color-critical); }
+    &--high     { background: var(--color-high); }
+    &--medium   { background: var(--color-warning); }
+    &--low      { background: var(--color-info); }
+  }
+
+  &__dot-count {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-right: 6px;
+  }
+
+  &__no-advisories {
+    font-size: 12px;
+    color: var(--color-success);
+  }
+
+  &__contract-value {
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &--active    { color: var(--color-success); }
+    &--expiring  { color: var(--color-warning); }
+    &--expired   { color: var(--color-critical); }
+    &--uncovered { color: var(--color-text-muted); }
+  }
+
+  &__contract-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  &__version {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1;
+  }
+
+  &__update-badge {
+    font-size: 12px;
+    color: var(--color-warning);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+
+    img {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  &__current-badge {
+    font-size: 12px;
+    color: var(--color-success);
+    margin-top: 2px;
+  }
+}

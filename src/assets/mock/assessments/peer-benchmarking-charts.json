@@ -1,0 +1,32 @@
+{
+  "bestDimension": {
+    "quarters": ["Q3 '25", "Q4 '25", "Q1 '26", "Q2 '26"],
+    "percentiles": [79, 83, 88, 91]
+  },
+  "needsFocus": {
+    "you": 34,
+    "gapToMedian": 16,
+    "aboveMedian": 50
+  },
+  "radar": {
+    "indicators": [
+      { "name": "Security Posture", "max": 100 },
+      { "name": "Uptime SLA", "max": 100 },
+      { "name": "Config Standard", "max": 100 },
+      { "name": "Support Coverage", "max": 100 },
+      { "name": "Lifecycle Currency", "max": 100 }
+    ],
+    "yourNetwork": [68, 82, 74, 91, 34],
+    "industryAvg": [58, 68, 55, 70, 52]
+  },
+  "percentileRanking": {
+    "source": [
+      ["dimension", "percentile"],
+      ["Security", 68],
+      ["Lifecycle", 34],
+      ["Coverage", 91],
+      ["Config", 74],
+      ["Uptime", 82]
+    ]
+  }
+}

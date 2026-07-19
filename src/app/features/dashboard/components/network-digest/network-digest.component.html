@@ -1,0 +1,54 @@
+<!-- Figma node 7:1550 — Network Digest card -->
+<div class="network-digest">
+
+  <!-- ── Header ───────────────────────────────────────────────────────────── -->
+  <div class="network-digest__header">
+    <div class="network-digest__header-left">
+      <span class="network-digest__icon" aria-hidden="true">📬</span>
+      <div class="network-digest__header-info">
+        <span class="network-digest__title">My Network Digest</span>
+        <span class="network-digest__subtitle">Since Tuesday 9:00 AM</span>
+      </div>
+    </div>
+    @if (newCount() > 0) {
+      <span class="network-digest__new-badge" aria-label="{{ newCount() }} new items">
+        {{ newCount() }} new
+      </span>
+    }
+  </div>
+
+  <!-- ── Items ─────────────────────────────────────────────────────────────── -->
+  <div class="network-digest__items" role="list">
+    @for (item of items(); track item.id; let last = $last) {
+      <div class="network-digest__item" [class.network-digest__item--last]="last" role="listitem">
+        <span class="network-digest__item-emoji" aria-hidden="true">{{ item.emoji }}</span>
+        <div class="network-digest__item-body">
+          <div class="network-digest__item-meta">
+            <span class="network-digest__item-badge" [style.background]="item.badgeColor">
+              {{ item.badgeLabel }}
+            </span>
+            <span class="network-digest__item-time">{{ item.timeLabel }}</span>
+          </div>
+          <p class="network-digest__item-title">{{ item.title }}</p>
+          <p class="network-digest__item-subtitle">{{ item.subtitle }}</p>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- ── Footer ────────────────────────────────────────────────────────────── -->
+  <div class="network-digest__footer">
+    <button class="network-digest__show-older" type="button">
+      Show older
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor"
+           stroke-width="0.917" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4.125 8.25L6.875 5.5L4.125 2.75"/>
+      </svg>
+    </button>
+    <button class="network-digest__mark-seen" type="button">
+      <img src="assets/icons/seen-icon.svg" alt="" aria-hidden="true" width="12" height="12" />
+      Mark All as Seen
+    </button>
+  </div>
+
+</div>

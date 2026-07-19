@@ -1,0 +1,328 @@
+// Figma node 70:331 / 71:359 — SpotlightSearch idle + results states
+@reference "../../../../styles.scss";
+
+.spotlight {
+  @apply fixed inset-0 z-50 flex items-start justify-center;
+  background: rgba(7, 11, 22, 0.75);
+  padding-top: 90px;
+
+  &__panel {
+    @apply relative flex flex-col overflow-hidden;
+    background: #1e293b;
+    border: 1px solid rgba(79, 70, 229, 0.3);
+    border-radius: 15px;
+    box-shadow:
+      0px 32px 80px 0px rgba(0, 0, 0, 0.6),
+      0px 0px 0px 1px rgba(79, 70, 229, 0.15);
+    max-height: calc(100vh - 120px);
+    max-width: 630px;
+    padding: 1px;
+    width: 630px;
+  }
+
+  // ── Input row ─────────────────────────────────────────────────────────────
+
+  &__input-row {
+    @apply flex items-center w-full shrink-0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    gap: 11.25px;
+    padding: 13.125px 15px 14.125px;
+  }
+
+  &__search-icon {
+    @apply block shrink-0;
+    height: 18px;
+    width: 18px;
+  }
+
+  &__input {
+    @apply flex-1 bg-transparent outline-none min-w-0;
+    color: #e2e8f0;
+    font-size: 16px;
+    line-height: normal;
+
+    &::placeholder {
+      color: rgba(226, 232, 240, 0.5);
+    }
+
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration {
+      display: none;
+    }
+  }
+
+  &__esc-kbd {
+    @apply block shrink-0 text-center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 3.75px;
+    color: #475569;
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-size: 11px;
+    height: 26px;
+    letter-spacing: normal;
+    line-height: 26px;
+    padding: 0 7.5px;
+    width: 36.875px;
+  }
+
+  // ── Empty / idle body ─────────────────────────────────────────────────────
+
+  &__empty-body {
+    @apply flex flex-col items-center w-full;
+    padding: 30px 15px;
+  }
+
+  &__empty-icon-circle {
+    @apply flex items-center justify-center shrink-0;
+    background: rgba(79, 70, 229, 0.1);
+    border: 1px solid rgba(79, 70, 229, 0.2);
+    border-radius: 9999px;
+    height: 45px;
+    padding: 1px;
+    width: 45px;
+  }
+
+  &__empty-icon {
+    @apply block;
+    height: 20px;
+    width: 20px;
+  }
+
+  &__empty-hint {
+    @apply text-center whitespace-nowrap m-0;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 19.5px;
+    padding-top: 11.25px;
+  }
+
+  &__pills {
+    @apply flex items-center justify-center;
+    gap: 15px;
+    padding-top: 15px;
+  }
+
+  &__pill {
+    @apply cursor-pointer;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 11.25px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    padding: 4.75px 10.375px;
+
+    &:hover {
+      background: rgba(79, 70, 229, 0.08);
+      border-color: rgba(79, 70, 229, 0.2);
+      color: #a5b4fc;
+    }
+  }
+
+  // ── Clear button ──────────────────────────────────────────────────────────
+
+  &__clear-btn {
+    @apply flex items-center justify-center shrink-0 cursor-pointer;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 9999px;
+    height: 20px;
+    width: 20px;
+  }
+
+  &__clear-icon {
+    @apply block;
+    height: 10px;
+    width: 10px;
+  }
+
+  // ── Results list ──────────────────────────────────────────────────────────
+
+  &__results {
+    @apply flex flex-col w-full overflow-y-auto;
+    max-height: 360px;
+  }
+
+  &__result {
+    @apply flex items-start relative cursor-pointer;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.07);
+    border-left: 2px solid transparent;
+    gap: 12px;
+    padding: 10px 15px 10px 13px;
+    transition: background 0.1s;
+
+    &:last-child { border-bottom: none; }
+
+    &--active,
+    &:hover {
+      background: rgba(79, 70, 229, 0.08);
+      border-left-color: rgba(79, 70, 229, 0.7);
+
+      .spotlight__open-btn { opacity: 1; pointer-events: auto; }
+    }
+  }
+
+  &__result-icon-wrap {
+    @apply flex items-center justify-center shrink-0;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    height: 40px;
+    margin-top: 2px;
+    width: 40px;
+
+    &--critical { background: rgba(239, 68, 68, 0.15);  border-color: rgba(239, 68, 68, 0.25); }
+    &--high     { background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.25); }
+    &--medium   { background: rgba(245, 158, 11, 0.1);  border-color: rgba(245, 158, 11, 0.2); }
+    &--healthy  { background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.2); }
+
+    &--critical .spotlight__result-icon {
+      filter: brightness(0) saturate(100%) invert(33%) sepia(99%) saturate(1000%) hue-rotate(329deg) brightness(103%) contrast(93%);
+    }
+
+    &--high .spotlight__result-icon,
+    &--medium .spotlight__result-icon {
+      filter: brightness(0) saturate(100%) invert(67%) sepia(98%) saturate(600%) hue-rotate(1deg) brightness(104%) contrast(96%);
+    }
+
+    &--healthy .spotlight__result-icon {
+      filter: brightness(0) saturate(100%) invert(60%) sepia(70%) saturate(600%) hue-rotate(120deg) brightness(96%) contrast(90%);
+    }
+  }
+
+  &__result-icon {
+    @apply block;
+    height: 20px;
+    width: 20px;
+  }
+
+  &__result-body {
+    @apply flex flex-col flex-1 min-w-0;
+    gap: 3px;
+  }
+
+  &__result-title-row {
+    @apply flex items-center;
+    gap: 8px;
+  }
+
+  &__result-name {
+    @apply font-semibold whitespace-nowrap;
+    color: #e2e8f0;
+    font-size: 13px;
+    line-height: 19.5px;
+  }
+
+  &__result-badge {
+    @apply font-medium whitespace-nowrap shrink-0;
+    border-radius: 9999px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 11px;
+    line-height: 16.5px;
+    padding: 0 7px;
+
+    &--critical { background: rgba(239, 68, 68, 0.1);  border-color: rgba(239, 68, 68, 0.3);  color: #ef4444; }
+    &--high     { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b; }
+    &--medium   { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b; }
+    &--healthy  { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10b981; }
+  }
+
+  &__result-subtitle {
+    @apply font-normal m-0;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 16.5px;
+  }
+
+  &__result-meta {
+    @apply flex items-center flex-wrap;
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  &__meta-item {
+    @apply flex items-center;
+    color: #475569;
+    font-size: 10px;
+    gap: 4px;
+    line-height: 15px;
+  }
+
+  &__meta-icon {
+    @apply block shrink-0;
+    height: 11px;
+    opacity: 0.7;
+    width: 11px;
+
+    &--critical {
+      opacity: 1;
+      filter: brightness(0) saturate(100%) invert(33%) sepia(99%) saturate(1000%) hue-rotate(329deg) brightness(103%) contrast(93%);
+    }
+
+    &--contract {
+      opacity: 1;
+      filter: brightness(0) saturate(100%) invert(56%) sepia(100%) saturate(500%) hue-rotate(130deg) brightness(93%) contrast(91%);
+    }
+  }
+
+  &__meta-advisories {
+    &--critical { color: #ef4444; }
+  }
+
+  &__meta-sep {
+    color: rgba(71, 85, 105, 0.5);
+    font-size: 10px;
+  }
+
+  &__open-btn {
+    @apply shrink-0 font-medium cursor-pointer whitespace-nowrap;
+    background: rgba(79, 70, 229, 0.85);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 12px;
+    height: 28px;
+    line-height: 28px;
+    margin-top: 4px;
+    opacity: 0;
+    padding: 0 10px;
+    pointer-events: none;
+    transition: opacity 0.1s;
+
+    &:hover { background: rgba(79, 70, 229, 1); }
+  }
+
+  // ── Footer keyboard hint bar ──────────────────────────────────────────────
+
+  &__footer {
+    @apply flex items-center justify-between shrink-0 w-full;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    padding: 8px 15px;
+  }
+
+  &__footer-count {
+    @apply font-normal;
+    color: #475569;
+    font-size: 11px;
+    line-height: 16.5px;
+  }
+
+  &__footer-hints {
+    @apply flex items-center;
+    gap: 6px;
+  }
+
+  &__footer-hint {
+    @apply font-normal whitespace-nowrap;
+    color: #475569;
+    font-size: 11px;
+    line-height: 16.5px;
+  }
+
+  &__footer-dot {
+    color: rgba(71, 85, 105, 0.5);
+    font-size: 11px;
+  }
+}

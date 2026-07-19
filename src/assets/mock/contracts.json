@@ -1,0 +1,37 @@
+{
+  "contracts": [
+    {
+      "id": "C-2024-881",
+      "name": "Enterprise Support — Chicago Campus",
+      "expiresAt": "2026-06-28",
+      "daysToExpiry": 18,
+      "affectedDeviceCount": 18,
+      "renewalValueUsd": 42000,
+      "accountManager": "Jane Smith",
+      "urgency": "red",
+      "tier": "Standard"
+    },
+    {
+      "id": "C-2025-044",
+      "name": "Premium Support — New York DC",
+      "expiresAt": "2026-08-01",
+      "daysToExpiry": 52,
+      "affectedDeviceCount": 24,
+      "renewalValueUsd": 68000,
+      "accountManager": "Mark Torres",
+      "urgency": "amber",
+      "tier": "Signature"
+    },
+    {
+      "id": "C-2023-199",
+      "name": "Basic Support — Boston Office",
+      "expiresAt": "2026-08-20",
+      "daysToExpiry": 71,
+      "affectedDeviceCount": 12,
+      "renewalValueUsd": 18000,
+      "accountManager": "Jane Smith",
+      "urgency": "green",
+      "tier": "Basic"
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+@reference "../../../../../../styles.scss";
+
+.device-header {
+  &__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  &__breadcrumb-back {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 120ms ease;
+
+    svg { flex-shrink: 0; }
+
+    &:hover { color: var(--color-text-primary); }
+  }
+
+  &__breadcrumb-link {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 120ms ease;
+
+    &:hover {
+      color: var(--color-text-primary);
+    }
+  }
+
+  &__breadcrumb-sep {
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  &__breadcrumb-current {
+    font-size: 13px;
+    color: var(--color-text-primary);
+    font-weight: 500;
+  }
+
+  &__hero {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  &__identity {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  &__icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    flex-shrink: 0;
+
+    &--critical {
+      background: rgba(225, 29, 72, 0.20);
+      border-color: rgba(225, 29, 72, 0.50);
+    }
+
+    &--high {
+      background: rgba(249, 115, 22, 0.18);
+      border-color: rgba(249, 115, 22, 0.45);
+    }
+
+    &--medium {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: rgba(245, 158, 11, 0.40);
+    }
+
+    &--healthy {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+  }
+
+  &__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  &__meta {
+    min-width: 0;
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  &__name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+    line-height: 1.2;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.5px;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
+
+    &--critical {
+      background: rgba(225, 29, 72, 0.15);
+      border: 1px solid rgba(225, 29, 72, 0.4);
+      color: var(--color-critical);
+      animation: pulse-critical 2.5s infinite;
+    }
+
+    &--high {
+      background: rgba(249, 115, 22, 0.12);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      color: var(--color-high);
+    }
+
+    &--medium {
+      background: var(--color-warning-bg);
+      border: 1px solid rgba(245, 158, 11, 0.30);
+      color: var(--color-warning);
+    }
+
+    &--healthy {
+      background: rgba(16, 185, 129, 0.10);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: var(--color-success);
+    }
+  }
+
+  &__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  &__subtitle {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 6px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  &__sep {
+    color: var(--color-text-muted);
+  }
+
+  &__ip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  &__action-btn {
+    background: transparent;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    color: #94a3b8;
+    border-radius: 11px;
+    padding: 6.5px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: border-color 150ms ease, color 150ms ease;
+    white-space: nowrap;
+
+    img {
+      width: 13px;
+      height: 13px;
+      opacity: 0.75;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      border-color: rgba(148, 163, 184, 0.25);
+      color: var(--color-text-primary);
+    }
+  }
+
+  &__divider {
+    height: 1px;
+    background: var(--color-border);
+    margin-top: 20px;
+  }
+}
+
+@keyframes pulse-critical {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+  50%       { box-shadow: 0 0 0 6px rgba(225, 29, 72, 0); }
+  25%       { box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.25); }
+}

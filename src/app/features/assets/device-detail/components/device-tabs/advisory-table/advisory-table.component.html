@@ -1,0 +1,98 @@
+<div class="advisory-table">
+  <div class="advisory-table__controls">
+    <input
+      class="advisory-table__search"
+      type="text"
+      placeholder="Search advisories…"
+      [value]="query()"
+      (input)="query.set($any($event.target).value)"
+      aria-label="Search advisories">
+
+    <div class="advisory-table__filters" role="group" aria-label="Filter by severity">
+      @for (f of severityFilters; track f.id) {
+        <button
+          class="advisory-table__filter"
+          [class.advisory-table__filter--active]="activeSeverity() === f.id"
+          (click)="activeSeverity.set(f.id)"
+          type="button">
+          {{ f.label }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="advisory-table__container">
+    <table class="advisory-table__table" role="grid">
+      <thead class="advisory-table__thead">
+        <tr>
+          <th class="advisory-table__th advisory-table__th--severity">Severity</th>
+          <th class="advisory-table__th advisory-table__th--cve">CVE ID</th>
+          <th class="advisory-table__th advisory-table__th--desc">Description</th>
+          <th class="advisory-table__th advisory-table__th--cvss">CVSS</th>
+          <th class="advisory-table__th advisory-table__th--fix">Fixed In</th>
+          <th class="advisory-table__th advisory-table__th--status">Status</th>
+          <th class="advisory-table__th advisory-table__th--actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="advisory-table__tbody">
+        @if (filtered().length === 0) {
+          <tr>
+            <td class="advisory-table__empty" colspan="7">
+              <div class="advisory-table__empty-content">
+                <img src="assets/icons/shield-inactive.svg" alt="" aria-hidden="true" class="advisory-table__empty-icon">
+                <span>No advisories match your filter</span>
+              </div>
+            </td>
+          </tr>
+        }
+        @for (adv of filtered(); track adv.id) {
+          <tr class="advisory-table__row">
+            <td class="advisory-table__td">
+              <span class="advisory-table__sev advisory-table__sev--{{ adv.severity }}">
+                <span class="advisory-table__sev-dot" aria-hidden="true"></span>
+                {{ adv.severity | titlecase }}
+              </span>
+            </td>
+            <td class="advisory-table__td">
+              @if (adv.cveId) {
+                <a class="advisory-table__cve-link"
+                   [href]="'https://advisories.meridiannet.io/cve/' + adv.cveId"
+                   target="_blank"
+                   rel="noopener noreferrer">{{ adv.cveId }}</a>
+              } @else {
+                <span class="advisory-table__no-cve">—</span>
+              }
+            </td>
+            <td class="advisory-table__td advisory-table__td--desc">
+              <span class="advisory-table__desc" [title]="adv.description">{{ adv.title }}</span>
+            </td>
+            <td class="advisory-table__td">
+              <span class="advisory-table__cvss" [style.color]="cvssColor(adv.cvss)">{{ adv.cvss }}</span>
+            </td>
+            <td class="advisory-table__td">
+              <span class="advisory-table__fix">{{ adv.fixedInVersion ?? 'N/A' }}</span>
+            </td>
+            <td class="advisory-table__td">
+              <span class="advisory-table__status advisory-table__status--{{ adv.status }}">
+                {{ adv.status | titlecase }}
+              </span>
+            </td>
+            <td class="advisory-table__td">
+              <div class="advisory-table__action-icons">
+                <button class="advisory-table__icon-btn" type="button" aria-label="Acknowledge advisory">
+                  <img src="assets/icons/check-icon.svg" alt="" aria-hidden="true">
+                </button>
+                <button class="advisory-table__icon-btn" type="button" aria-label="Suppress advisory">
+                  <img src="assets/icons/eye-slash-icon.svg" alt="" aria-hidden="true">
+                </button>
+                <button class="advisory-table__icon-btn" type="button" aria-label="View documentation">
+                  <img src="assets/icons/external-link-icon.svg" alt="" aria-hidden="true">
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

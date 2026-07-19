@@ -1,0 +1,77 @@
+@reference "../../../../styles.scss";
+
+// Figma node 7:1425 — bg rgba(15,23,42,0.9) | border-b rgba(148,163,184,0.12)
+// pt-[5.625px] pb-[6.625px] px-[18.75px] | gap-[11.25px]
+.pulse-strip {
+  @apply flex items-center shrink-0 border-b border-border-subtle;
+  background: rgba(15, 23, 42, 0.9);
+  padding: 5.625px 18.75px 6.625px;
+  gap: 11.25px;
+
+  // ── Label ──────────────────────────────────────────────────────────────────
+  // Figma: Inter Medium 11px #64748b tracking-[0.44px] | icon 12px gap-[5.625px]
+  &__label {
+    @apply flex items-center text-text-muted text-[11px] font-medium shrink-0;
+    gap: 5.625px;
+    letter-spacing: 0.44px;
+    color: #64748b;
+  }
+
+  &__label-icon { @apply shrink-0; }
+
+  // ── Pills ─────────────────────────────────────────────────────────────────
+  &__pills {
+    @apply flex items-center flex-1;
+    gap: 7.5px;
+  }
+
+  // Figma: h-[26px] | rounded-full | px-[10.375px] py-[4.75px] | gap-[5.625px] | Inter Medium 11px
+  &__pill {
+    @apply flex items-center rounded-full border text-[11px] font-medium;
+    height: 26px;
+    padding: 4.75px 10.375px;
+    gap: 5.625px;
+
+    // Figma: red — bg rgba(225,29,72,0.18) | border rgba(225,29,72,0.4) | text #fb7185
+    &--red {
+      background: rgba(225, 29, 72, 0.18);
+      border-color: rgba(225, 29, 72, 0.4);
+      color: #fb7185;
+
+      .pulse-strip__pill-dot { background: #e11d48; }
+    }
+
+    // Figma: amber — bg rgba(245,158,11,0.15) | border rgba(245,158,11,0.35) | text #fcd34d
+    &--amber {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: rgba(245, 158, 11, 0.35);
+      color: #fcd34d;
+
+      .pulse-strip__pill-dot { background: #f59e0b; }
+    }
+
+    // Green — use status-good tokens
+    &--green {
+      @apply bg-status-good/10 border-status-good/30 text-status-good;
+
+      .pulse-strip__pill-dot { @apply bg-status-good; }
+    }
+  }
+
+  // Figma: dot — rounded-full size-[5.625px]
+  &__pill-dot {
+    @apply rounded-full shrink-0;
+    width: 5.625px;
+    height: 5.625px;
+  }
+
+  &__pill-days { @apply opacity-80; }
+
+  // ── Dismiss button ─────────────────────────────────────────────────────────
+  &__dismiss {
+    @apply ml-auto text-text-muted cursor-pointer shrink-0
+           transition-colors duration-150 rounded p-1;
+
+    &:hover { @apply text-text-secondary; }
+  }
+}

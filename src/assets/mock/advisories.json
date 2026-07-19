@@ -1,0 +1,49 @@
+{
+  "advisories": [
+    {
+      "id": "adv-001",
+      "title": "CVE-2026-1823: Remote Code Execution in MeridianOS XE",
+      "cveId": "CVE-2026-1823",
+      "cvss": 9.8,
+      "severity": "critical",
+      "activeExploit": true,
+      "publishedAt": "2026-06-03T00:00:00Z",
+      "patchAvailableAt": "2026-06-03T00:00:00Z",
+      "daysSincePatch": 7,
+      "affectedDeviceIds": ["dev-001","dev-003","dev-005"],
+      "affectedDeviceCount": 47,
+      "priorityScore": 0,
+      "patchInstructions": "Upgrade to MeridianOS XE 17.12.3 or later."
+    },
+    {
+      "id": "adv-002",
+      "title": "CVE-2026-2047: Privilege Escalation in MeridianOS NX",
+      "cveId": "CVE-2026-2047",
+      "cvss": 8.1,
+      "severity": "high",
+      "activeExploit": false,
+      "publishedAt": "2026-06-08T11:30:00Z",
+      "patchAvailableAt": null,
+      "daysSincePatch": 0,
+      "affectedDeviceIds": ["dev-002","dev-004"],
+      "affectedDeviceCount": 12,
+      "priorityScore": 0,
+      "patchInstructions": "No patch available. Apply workaround: disable feature X."
+    },
+    {
+      "id": "adv-003",
+      "title": "Field Notice: FN-72491 Fan Module Defect",
+      "cveId": null,
+      "cvss": 0,
+      "severity": "medium",
+      "activeExploit": false,
+      "publishedAt": "2026-06-01T00:00:00Z",
+      "patchAvailableAt": "2026-06-01T00:00:00Z",
+      "daysSincePatch": 9,
+      "affectedDeviceIds": ["dev-008"],
+      "affectedDeviceCount": 8,
+      "priorityScore": 0,
+      "patchInstructions": "Replace fan module. Part number: FAN-VERTEX-9K."
+    }
+  ]
+}

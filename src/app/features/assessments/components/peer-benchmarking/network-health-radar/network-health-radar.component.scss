@@ -1,0 +1,46 @@
+// Pentagon vertices (center 50%/48%, R=35%):
+// Top:  50% 13%  | TR: 83.3% 37.2% | BR: 70.6% 76.3% | BL: 29.4% 76.3% | TL: 16.7% 37.2%
+// Mid ring (60%): 50% 27% | 70% 41.8% | 62.4% 64.8% | 37.6% 64.8% | 30% 41.8%
+// Inner ring (30%): 50% 37.5% | 60% 44.8% | 55.3% 58.8% | 44.7% 58.8% | 40% 44.8%
+// Data (Sec68 Upt82 Cfg74 Cov91 Lfc34):
+//   50% 24.2% | 77.3% 39.1% | 65.2% 69% | 31.3% 73.8% | 38.7% 44.3%
+// Industry avg (Sec58 Upt68 Cfg55 Cov70 Lfc52):
+//   50% 27.7% | 72.6% 40.6% | 60.3% 62.6% | 39.7% 62.6% | 27.4% 40.6%
+@reference "../../../../../../styles.scss";
+
+.assessments-page {
+  // Shared chart panel container — also used by percentile-ranking via ViewEncapsulation.None
+  &__chart-panel {
+    @apply flex flex-col flex-1 p-px;
+    background: #1e293b;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 15.25px;
+    min-width: 0;
+  }
+
+  &__chart-header {
+    @apply flex items-center justify-between shrink-0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    padding: 11.25px 15px 12.25px;
+  }
+
+  &__chart-title {
+    @apply font-semibold whitespace-nowrap;
+    color: #cbd5e1;
+    font-size: 13px;
+    line-height: 19.5px;
+  }
+
+  &__chart-subtitle {
+    @apply font-normal whitespace-nowrap;
+    color: #475569;
+    font-size: 11px;
+    line-height: 16.5px;
+  }
+
+  &__chart {
+    width: 100%;
+    flex: 1;
+    min-height: 200px;
+  }
+}

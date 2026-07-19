@@ -1,0 +1,163 @@
+{
+  "navigation": [
+    {
+      "id": "dashboard",
+      "label": "Dashboard",
+      "icon": "dashboard",
+      "path": "/dashboard",
+      "roles": [
+        "admin",
+        "engineer",
+        "manager",
+        "partner"
+      ],
+      "badge": "live",
+      "children": [
+        {
+          "id": "risk",
+          "label": "Risk Spotlight",
+          "path": "/dashboard/risk",
+          "roles": [
+            "admin",
+            "engineer",
+            "manager",
+            "partner"
+          ]
+        },
+        {
+          "id": "digest",
+          "label": "Network Digest",
+          "path": "/dashboard/digest",
+          "roles": [
+            "admin",
+            "engineer",
+            "manager",
+            "partner"
+          ]
+        },
+        {
+          "id": "health",
+          "label": "Health Scorecard",
+          "path": "/dashboard/health",
+          "roles": [
+            "admin",
+            "engineer",
+            "manager",
+            "partner"
+          ],
+          "badge": "dev"
+        }
+      ]
+    },
+    {
+      "id": "assets",
+      "label": "Assets",
+      "icon": "assets",
+      "path": "/assets",
+      "roles": [
+        "admin",
+        "engineer",
+        "manager",
+        "partner"
+      ],
+      "badge": "live",
+      "children": [
+        {
+          "id": "device-search",
+          "label": "Device Search",
+          "path": "/assets",
+          "roles": [
+            "admin",
+            "engineer",
+            "manager",
+            "partner"
+          ]
+        },
+        {
+          "id": "device-detail",
+          "label": "Device Detail",
+          "path": "/assets/devices",
+          "roles": [
+            "admin",
+            "engineer",
+            "manager",
+            "partner"
+          ]
+        },
+        {
+          "id": "coverage-gap",
+          "label": "Coverage Gap",
+          "path": "/assets/coverage-gap",
+          "roles": [
+            "admin",
+            "engineer",
+            "manager",
+            "partner"
+          ],
+          "badge": "dev"
+        },
+        {
+          "id": "inventory",
+          "label": "Inventory",
+          "path": "/assets/inventory",
+          "roles": [
+            "admin",
+            "engineer",
+            "manager",
+            "partner"
+          ],
+          "badge": "dev"
+        }
+      ]
+    },
+    {
+      "id": "assessments",
+      "label": "Assessments",
+      "icon": "assessments",
+      "path": "/assessments",
+      "roles": [
+        "admin",
+        "engineer",
+        "manager",
+        "partner"
+      ],
+      "badge": "dev",
+      "children": []
+    },
+    {
+      "id": "planning",
+      "label": "Planning",
+      "icon": "planning",
+      "path": "/planning",
+      "roles": [
+        "admin",
+        "manager"
+      ],
+      "badge": "dev",
+      "children": []
+    },
+    {
+      "id": "reports",
+      "label": "Reports",
+      "icon": "reports",
+      "path": "/reports",
+      "roles": [
+        "admin",
+        "manager"
+      ],
+      "badge": "dev",
+      "children": []
+    },
+    {
+      "id": "settings",
+      "label": "Settings",
+      "icon": "settings",
+      "path": "/settings",
+      "roles": [
+        "admin"
+      ],
+      "badge": "dev",
+      "children": []
+    }
+  ]
+}

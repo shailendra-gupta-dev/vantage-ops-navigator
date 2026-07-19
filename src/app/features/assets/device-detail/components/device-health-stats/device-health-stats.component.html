@@ -1,0 +1,68 @@
+<div class="health-stats">
+  <!-- Card 1: Advisories -->
+  <div class="health-stats__card">
+    <span class="health-stats__value health-stats__value--critical">
+      {{ device().criticalAdvisoryCount + device().highAdvisoryCount }}
+    </span>
+    <span class="health-stats__label">Active Advisories</span>
+    <div class="health-stats__breakdown">
+      @if (device().criticalAdvisoryCount > 0) {
+        <span class="health-stats__dot health-stats__dot--critical"></span>
+        <span class="health-stats__dot-count">{{ device().criticalAdvisoryCount }}</span>
+      }
+      @if (device().highAdvisoryCount > 0) {
+        <span class="health-stats__dot health-stats__dot--high"></span>
+        <span class="health-stats__dot-count">{{ device().highAdvisoryCount }}</span>
+      }
+      @if (device().mediumAdvisoryCount > 0) {
+        <span class="health-stats__dot health-stats__dot--medium"></span>
+        <span class="health-stats__dot-count">{{ device().mediumAdvisoryCount }}</span>
+      }
+      @if (device().lowAdvisoryCount > 0) {
+        <span class="health-stats__dot health-stats__dot--low"></span>
+        <span class="health-stats__dot-count">{{ device().lowAdvisoryCount }}</span>
+      }
+      @if (device().criticalAdvisoryCount === 0 && device().highAdvisoryCount === 0 &&
+           device().mediumAdvisoryCount === 0 && device().lowAdvisoryCount === 0) {
+        <span class="health-stats__no-advisories">None active</span>
+      }
+    </div>
+  </div>
+
+  <!-- Card 2: Contract -->
+  <div class="health-stats__card">
+    <div class="health-stats__contract-value health-stats__contract-value--{{ device().contractStatus }}">
+      <img src="assets/icons/check-circle-icon.svg" alt="" aria-hidden="true" class="health-stats__contract-icon">
+      <span>{{ contractLabel() }}</span>
+    </div>
+    <span class="health-stats__label">Service Contract</span>
+    @if (device().contractExpiry) {
+      <span class="health-stats__sublabel">Expires {{ formatDate(device().contractExpiry!) }}</span>
+    }
+  </div>
+
+  <!-- Card 3: LDOS Countdown -->
+  <div class="health-stats__card">
+    <span class="health-stats__value health-stats__value--{{ ldosUrgency() }}">
+      {{ device().daysToLdos ?? '—' }}
+    </span>
+    <span class="health-stats__label">Days to LDOS</span>
+    @if (device().ldosDate) {
+      <span class="health-stats__sublabel">{{ formatDate(device().ldosDate!) }}</span>
+    }
+  </div>
+
+  <!-- Card 4: Software Version -->
+  <div class="health-stats__card">
+    <span class="health-stats__version">{{ device().softwareVersion }}</span>
+    <span class="health-stats__label">Running Version</span>
+    @if (device().latestAvailableVersion) {
+      <span class="health-stats__update-badge">
+        <img src="assets/icons/arrow-up-icon.svg" alt="" aria-hidden="true">
+        {{ device().latestAvailableVersion }} available
+      </span>
+    } @else {
+      <span class="health-stats__current-badge">Up to date</span>
+    }
+  </div>
+</div>

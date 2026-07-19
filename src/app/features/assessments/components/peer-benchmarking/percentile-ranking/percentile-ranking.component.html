@@ -1,0 +1,12 @@
+<!-- Right panel: Percentile Ranking -->
+<div class="assessments-page__chart-panel">
+  <div class="assessments-page__chart-header">
+    <span class="assessments-page__chart-title">Percentile Ranking</span>
+    <span class="assessments-page__chart-subtitle">vs. 1,247 peer orgs</span>
+  </div>
+  @defer (on idle) {
+    <div echarts class="assessments-page__chart" [options]="chartOpt()"></div>
+  } @placeholder {
+    <div class="assessments-page__chart"></div>
+  }
+</div>

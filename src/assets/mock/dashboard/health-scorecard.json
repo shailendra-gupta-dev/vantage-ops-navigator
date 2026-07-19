@@ -1,0 +1,9 @@
+{
+  "security": { "grade": "B", "criticalCVEs": 3, "gaugeValue": 35 },
+  "lifecycle": { "active": 72, "nearEos": 15, "eol": 8, "unknown": 5 },
+  "coverage": { "covered": 87, "uncovered": 13, "grade": "B+" },
+  "connectivity": {
+    "days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    "uptime": [99.2, 99.5, 98.8, 99.6, 99.4, 99.7, 99.3]
+  }
+}

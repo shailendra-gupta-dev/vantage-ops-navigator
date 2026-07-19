@@ -1,0 +1,109 @@
+@reference "../../../../styles.scss";
+
+// Figma node 7:1393 — h-[45px] bg rgba(15,23,42,0.95) border-b rgba(148,163,184,0.12)
+.app-header {
+  @apply flex items-center justify-between shrink-0 h-[45px]
+         border-b border-border-subtle;
+  background: rgba(15, 23, 42, 0.95);
+  padding: 0 18.75px;
+
+  // ── Breadcrumb ────────────────────────────────────────────────────────────
+  // Figma: gap-[7.5px] | root #475569 | sep #334155 | page #94a3b8 | 13px
+  &__breadcrumb {
+    @apply flex items-center;
+    gap: 7.5px;
+  }
+
+  // Figma: logo replaces plain-text root — h-22px auto-width
+  &__logo {
+    height: 22px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  &__breadcrumb-sep {
+    @apply text-[13px] font-normal;
+    color: #334155;
+  }
+
+  &__breadcrumb-page {
+    @apply text-text-secondary text-[13px] font-medium whitespace-nowrap;
+  }
+
+  // ── Actions row ───────────────────────────────────────────────────────────
+  // Figma: gap-[11.25px]
+  &__actions {
+    @apply flex items-center;
+    gap: 11.25px;
+  }
+
+  // ── Search pill ───────────────────────────────────────────────────────────
+  // Figma: bg rgba(30,41,59,0.8) | border rgba(148,163,184,0.12) | rounded-[11.25px] | px-[12.25px] py-[6.625px] | gap-[7.5px]
+  &__search {
+    @apply flex items-center cursor-pointer border border-border-subtle rounded-xl;
+    background: rgba(30, 41, 59, 0.8);
+    padding: 6.625px 12.25px;
+    gap: 7.5px;
+
+    &:hover {
+      @apply bg-bg-elevated;
+    }
+  }
+
+  &__search-icon {
+    @apply text-text-muted shrink-0;
+    width: 13px;
+    height: 13px;
+  }
+
+  &__search-text {
+    @apply text-text-muted text-[12px] font-medium whitespace-nowrap;
+  }
+
+  // Figma: bg rgba(79,70,229,0.2) | rounded-[3.75px] | px-[5.625px] py-[1.875px] | text #818cf8 | 10px
+  // imgIcon8 (9px ⌘ svg) + "K" text side by side
+  &__search-kbd {
+    @apply inline-flex items-center text-[10px] font-medium rounded-[3.75px] whitespace-nowrap;
+    background: rgba(79, 70, 229, 0.2);
+    color: #818cf8;
+    padding: 1.875px 5.625px;
+    gap: 1.875px;
+  }
+
+  &__search-kbd-img {
+    display: block;
+    height: 9px;
+    width: auto;
+    opacity: 0.85;
+  }
+
+  // ── Bell ──────────────────────────────────────────────────────────────────
+  // Figma: size-[30px] rounded-[11.25px] | dot bg #e11d48 size-[7.5px]
+  &__bell {
+    @apply relative flex items-center justify-center rounded-xl
+           text-text-secondary cursor-pointer transition-colors duration-150;
+    width: 30px;
+    height: 30px;
+
+    &:hover { @apply text-text-primary bg-bg-elevated; }
+  }
+
+  &__bell-dot {
+    @apply absolute rounded-full bg-status-critical;
+    width: 7.5px;
+    height: 7.5px;
+    top: 3.75px;
+    left: 18.75px;
+  }
+
+  // ── Avatar ────────────────────────────────────────────────────────────────
+  // Figma: size-[30px] rounded-full bg-brand-blue | Inter 11px semibold white
+  &__avatar {
+    @apply flex items-center justify-center rounded-full
+           bg-brand-blue text-white text-[11px] font-semibold
+           shrink-0 cursor-pointer select-none;
+    width: 30px;
+    height: 30px;
+  }
+}

@@ -1,0 +1,9 @@
+@reference "../../../../../../styles.scss";
+
+.assessments-page {
+  &__chart {
+    width: 100%;
+    flex: 1;
+    min-height: 180px;
+  }
+}

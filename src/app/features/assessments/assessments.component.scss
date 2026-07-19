@@ -1,0 +1,106 @@
+// Figma node 7:2372 — Assessments / Peer Benchmarking (renders inside app-layout__content router-outlet)
+@reference "../../../styles.scss";
+
+// Pentagon vertices (center 50%/48%, R=35%):
+// Top:  50% 13%  | TR: 83.3% 37.2% | BR: 70.6% 76.3% | BL: 29.4% 76.3% | TL: 16.7% 37.2%
+// Mid ring (60%): 50% 27% | 70% 41.8% | 62.4% 64.8% | 37.6% 64.8% | 30% 41.8%
+// Inner ring (30%): 50% 37.5% | 60% 44.8% | 55.3% 58.8% | 44.7% 58.8% | 40% 44.8%
+// Data (Sec68 Upt82 Cfg74 Cov91 Lfc34):
+//   50% 24.2% | 77.3% 39.1% | 65.2% 69% | 31.3% 73.8% | 38.7% 44.3%
+// Industry avg (Sec58 Upt68 Cfg55 Cov70 Lfc52):
+//   50% 27.7% | 72.6% 40.6% | 60.3% 62.6% | 39.7% 62.6% | 27.4% 40.6%
+
+.assessments-page {
+  @apply flex flex-col gap-[15px] p-[18.75px] min-h-full;
+
+  // ─── Section 1: Header ────────────────────────────────────────────────────
+
+  &__header {
+    @apply flex items-center justify-between shrink-0 w-full;
+  }
+
+  &__header-left {
+    @apply flex items-center gap-[7.5px];
+  }
+
+  &__title {
+    @apply font-bold whitespace-nowrap m-0;
+    color: #f1f5f9;
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  &__in-dev {
+    @apply flex items-center gap-[3.75px] shrink-0;
+    background: rgba(100, 116, 139, 0.2);
+    border-radius: 3.75px;
+    padding: 1.875px 7.5px;
+  }
+
+  &__in-dev-icon {
+    @apply block shrink-0;
+    height: 9px;
+    width: 9px;
+  }
+
+  &__in-dev-text {
+    @apply font-semibold whitespace-nowrap;
+    color: #64748b;
+    font-size: 9px;
+    letter-spacing: 0.36px;
+    line-height: 13.5px;
+  }
+
+  &__header-filters {
+    @apply flex items-center gap-[7.5px];
+  }
+
+  &__filter-pill {
+    @apply font-medium whitespace-nowrap cursor-pointer;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 11.25px;
+    color: #64748b;
+    font-size: 11px;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 9.38px;
+
+    &--active {
+      background: rgba(79, 70, 229, 0.15);
+      border-color: rgba(79, 70, 229, 0.3);
+      color: #a5b4fc;
+    }
+  }
+
+  // ─── Section 3 layout: Rank cards ────────────────────────────────────────
+
+  &__rank-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 11.25px;
+    width: 100%;
+
+    // Host elements must be flex containers so the inner __rank-card's flex:1 can fill them
+    > app-overall-rank-card,
+    > app-best-dimension-card,
+    > app-needs-focus-card {
+      display: flex;
+    }
+  }
+
+  // ─── Section 4 layout: Charts ─────────────────────────────────────────────
+
+  &__charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+
+    // Host elements must be flex containers so the inner __chart-panel's flex:1 can fill them
+    > app-network-health-radar,
+    > app-percentile-ranking {
+      display: flex;
+    }
+  }
+}

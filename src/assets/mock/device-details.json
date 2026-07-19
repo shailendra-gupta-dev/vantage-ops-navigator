@@ -1,0 +1,126 @@
+{
+  "advisories": {
+    "dev-001": [
+      {
+        "id": "adv-001",
+        "cveId": "CVE-2026-1823",
+        "title": "Remote Code Execution via crafted OSPF packet",
+        "description": "A vulnerability in the OSPF packet processing of MeridianOS XE allows an unauthenticated remote attacker to execute arbitrary code on the affected device.",
+        "severity": "critical",
+        "cvss": 9.6,
+        "fixedInVersion": "17.12.1",
+        "status": "open",
+        "publishedAt": "2026-02-14"
+      },
+      {
+        "id": "adv-002",
+        "cveId": "CVE-2026-0991",
+        "title": "Privilege escalation via crafted CLI command",
+        "description": "A vulnerability in the CLI of MeridianOS XE allows a low-privileged authenticated user to escalate privileges to root level.",
+        "severity": "high",
+        "cvss": 8.1,
+        "fixedInVersion": "17.11.2",
+        "status": "acknowledged",
+        "publishedAt": "2026-01-22"
+      },
+      {
+        "id": "adv-003",
+        "cveId": "CVE-2025-4432",
+        "title": "Denial of service via malformed BGP update",
+        "description": "A vulnerability in the BGP implementation of MeridianOS XE could allow an unauthenticated remote attacker to cause a device to reload unexpectedly.",
+        "severity": "high",
+        "cvss": 7.5,
+        "fixedInVersion": "17.10.3",
+        "status": "open",
+        "publishedAt": "2025-11-08"
+      },
+      {
+        "id": "adv-004",
+        "cveId": "CVE-2025-3301",
+        "title": "Information disclosure in SNMP MIB handler",
+        "description": "A vulnerability in the SNMP subsystem of MeridianOS XE could allow an authenticated remote attacker to obtain sensitive device configuration data.",
+        "severity": "medium",
+        "cvss": 5.3,
+        "fixedInVersion": "17.9.5",
+        "status": "acknowledged",
+        "publishedAt": "2025-08-19"
+      },
+      {
+        "id": "adv-005",
+        "cveId": "CVE-2025-1199",
+        "title": "Buffer overflow in HTTP server request handler",
+        "description": "A vulnerability in the HTTP server of MeridianOS XE could allow an unauthenticated remote attacker to cause a buffer overflow condition.",
+        "severity": "low",
+        "cvss": 3.7,
+        "fixedInVersion": "17.9.5",
+        "status": "resolved",
+        "publishedAt": "2025-04-03"
+      },
+      {
+        "id": "adv-006",
+        "cveId": "CVE-2025-0812",
+        "title": "Unauthenticated REST API access to device config",
+        "description": "A vulnerability in the REST API of MeridianOS XE allows an unauthenticated remote attacker to read or modify the device configuration.",
+        "severity": "high",
+        "cvss": 8.6,
+        "fixedInVersion": "17.11.1",
+        "status": "open",
+        "publishedAt": "2025-02-28"
+      },
+      {
+        "id": "adv-007",
+        "cveId": "CVE-2024-9201",
+        "title": "Memory leak in IPv6 RA guard feature",
+        "description": "A vulnerability in the IPv6 RA guard feature of MeridianOS XE could allow an unauthenticated adjacent attacker to cause a memory leak on the device.",
+        "severity": "medium",
+        "cvss": 6.5,
+        "fixedInVersion": "17.10.2",
+        "status": "acknowledged",
+        "publishedAt": "2024-12-10"
+      }
+    ]
+  },
+  "details": {
+    "dev-001": {
+      "deviceId": "dev-001",
+      "serialNumber": "FDO2249A0QP",
+      "macAddress": "00:1A:2B:3C:4D:5E",
+      "managementIp": "10.44.1.1",
+      "configHash": "a3f2d891c7b4e6",
+      "uptime": "47 days, 12 hours",
+      "cpuUtilization": 38,
+      "memoryUtilization": 62,
+      "interfaceCount": 48,
+      "lastConfigChange": "2026-06-12T14:22:00Z",
+      "lastSynced": "2026-06-19T10:15:00Z"
+    }
+  },
+  "activityLog": {
+    "dev-001": [
+      { "id": "evt-001", "type": "advisory",  "title": "New Critical Advisory Added",     "description": "CVE-2026-1823 detected on this device",                        "timestamp": "2026-06-18T09:42:00Z" },
+      { "id": "evt-002", "type": "sync",      "title": "Configuration Sync Completed",    "description": "Device config pulled successfully, no changes detected",          "timestamp": "2026-06-18T08:00:00Z" },
+      { "id": "evt-003", "type": "advisory",  "title": "Advisory Acknowledged",           "description": "CVE-2026-0991 acknowledged by admin@vantageops.io",                  "timestamp": "2026-06-17T16:30:00Z" },
+      { "id": "evt-004", "type": "support",       "title": "Support Case Opened",                 "description": "Case SR1-1234567890 opened for privilege escalation advisory",    "timestamp": "2026-06-15T11:20:00Z" },
+      { "id": "evt-005", "type": "contract",  "title": "Contract Renewal Reminder",       "description": "Contract SVC-2024-881 renews in 195 days",                       "timestamp": "2026-06-10T08:00:00Z" },
+      { "id": "evt-006", "type": "config",    "title": "Configuration Change Detected",   "description": "Access-list ACL-WAN-INBOUND modified",                           "timestamp": "2026-06-12T14:22:00Z" },
+      { "id": "evt-007", "type": "sync",      "title": "Configuration Sync Completed",    "description": "Device config pulled successfully",                               "timestamp": "2026-06-11T08:00:00Z" },
+      { "id": "evt-008", "type": "advisory",  "title": "High Advisory Detected",          "description": "CVE-2025-4432 BGP denial-of-service vulnerability found",         "timestamp": "2026-06-09T15:11:00Z" },
+      { "id": "evt-009", "type": "support",       "title": "Support Case Closed",                 "description": "Case SR1-0987654321 resolved — firmware update applied",          "timestamp": "2026-06-01T10:45:00Z" },
+      { "id": "evt-010", "type": "sync",      "title": "Inventory Sync",                  "description": "Full inventory sync completed — 48 interfaces discovered",         "timestamp": "2026-05-25T08:00:00Z" }
+    ]
+  },
+  "relatedContracts": {
+    "dev-001": [
+      { "id": "SVC-2024-881", "daysRemaining": 195, "urgency": "amber" },
+      { "id": "SVC-2023-044", "daysRemaining": 52,  "urgency": "red"   }
+    ]
+  },
+  "relatedDevices": {
+    "dev-001": [
+      { "id": "dev-002", "name": "SW-CHICAGO-CORE-02", "healthStatus": "healthy" },
+      { "id": "dev-003", "name": "FW-CHICAGO-DC-01",   "healthStatus": "healthy" },
+      { "id": "dev-010", "name": "RW-NYC-EDGE-01",     "healthStatus": "high"    },
+      { "id": "dev-004", "name": "SW-NYC-ACCESS-04",   "healthStatus": "medium"  }
+    ]
+  }
+}
