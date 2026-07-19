@@ -24,10 +24,16 @@ This is a personal portfolio project backed by mock JSON data (no real backend).
 </td>
 </tr>
 <tr>
-<td colspan="2">
+<td width="50%">
 
 **Assessments** — peer benchmarking, percentile ranking, network health radar
 <a href="docs/screenshots/assessments.png"><img src="docs/screenshots/assessments.png" width="100%" alt="Assessments — Peer Benchmarking"></a>
+
+</td>
+<td width="50%">
+
+**Device Search** — spotlight-first search, reached via ⌘K or the header bar
+<a href="docs/screenshots/device-search.png"><img src="docs/screenshots/device-search.png" width="100%" alt="Device Search"></a>
 
 </td>
 </tr>
