@@ -24,6 +24,15 @@ This is a personal portfolio project backed by mock JSON data (no real backend).
 | Testing | Vitest |
 | SSR | `@angular/ssr` + Express |
 
+## Design & build workflow
+
+Every screen started as a design, not a template:
+
+1. **Mockups** — designed in Figma using **Figma Make** to generate the visual mockups (layout, screens, states) for the dashboard, device detail, and assessments views.
+2. **Design-to-code** — implemented in **Claude Code**, connected to Figma via the **Figma MCP server**. Claude read the actual node structure, styles, and screenshots straight from the Figma file for each screen and translated them into the Angular components, matching spacing, color tokens, and typography rather than approximating from a static image.
+
+The result is a codebase where the Tailwind `@theme` tokens, component layout, and BEM class structure trace directly back to the Figma source, rather than being hand-eyeballed from a screenshot.
+
 ## Getting started
 
 ```bash
