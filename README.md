@@ -79,11 +79,13 @@ npm test         # ng test — Vitest
 
 ### Deployment
 
-The live demo is a static build of the client bundle (`dist/vantage-ops-navigator/browser`) published to the `gh-pages` branch and served via GitHub Pages — SSR isn't needed since every data source is static JSON already shipped with the app:
+The live demo is a static build of the client bundle (`dist/vantage-ops-navigator/browser`) served via GitHub Pages — SSR isn't needed since every data source is static JSON already shipped with the app.
+
+Every push to `master` triggers [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which builds and redeploys automatically. To reproduce that build locally:
 
 ```bash
 ng build --configuration production --base-href /vantage-ops-navigator/
-npx angular-cli-ghpages --dir=dist/vantage-ops-navigator/browser
+cp dist/vantage-ops-navigator/browser/index.csr.html dist/vantage-ops-navigator/browser/index.html
 ```
 
 ## Project structure
