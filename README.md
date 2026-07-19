@@ -1,8 +1,37 @@
 # Vantage Ops Navigator
 
+**🔗 Live demo: [shailendra-gupta-dev.github.io/vantage-ops-navigator](https://shailendra-gupta-dev.github.io/vantage-ops-navigator/)**
+
 A network operations dashboard concept for tracking device health, security advisories, support contracts, and peer benchmarking across a fleet of network devices — built with Angular 22 using standalone components, Signals, and zoneless change detection.
 
 This is a personal portfolio project backed by mock JSON data (no real backend). All company names, product families, and vendor references (e.g. "Meridian Networks", "MeridianOS", "Vertex", "Aegis") are fictional; any resemblance to real products is for realism only. This project is not affiliated with, endorsed by, or built for any real vendor.
+
+## Screenshots
+
+<table>
+<tr>
+<td width="50%">
+
+**Dashboard** — risk spotlight, network digest, health scorecard
+<a href="docs/screenshots/dashboard.png"><img src="docs/screenshots/dashboard.png" width="100%" alt="Dashboard"></a>
+
+</td>
+<td width="50%">
+
+**Device Detail** — advisories, contract lifecycle, quick actions
+<a href="docs/screenshots/device-detail.png"><img src="docs/screenshots/device-detail.png" width="100%" alt="Device Detail"></a>
+
+</td>
+</tr>
+<tr>
+<td colspan="2">
+
+**Assessments** — peer benchmarking, percentile ranking, network health radar
+<a href="docs/screenshots/assessments.png"><img src="docs/screenshots/assessments.png" width="100%" alt="Assessments — Peer Benchmarking"></a>
+
+</td>
+</tr>
+</table>
 
 ## Features
 
@@ -40,6 +69,15 @@ npm install
 npm start        # ng serve — http://localhost:4200
 npm run build    # ng build — output in dist/
 npm test         # ng test — Vitest
+```
+
+### Deployment
+
+The live demo is a static build of the client bundle (`dist/vantage-ops-navigator/browser`) published to the `gh-pages` branch and served via GitHub Pages — SSR isn't needed since every data source is static JSON already shipped with the app:
+
+```bash
+ng build --configuration production --base-href /vantage-ops-navigator/
+npx angular-cli-ghpages --dir=dist/vantage-ops-navigator/browser
 ```
 
 ## Project structure
