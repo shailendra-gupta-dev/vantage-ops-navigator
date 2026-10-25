@@ -2,16 +2,24 @@
 @reference "../../../styles.scss";
 
 .assets-page {
-  @apply flex items-center justify-center p-[30px] min-h-full;
+  @apply flex items-center justify-center p-4 min-h-full;
+
+  @media (min-width: 768px) {
+    @apply p-[30px];
+  }
 
   &__card {
     @apply flex flex-col items-start shrink-0;
     background: #1e293b;
     border: 1px solid rgba(100, 116, 139, 0.2);
     border-radius: 15px;
-    width: 480px;
+    width: 100%;
     max-width: 480px;
-    padding: 31px;
+    padding: 20px;
+
+    @media (min-width: 768px) {
+      padding: 31px;
+    }
   }
 
   &__card-icon-wrap {
