@@ -258,3 +258,75 @@
     opacity: 0.4;
   }
 }
+
+// ── Responsive ──────────────────────────────────────────────────────────────
+// 768–1279px: the seven-column table keeps its layout and scrolls sideways inside its card
+// (the container previously clipped it).
+@media (max-width: 1279px) {
+  .advisory-table__container { overflow-x: auto; }
+
+  .advisory-table__table { min-width: 820px; }
+}
+
+// <768px: search goes full width and each advisory row becomes a card —
+// severity + CVE on top, description, then CVSS / Fixed in / Status, then actions.
+@media (max-width: 767px) {
+  .advisory-table {
+    &__controls { flex-direction: column; align-items: stretch; margin-bottom: 12px; }
+
+    &__search { width: 100%; box-sizing: border-box; }
+
+    &__container { background: none; border: 0; border-radius: 0; overflow: visible; }
+
+    &__table { min-width: 0; display: block; }
+
+    &__thead { display: none; }
+
+    &__tbody { display: flex; flex-direction: column; gap: 10px; }
+
+    &__row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px 12px;
+      padding: 12px 14px;
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+
+      &:last-child { border-bottom: 1px solid var(--color-border); }
+    }
+
+    &__td {
+      display: block;
+      padding: 0;
+      min-width: 0;
+
+      // Small caption above each value, taken from the cell's data-label
+      &::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 3px;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+      }
+
+      &--sev::before, &--cve::before, &--desc::before, &--actions::before { display: none; }
+
+      &--cve { grid-column: 2 / -1; align-self: center; }
+
+      &--desc { grid-column: 1 / -1; max-width: none; }
+
+      &--actions { grid-column: 1 / -1; }
+    }
+
+    // The description may wrap on a card instead of truncating
+    &__desc { white-space: normal; overflow: visible; text-overflow: clip; }
+
+    &__action-icons { justify-content: flex-start; }
+
+    &__empty { display: block; padding: 24px 16px; }
+  }
+}

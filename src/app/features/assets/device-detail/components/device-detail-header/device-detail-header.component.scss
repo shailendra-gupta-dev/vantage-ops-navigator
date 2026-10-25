@@ -4,8 +4,12 @@
   &__breadcrumb {
     display: flex;
     align-items: center;
-    gap: 8px;
+    flex-wrap: wrap;
+    gap: 4px 8px;
     margin-bottom: 20px;
+
+    // Keep each crumb on one line; wrap between crumbs instead of inside them
+    a, span { white-space: nowrap; }
   }
 
   &__breadcrumb-back {
@@ -42,6 +46,10 @@
     font-size: 13px;
     color: var(--color-text-primary);
     font-weight: 500;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
   &__hero {
@@ -218,6 +226,36 @@
     height: 1px;
     background: var(--color-border);
     margin-top: 20px;
+  }
+  // ── Responsive ────────────────────────────────────────────────────────────
+  // Below 1024px the title block and the three action buttons stack, and the buttons
+  // flow in a wrapping row instead of squeezing the identity block.
+  @media (max-width: 1023px) {
+    &__hero { flex-direction: column; align-items: stretch; gap: 16px; }
+
+    &__actions { flex-wrap: wrap; }
+
+    &__action-btn { flex: 1 1 auto; justify-content: center; }
+  }
+
+  @media (max-width: 767px) {
+    &__breadcrumb { margin-bottom: 16px; }
+
+    &__identity { gap: 12px; }
+
+    &__icon-wrap { width: 44px; height: 44px; border-radius: 10px; }
+
+    &__icon { width: 22px; height: 22px; }
+
+    &__name { font-size: 18px; overflow-wrap: anywhere; }
+
+    &__subtitle { gap: 4px 8px; }
+
+    // Three buttons: first one full width, the other two share the next row
+    &__action-btn { flex: 1 1 calc(50% - 4px); }
+    &__action-btn:first-child { flex-basis: 100%; }
+
+    &__divider { margin-top: 16px; }
   }
 }
 

@@ -1,7 +1,8 @@
 @reference "../../../../styles.scss";
 
 .device-detail {
-  padding: 24px;
+  // Gutter: 16px mobile, 20px tablet, 24px from 1024px up (same steps as the dashboard)
+  padding: 16px;
   max-width: 1200px;
   margin: 0 auto;
 
@@ -23,6 +24,17 @@
     position: sticky;
     top: 16px;
     margin-top: 16px;
+  }
+
+  @media (min-width: 768px) { padding: 20px; }
+  @media (min-width: 1024px) { padding: 24px; }
+
+  // Below 1280px the actions sidebar no longer fits beside the content (the advisory table
+  // needs ~820px): it drops underneath. From 1280px it sits beside it, as in the Figma desktop frame.
+  @media (max-width: 1279px) {
+    &__body { flex-direction: column; align-items: stretch; gap: 0; }
+
+    &__sidebar { width: 100%; position: static; margin-top: 20px; }
   }
 
   &__loading {

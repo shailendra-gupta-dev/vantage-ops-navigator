@@ -225,3 +225,26 @@
     }
   }
 }
+
+// ── Responsive ──────────────────────────────────────────────────────────────
+// <768px: the horizontal EoL timeline (four milestones in one row) cannot fit, so the
+// connector track is dropped and the milestones become a two-column grid; migration rows stack.
+@media (max-width: 767px) {
+  .contract-lifecycle {
+    &__timeline-track { display: none; }
+
+    &__timeline-labels {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 12px;
+    }
+
+    &__milestone-label { max-width: none; }
+
+    &__migration-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+
+    &__migration-label { min-width: 0; }
+
+    &__migration-links { flex-wrap: wrap; gap: 8px 20px; }
+  }
+}
