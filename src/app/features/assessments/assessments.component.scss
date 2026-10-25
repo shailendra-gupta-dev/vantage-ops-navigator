@@ -103,4 +103,93 @@
       display: flex;
     }
   }
+
+  // ═══ Responsive ═══════════════════════════════════════════════════════════
+  // Figma only provides the 1359px desktop frame for this screen, so the smaller layouts
+  // follow the same breakpoints and gutters as the dashboard:
+  //   <768 mobile · 768–1023 tablet portrait · 1024–1279 compact desktop · ≥1280 desktop
+  // The sub-components share global class names (ViewEncapsulation.None), so the selectors
+  // below are scoped through their container to out-rank the components' own rules.
+
+  // Very wide screens (1920/2560px): keep the content readable and centred
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+
+  // Gutter: 16px mobile/tablet, 20px compact, 18.75px desktop (original design value)
+  padding: 16px;
+
+  @media (min-width: 1024px) { padding: 20px; }
+  @media (min-width: 1280px) { padding: 18.75px; }
+
+  // The three rank cards embed a small 80px sparkline/bar. Their chart shares the global class
+  // `.assessments-page__chart` with the radar and percentile panels, whose `flex: 1;
+  // min-height: 180px` leaked into the cards and made them ~285px tall at every width.
+  .assessments-page__rank-cards .assessments-page__chart {
+    flex: none;
+    height: 80px;
+    min-height: 0;
+  }
+
+  // The radar and percentile panels were both squashed to the smaller min-height of the two
+  // shared rules (~180px); the Figma panels are ~280px of chart under a 41px header.
+  .assessments-page__charts .assessments-page__chart { min-height: 280px; }
+
+  // Header: title row and filter pills wrap instead of overflowing
+  .assessments-page__header { flex-wrap: wrap; gap: 10px 16px; }
+
+  .assessments-page__header-left { flex-wrap: wrap; }
+
+  .assessments-page__header-filters { flex-wrap: wrap; }
+
+  // Cohort bar: items wrap below 1280px
+  .assessments-page__cohort-bar { flex-wrap: wrap; gap: 14px 22.5px; }
+
+  .assessments-page__cohort-item { min-width: 0; }
+
+  // Info banner copy wraps (it is nowrap on desktop)
+  .assessments-page__info-headline { white-space: normal; }
+
+  // The overall-rank scale (Bottom · Better than … · Top) wraps rather than overlapping
+  .assessments-page__progress-scale { flex-wrap: wrap; gap: 2px 8px; }
+
+  // Chart panel header: title and subtitle wrap on narrow panels
+  .assessments-page__chart-header { flex-wrap: wrap; gap: 2px 12px; }
+
+  // Tablet portrait (768–1023px): two rank cards per row, the third spans the row
+  @media (max-width: 1023px) {
+    .assessments-page__rank-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .assessments-page__rank-cards > :last-child { grid-column: 1 / -1; }
+
+    // Charts stack below 1024px, each full width
+    .assessments-page__charts { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  // Mobile (<768px)
+  @media (max-width: 767px) {
+    gap: 14px;
+
+    .assessments-page__header { flex-direction: column; align-items: flex-start; }
+
+    .assessments-page__title { font-size: 18px; line-height: 22px; }
+
+    // Five cohort facts in two columns
+    .assessments-page__cohort-bar {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 12px;
+      padding: 14px;
+    }
+
+    .assessments-page__cohort-value { white-space: normal; }
+
+    // Rank cards stack in one column
+    .assessments-page__rank-cards { grid-template-columns: minmax(0, 1fr); }
+
+    .assessments-page__rank-cards > :last-child { grid-column: auto; }
+
+    // Charts get a little more height than their desktop minimums so labels stay legible
+    .assessments-page__charts .assessments-page__chart { min-height: 260px; }
+  }
 }

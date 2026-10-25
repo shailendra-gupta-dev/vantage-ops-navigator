@@ -5,9 +5,11 @@ import {
   computed,
   inject,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
+import { distinctUntilChanged, fromEvent, map, of, startWith } from 'rxjs';
 import type { EChartsOption } from 'echarts';
 import { CHART_TOOLTIP } from '@core/utils/chart.utils';
 
@@ -28,6 +30,24 @@ interface RadarChartData {
 })
 export class NetworkHealthRadarComponent {
   private readonly http = inject(HttpClient);
+  private readonly doc = inject(DOCUMENT);
+
+  // True on phone-width viewports. The radar shrinks there so the outer axis labels
+  // (e.g. "Lifecycle Currency") are not clipped by the panel. SSR-safe: no window on the server.
+  private readonly narrow = toSignal(
+    this.doc.defaultView
+      ? fromEvent(this.doc.defaultView, 'resize').pipe(
+          map(() => this.isNarrow()),
+          startWith(this.isNarrow()),
+          distinctUntilChanged(),
+        )
+      : of(false),
+    { initialValue: false },
+  );
+
+  private isNarrow(): boolean {
+    return (this.doc.defaultView?.innerWidth ?? 1024) < 768;
+  }
 
   private readonly chartData = toSignal(
     this.http.get<{ radar: RadarChartData }>(
@@ -52,6 +72,7 @@ export class NetworkHealthRadarComponent {
 
   readonly chartOpt = computed((): EChartsOption => {
     const d = this.chartData().radar;
+    const narrow = this.narrow();
     return {
       backgroundColor: 'transparent',
       tooltip: { ...CHART_TOOLTIP, trigger: 'item' },
@@ -65,9 +86,9 @@ export class NetworkHealthRadarComponent {
         indicator: d.indicators,
         shape: 'polygon',
         center: ['50%', '48%'],
-        radius: '62%',
+        radius: narrow ? '44%' : '62%',
         splitNumber: 3,
-        axisName: { color: '#64748b', fontSize: 11, fontFamily: 'Inter, system-ui, sans-serif' },
+        axisName: { color: '#64748b', fontSize: narrow ? 10 : 11, fontFamily: 'Inter, system-ui, sans-serif' },
         splitLine: { lineStyle: { color: 'rgba(71,85,105,0.35)' } },
         splitArea: { show: false },
         axisLine: { lineStyle: { color: 'rgba(71,85,105,0.3)' } },
