@@ -174,3 +174,18 @@
     &:hover { color: var(--color-text-primary); }
   }
 }
+
+// Below 1280px the sidebar sits under the content: the three cards flow into a responsive grid
+@media (max-width: 1279px) {
+  .actions-sidebar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    align-items: start;
+  }
+}
+
+// Two columns (tablet): Quick Actions spans both rows so Contracts and Devices stack beside it
+@media (min-width: 600px) and (max-width: 1023px) {
+  .actions-sidebar > .actions-card:first-child { grid-row: span 2; }
+}

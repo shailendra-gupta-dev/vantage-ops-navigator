@@ -7,6 +7,11 @@
     display: flex;
     gap: 0;
     border-bottom: 1px solid var(--color-border);
+    // Four tabs do not fit a phone: the bar scrolls sideways instead of wrapping or clipping
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { display: none; }
   }
 
   &__tab {
@@ -25,6 +30,7 @@
     gap: 8px;
     transition: color 150ms ease, border-color 150ms ease;
     white-space: nowrap;
+    flex: 0 0 auto;
 
     &--active {
       color: var(--color-text-primary);
@@ -48,5 +54,13 @@
 
   &__content {
     padding-top: 20px;
+  }
+
+  @media (max-width: 767px) {
+    margin-top: 16px;
+
+    &__tab { padding: 10px 14px; font-size: 13px; }
+
+    &__content { padding-top: 16px; }
   }
 }

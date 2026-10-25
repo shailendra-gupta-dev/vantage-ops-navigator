@@ -106,3 +106,15 @@
     margin: 0;
   }
 }
+
+// ── Responsive ──────────────────────────────────────────────────────────────
+// <768px: the two cards stack and the label column narrows so values keep their room.
+@media (max-width: 767px) {
+  .info-panel {
+    &__grid { grid-template-columns: 1fr; gap: 12px; }
+
+    &__card { padding: 16px; }
+
+    &__row { grid-template-columns: 112px minmax(0, 1fr); }
+  }
+}

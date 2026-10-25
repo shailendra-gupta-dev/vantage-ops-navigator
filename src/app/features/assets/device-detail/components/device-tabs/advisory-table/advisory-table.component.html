@@ -47,13 +47,13 @@
         }
         @for (adv of filtered(); track adv.id) {
           <tr class="advisory-table__row">
-            <td class="advisory-table__td">
+            <td class="advisory-table__td advisory-table__td--sev" data-label="Severity">
               <span class="advisory-table__sev advisory-table__sev--{{ adv.severity }}">
                 <span class="advisory-table__sev-dot" aria-hidden="true"></span>
                 {{ adv.severity | titlecase }}
               </span>
             </td>
-            <td class="advisory-table__td">
+            <td class="advisory-table__td advisory-table__td--cve" data-label="CVE ID">
               @if (adv.cveId) {
                 <a class="advisory-table__cve-link"
                    [href]="'https://advisories.meridiannet.io/cve/' + adv.cveId"
@@ -63,21 +63,21 @@
                 <span class="advisory-table__no-cve">—</span>
               }
             </td>
-            <td class="advisory-table__td advisory-table__td--desc">
+            <td class="advisory-table__td advisory-table__td--desc" data-label="Description">
               <span class="advisory-table__desc" [title]="adv.description">{{ adv.title }}</span>
             </td>
-            <td class="advisory-table__td">
+            <td class="advisory-table__td" data-label="CVSS">
               <span class="advisory-table__cvss" [style.color]="cvssColor(adv.cvss)">{{ adv.cvss }}</span>
             </td>
-            <td class="advisory-table__td">
+            <td class="advisory-table__td" data-label="Fixed In">
               <span class="advisory-table__fix">{{ adv.fixedInVersion ?? 'N/A' }}</span>
             </td>
-            <td class="advisory-table__td">
+            <td class="advisory-table__td" data-label="Status">
               <span class="advisory-table__status advisory-table__status--{{ adv.status }}">
                 {{ adv.status | titlecase }}
               </span>
             </td>
-            <td class="advisory-table__td">
+            <td class="advisory-table__td advisory-table__td--actions" data-label="Actions">
               <div class="advisory-table__action-icons">
                 <button class="advisory-table__icon-btn" type="button" aria-label="Acknowledge advisory">
                   <img src="assets/icons/check-icon.svg" alt="" aria-hidden="true">
