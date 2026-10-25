@@ -108,3 +108,12 @@
     line-height: 18px;
   }
 }
+
+// Below 1024px the whole page scrolls (not the content area), so `min-h-full` on the page has
+// no definite parent height. Let the host and page grow inside the flex-column content area
+// instead, which keeps the idle card vertically centred as in the Figma 375/768 frames.
+@media (max-width: 1023px) {
+  app-assets { display: flex; flex-direction: column; flex: 1 1 auto; }
+
+  .assets-page { flex: 1 1 auto; }
+}

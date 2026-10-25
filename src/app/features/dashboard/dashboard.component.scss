@@ -6,6 +6,10 @@
 .dashboard-page {
   --dash-gap: 14px;
   @apply flex flex-col p-4;
+  // Very wide screens (1920/2560px): keep the content readable and centred
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
   gap: var(--dash-gap);
 
   @media (min-width: 768px) {

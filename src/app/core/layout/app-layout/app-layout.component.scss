@@ -51,7 +51,8 @@
 
     .app-layout__main { min-height: 100dvh; overflow: visible; }
 
-    .app-layout__content { flex: 1 0 auto; overflow: visible; }
+    // A flex column lets a page (e.g. the Assets idle card) grow to fill the remaining height
+    .app-layout__content { flex: 1 0 auto; overflow: visible; display: flex; flex-direction: column; }
 
     // Let the sticky header participate directly in the page flow
     app-header { display: contents; }
