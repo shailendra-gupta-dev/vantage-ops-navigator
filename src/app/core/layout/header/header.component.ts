@@ -26,4 +26,5 @@ export class HeaderComponent {
 
   readonly roleChange  = output<UserRole>();
   readonly searchOpen  = output<void>();
+  readonly menuToggle  = output<void>();
 }

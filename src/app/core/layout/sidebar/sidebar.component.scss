@@ -143,4 +143,95 @@
   &__profile-role {
     @apply text-text-muted text-[10px] font-normal truncate;
   }
+
+  // ── Responsive ────────────────────────────────────────────────────────────
+  // ≥1280px        full 240px sidebar (Figma desktop)
+  // 1024–1279px    64px icon rail (Figma compact desktop) — labels, badges, children hidden
+  // <1024px        off-canvas drawer, opened from the header hamburger
+
+  // Brand mark used only in the rail; the full wordmark logo is hidden there.
+  &__logo-mark {
+    @apply hidden items-center justify-center shrink-0 rounded-[8px] text-white font-bold text-[11px];
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+  }
+
+  // Drawer close button (hidden once the sidebar is permanent)
+  &__close {
+    @apply hidden items-center justify-center shrink-0 rounded-xl
+           text-text-secondary cursor-pointer transition-colors duration-150;
+    width: 36px;
+    height: 36px;
+    margin-left: auto;
+    margin-right: 12px;
+
+    &:hover { @apply text-text-primary bg-bg-elevated; }
+  }
+
+  @media (max-width: 1023px) {
+    &__close { @apply inline-flex; }
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    width: 240px;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+
+    &--open {
+      transform: translateX(0);
+      box-shadow: 8px 0 32px rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    width: 64px;
+
+    &__logo { @apply justify-center; }
+
+    &__logo-link { @apply justify-center; }
+
+    &__logo-img { display: none; }
+
+    &__logo-mark { @apply flex; }
+
+    &__item { @apply justify-center px-0; }
+
+    &__profile { @apply justify-center px-0; }
+
+    &__item-label,
+    &__badge,
+    &__item-arrow,
+    &__children,
+    &__profile-info { display: none; }
+  }
+
+  // Figma rail (414:2842): 36px gradient avatar; the same gradient is used in the drawer.
+  @media (max-width: 1279px) {
+    &__avatar {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+    }
+  }
+
+  // Permanent sidebar (≥1024px): logo block ends where the contract pulse strip ends,
+  // profile block starts where the footer starts.
+  @media (min-width: 1024px) {
+    &__logo { height: var(--chrome-top-h, 68px); }
+
+    &__profile { height: var(--chrome-bottom-h, 56px); }
+  }
+
+  // The logo block is solid grey so it blends with the logo artwork (which sits on #0f172a);
+  // the profile block intentionally keeps the sidebar's own blue.
+  &__logo { background: #0f172a; }
+
+  // Compact rail uses the darker #0b1120 chrome behind the "V" mark
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    &__logo { background: #0b1120; }
+  }
 }

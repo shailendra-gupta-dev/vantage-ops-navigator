@@ -2,8 +2,15 @@
 
   <app-risk-spotlight />
 
-  <app-network-digest />
+  <!-- KPI row: Figma mobile / tablet / compact frames only (hidden ≥1280px) -->
+  <app-metric-cards />
 
-  <app-health-scorecard />
+  <!-- Digest and scorecard sit side by side only at 1024–1279px (Figma compact desktop);
+       otherwise they stack, matching the mobile, tablet portrait and desktop frames. -->
+  <div class="dashboard-page__row">
+    <app-network-digest />
+
+    <app-health-scorecard />
+  </div>
 
 </div>

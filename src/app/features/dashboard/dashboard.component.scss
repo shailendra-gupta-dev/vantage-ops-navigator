@@ -1,7 +1,39 @@
 @reference "../../../styles.scss";
 
+// Spacing follows the Figma frames:
+//   mobile  — p-16, gap-14   | tablet portrait — p-16, gap-16
+//   compact — px-20 pt-16 pb-20, gap-14 | desktop — p-24, gap-16
 .dashboard-page {
-  @apply flex flex-col gap-4 p-6;
+  --dash-gap: 14px;
+  @apply flex flex-col p-4;
+  gap: var(--dash-gap);
+
+  @media (min-width: 768px) {
+    --dash-gap: 16px;
+  }
+
+  @media (min-width: 1024px) {
+    --dash-gap: 14px;
+    padding: 16px 20px 20px;
+  }
+
+  @media (min-width: 1280px) {
+    --dash-gap: 16px;
+    @apply p-6;
+  }
+
+  // Figma compact desktop (1024px): digest 380px | scorecard fills the rest.
+  // Below and above that range the two cards stack in a single column.
+  &__row {
+    @apply flex flex-col min-w-0;
+    gap: var(--dash-gap);
+
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      display: grid;
+      grid-template-columns: 380px minmax(0, 1fr);
+      align-items: start;
+    }
+  }
 
   &__placeholder {
     @apply flex items-center justify-center px-4 rounded-card

@@ -1,4 +1,4 @@
-<aside class="sidebar">
+<aside class="sidebar" [class.sidebar--open]="open()">
 
   <!-- ── Logo ───────────────────────────────────────────────────────────── -->
   <div class="sidebar__logo">
@@ -8,11 +8,22 @@
            class="sidebar__logo-img"
            alt="Vantage Ops Navigator"
            height="36" />
+      <!-- Compact mark shown only in the 64px icon rail (1024–1279px), Figma LogoMark -->
+      <span class="sidebar__logo-mark" aria-hidden="true">V</span>
     </a>
+
+    <!-- Close — only visible in the off-canvas drawer (below 1024px) -->
+    <button class="sidebar__close" type="button" (click)="closed.emit()"
+            aria-label="Close navigation menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor"
+           stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 4l10 10M14 4L4 14"/>
+      </svg>
+    </button>
   </div>
 
   <!-- ── Nav ────────────────────────────────────────────────────────────── -->
-  <nav class="sidebar__nav" aria-label="Main navigation">
+  <nav class="sidebar__nav" aria-label="Main navigation" (click)="onNavClick($event)">
     @for (section of navConfig(); track section.id) {
       @if (section.roles.includes(currentRole())) {
 
@@ -81,7 +92,7 @@
     <div class="sidebar__avatar" aria-hidden="true">{{ profile().initials }}</div>
     <div class="sidebar__profile-info">
       <span class="sidebar__profile-name">{{ profile().name }}</span>
-      <span class="sidebar__profile-role">{{ profile().role }}</span>
+      <span class="sidebar__profile-role">{{ profile().role | titlecase }}</span>
     </div>
   </div>
 

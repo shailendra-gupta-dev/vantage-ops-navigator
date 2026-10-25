@@ -1,15 +1,74 @@
 @reference "../../../../styles.scss";
 
+// Breakpoints (match Figma frames):
+//   <1024px        single column — sidebar is an off-canvas drawer
+//   1024–1279px    64px icon rail + content (Figma compact desktop)
+//   ≥1280px        240px sidebar + content (Figma desktop)
 .app-layout {
+  // Heights shared across the sidebar and the main column so their divider lines stay aligned:
+  //   --chrome-top-h    sidebar logo block  = header + contract pulse strip
+  //   --chrome-bottom-h sidebar profile     = footer
+  --chrome-top-h: 84px;    // desktop: header 45 + pulse 39
+  --chrome-bottom-h: 56px;
   @apply grid h-dvh overflow-hidden;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: minmax(0, 1fr);
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    --chrome-top-h: 90px;  // compact: header 52 + pulse 38
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
 
   &__main {
-    @apply flex flex-col overflow-hidden bg-bg-base;
+    @apply flex flex-col overflow-hidden bg-bg-base min-w-0;
   }
 
   &__content {
-    @apply flex-1 overflow-y-auto;
+    @apply flex-1 overflow-y-auto min-w-0;
+  }
+
+  // Below 1024px the Figma frames are one continuous page (header, breadcrumb, pulse,
+  // content, footer), so the whole page scrolls instead of just the content area and the
+  // footer sits at the end of the content rather than pinned to the bottom of the screen.
+  @media (max-width: 1023px) {
+    display: block;
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+
+    .app-layout__main { min-height: 100dvh; overflow: visible; }
+
+    .app-layout__content { flex: 1 0 auto; overflow: visible; }
+
+    // Let the sticky header participate directly in the page flow
+    app-header { display: contents; }
+  }
+
+  // Dims the page behind the open drawer; only exists below 1024px.
+  &__scrim {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    background: rgba(2, 6, 23, 0.6);
+
+    @media (max-width: 1023px) {
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+    }
+
+    &--visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
   }
 
   &__placeholder {

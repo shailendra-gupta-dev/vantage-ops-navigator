@@ -74,4 +74,66 @@
 
     &:hover { @apply text-text-secondary; }
   }
+
+  // Desktop: fixed height (border included) so the strip's bottom line matches the sidebar logo block.
+  @media (min-width: 1280px) {
+    height: 39px;
+  }
+
+  // ═══ Responsive ═══════════════════════════════════════════════════════════
+  // Placed after the base rules so they win at equal specificity.
+
+  // Compact desktop 1024–1279px — Figma 414:2863: h-38, pills h-24 / 10px medium, gap-10
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    height: 38px;
+    padding: 0 16px 0 20px;
+    gap: 10px;
+
+    &__label { @apply text-[10px] font-semibold; letter-spacing: 0.5px; }
+
+    &__pills { gap: 10px; flex: 0 1 auto; }
+
+    &__pill { height: 24px; padding: 3px 8px; gap: 5px; font-size: 10px; }
+  }
+
+  // Tablet portrait 768–1023px — Figma 414:1919: label + wrapping pills, text "C-2025-044 · 18d",
+  // px-20 py-8 gap-10, border top and bottom, no dismiss button.
+  @media (min-width: 768px) and (max-width: 1023px) {
+    flex-wrap: wrap;
+    padding: 8px 20px;
+    gap: 10px;
+    border-top: 1px solid rgba(148, 163, 184, 0.12);
+
+    &__label { @apply text-[10px] font-semibold; letter-spacing: 0.5px; gap: 5px; }
+
+    &__pills { flex: 0 1 auto; flex-wrap: wrap; gap: 6px; }
+
+    &__pill { height: auto; padding: 4px 9px; gap: 5px; @apply font-semibold; }
+
+    &__pill-days { @apply font-semibold; }
+
+    &__pill-days::before { content: '·\00a0'; }
+
+    &__dismiss { display: none; }
+  }
+
+  // Mobile <768px — Figma 444:360: label row, then three full-width stacked pills
+  // (dot · id · days), px-16 py-10 gap-8, border top and bottom, no dismiss button.
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 16px;
+    border-top: 1px solid rgba(148, 163, 184, 0.12);
+
+    &__label { @apply text-[10px] font-semibold; letter-spacing: 0.8px; gap: 6px; }
+
+    &__pills { flex: none; flex-direction: column; align-items: stretch; width: 100%; gap: 8px; }
+
+    &__pill { width: 100%; height: auto; padding: 4px 10px; gap: 6px; @apply font-semibold; }
+
+    &__pill-days { @apply font-normal; }
+
+    &__dismiss { display: none; }
+  }
 }

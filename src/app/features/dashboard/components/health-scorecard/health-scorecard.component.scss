@@ -49,17 +49,34 @@
 
   // ── 4-panel grid ───────────────────────────────────────────────────────────
   // Figma: 4 equal columns, border-r dividers, h-[221.25px] body
+  // Figma: mobile stacks the four panels; 768–1279px uses a 2×2 grid (the
+  // scorecard is half-width at 1024px); desktop keeps the four-across row.
   &__panels {
-    @apply flex flex-1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    flex: 1;
     min-height: 221px;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (min-width: 1280px) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
 
   &__panel {
-    @apply flex flex-col items-center justify-between flex-1;
+    @apply flex flex-col items-center justify-between;
     padding: 11.25px 10px 13px;
 
     &--border-r {
-      border-right: 1px solid rgba(148, 163, 184, 0.12);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+
+      @media (min-width: 768px) {
+        border-bottom: none;
+        border-right: 1px solid rgba(148, 163, 184, 0.12);
+      }
     }
   }
 
@@ -108,5 +125,58 @@
   &__legend-label {
     font-size: 9px;
     color: #64748b;
+  }
+
+  // ═══ Responsive ═══════════════════════════════════════════════════════════
+  // Below 1024px the Figma frames (mobile 444:514, tablet 414:2011) drop the single
+  // bordered card: a plain heading row, then four separate cards — one per panel,
+  // each titled, with the chart centred and the caption underneath.
+  @media (max-width: 1023px) {
+    gap: 12px;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+
+    &__header { padding: 0; border: 0; gap: 12px; }
+
+    &__header-left { @apply w-full justify-between; }
+
+    &__heading { font-size: 16px; font-weight: 600; }
+
+    &__header-desc { font-size: 11px; color: #94a3b8; }
+
+    &__panels { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+
+    &__panel,
+    &__panel--border-r {
+      height: 224px;
+      padding: 16px;
+      gap: 12px;
+      background: #1e293b;
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      border-radius: 12px;
+    }
+
+    // Title first, caption last (DOM order is chart → title → caption)
+    &__panel-label { order: -1; margin: 0; font-size: 14px; }
+
+    &__panel-sub { margin: 0; font-size: 14px; color: #94a3b8; }
+
+    &__legend { display: none; }
+
+    &__chart {
+      &--security, &--lifecycle, &--coverage { height: 140px; }
+      &--connectivity { height: 128px; }
+    }
+  }
+
+  // Tablet portrait 768–1023px: 2×2 grid of cards, gap-12, smaller type
+  @media (min-width: 768px) and (max-width: 1023px) {
+    &__panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    &__panel-label { font-size: 13px; }
+
+    &__panel-sub { font-size: 10px; }
   }
 }

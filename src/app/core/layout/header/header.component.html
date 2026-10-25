@@ -1,17 +1,37 @@
 <!-- Figma node 7:1393 — h-[45px] flex items-center justify-between px-[18.75px] -->
 <header class="app-header">
 
-  <!-- Left — breadcrumb: Figma gap-[7.5px] | logo / separator / page-title pattern -->
+  <!-- Hamburger — visible below 1024px, opens the sidebar drawer -->
+  <button class="app-header__menu" type="button" (click)="menuToggle.emit()"
+          aria-label="Open navigation menu">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor"
+         stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+      <path d="M3 5h12M3 9h12M3 13h12"/>
+    </svg>
+  </button>
+
+  <!-- Brand — Figma mobile (414:1740) / tablet (414:1899) header only; the sidebar carries it on larger screens -->
+  <div class="app-header__brand">
+    <span class="app-header__brand-mark" aria-hidden="true">V</span>
+    <span class="app-header__brand-text">
+      <span class="app-header__brand-name">VANTAGE <span class="app-header__brand-accent">OPS</span></span>
+      <span class="app-header__brand-sub">NAVIGATOR</span>
+    </span>
+  </div>
+
+  <!-- Left — breadcrumb (≥1024px): Figma gap-[7.5px] | root / separator / page-title pattern -->
   <div class="app-header__breadcrumb">
-    <span class="app-header__breadcrumb-page">Vantage Ops Navigator</span>
+    <span class="app-header__breadcrumb-page app-header__breadcrumb-long">Vantage Ops Navigator</span>
+    <span class="app-header__breadcrumb-page app-header__breadcrumb-short">Vantage Ops</span>
     <span class="app-header__breadcrumb-sep" aria-hidden="true">/</span>
-    <span class="app-header__breadcrumb-page">{{ pageTitle() }}</span>
+    <span class="app-header__breadcrumb-page app-header__breadcrumb-current">{{ pageTitle() }}</span>
   </div>
 
   <!-- Right — Figma gap-[11.25px]: search · bell · role-switcher · avatar -->
   <div class="app-header__actions">
 
     <!-- Search pill — Figma: bg rgba(30,41,59,0.8) | border | rounded-[11.25px] | px-[12.25px] py-[6.625px] -->
+    <!-- Responsive: full pill ≥1024px, text-only pill 768–1023px, icon-only below 768px -->
     <button class="app-header__search" type="button" (click)="searchOpen.emit()"
             aria-label="Open search">
       <svg class="app-header__search-icon" width="13" height="13" viewBox="0 0 13 13"
@@ -48,3 +68,10 @@
   </div>
 
 </header>
+
+<!-- Breadcrumb row — Figma mobile (444:358) / tablet (414:1917): its own row under the header, below 1024px -->
+<nav class="app-crumbs" aria-label="Breadcrumb">
+  <span class="app-crumbs__root">Vantage Ops Navigator</span>
+  <span class="app-crumbs__sep" aria-hidden="true"></span>
+  <span class="app-crumbs__current">{{ pageTitle() }}</span>
+</nav>
