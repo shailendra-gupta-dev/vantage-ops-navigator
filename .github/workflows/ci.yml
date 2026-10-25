@@ -1,8 +1,8 @@
 name: CI
 
-# Build check for every pull request into master. The Pages deploy workflow
-# (deploy.yml) publishes after merge; this catches broken builds and
-# component-style budget errors before they reach master.
+# Unit tests + production build for every pull request into master. The Pages
+# deploy workflow (deploy.yml) publishes after merge; this catches failing tests,
+# broken builds and component-style budget errors before they reach master.
 on:
   pull_request:
     branches: [master]
@@ -29,6 +29,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Unit tests
+        run: npx ng test --watch=false
 
       - name: Build (production, GitHub Pages base href)
         run: npx ng build --configuration production --base-href /vantage-ops-navigator/

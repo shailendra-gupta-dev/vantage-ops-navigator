@@ -8,6 +8,7 @@
     [profile]="profile()"
     [open]="navOpen()"
     (closed)="navOpen.set(false)"
+    (roleChange)="currentRole.set($event)"
   />
 
   <!-- Scrim behind the open drawer (below 1024px) -->

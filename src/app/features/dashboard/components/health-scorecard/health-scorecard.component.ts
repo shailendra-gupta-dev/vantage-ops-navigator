@@ -121,11 +121,18 @@ export class HealthScorecardComponent {
   ];
 
   // ── ECharts options ─────────────────────────────────────────────────────────
+  // Visual style follows the Figma scorecard (gradient gauge with needle, vertical
+  // stacked bar, segmented donut, teal line); the values stay driven by the mock data.
 
   readonly securityChartOpt = computed((): EChartsOption => {
     const grade = this.securityGrade();
     const color = this.securityGradeColor();
     const value = this.securityGaugeValue();
+    // green → lime → amber → orange → red, compressed into the filled part of the arc
+    const palette = ['#10b981', '#84cc16', '#eab308', '#f59e0b', '#f97316', '#ef4444'];
+    const fill = value / 100;
+    const stops: [number, string][] = palette.map((c, i) => [fill * ((i + 1) / palette.length), c]);
+    stops.push([1, 'rgba(255,255,255,0.07)']);
     return {
       backgroundColor: 'transparent',
       tooltip: {
@@ -139,16 +146,13 @@ export class HealthScorecardComponent {
         endAngle: 0,
         min: 0,
         max: 100,
-        radius: '90%',
-        center: ['50%', '70%'],
+        radius: '100%',
+        center: ['50%', '78%'],
         splitNumber: 4,
-        axisLine: {
-          lineStyle: {
-            width: 8,
-            color: [[value / 100, color], [1, 'rgba(255,255,255,0.07)']],
-          },
-        },
-        pointer: { show: false },
+        axisLine: { roundCap: true, lineStyle: { width: 9, color: stops } },
+        // Needle in the grade colour, as in the Figma gauge
+        pointer: { show: true, length: '58%', width: 5, offsetCenter: [0, 0], itemStyle: { color } },
+        anchor: { show: true, size: 7, itemStyle: { color } },
         axisTick: { show: false },
         splitLine: { show: false },
         axisLabel: { show: false },
@@ -156,10 +160,10 @@ export class HealthScorecardComponent {
         detail: {
           formatter: () => grade,
           color,
-          fontSize: 18,
+          fontSize: 20,
           fontWeight: 700,
           fontFamily: 'Inter, system-ui, sans-serif',
-          offsetCenter: ['0%', '-10%'],
+          offsetCenter: ['0%', '38%'],
         },
         data: [{ value }],
       }],
@@ -168,45 +172,74 @@ export class HealthScorecardComponent {
 
   readonly lifecycleChartOpt = computed((): EChartsOption => {
     const d = this.lifecycleStats();
+    const label = {
+      show: true,
+      color: '#fff',
+      fontSize: 10,
+      fontWeight: 700 as const,
+      fontFamily: 'Inter, system-ui, sans-serif',
+      formatter: (p: any) => (p.value > 0 ? `${p.value}%` : ''),
+    };
+    // One vertical stacked bar: Active at the bottom, then Near EoS, EoL, Unknown
+    const seg = (name: string, value: number, color: string) => ({
+      name, type: 'bar' as const, stack: 'total', data: [value], barWidth: '58%', barMaxWidth: 90,
+      itemStyle: { color }, label,
+    });
     return {
       backgroundColor: 'transparent',
-      grid: { left: 0, right: 0, top: 4, bottom: 0, containLabel: false },
-      xAxis: { type: 'value', max: 100, show: false },
-      yAxis: { type: 'category', data: [''], show: false },
+      grid: { left: 30, right: 6, top: 6, bottom: 2, containLabel: false },
+      xAxis: { type: 'category', data: [''], show: false },
+      yAxis: {
+        type: 'value',
+        min: 0,
+        max: 100,
+        interval: 20,
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: { color: '#64748b', fontSize: 8, formatter: '{value}%', fontFamily: 'Inter, system-ui, sans-serif' },
+        splitLine: { lineStyle: { color: 'rgba(148,163,184,0.12)' } },
+      },
       series: [
-        { name: 'Active',   type: 'bar', stack: 'total', data: [d.active],  barMaxWidth: 14, itemStyle: { color: '#10b981', borderRadius: [7, 0, 0, 7] } },
-        { name: 'Near EoS', type: 'bar', stack: 'total', data: [d.nearEos], barMaxWidth: 14, itemStyle: { color: '#f59e0b' } },
-        { name: 'EoL',      type: 'bar', stack: 'total', data: [d.eol],     barMaxWidth: 14, itemStyle: { color: '#ef4444' } },
-        { name: 'Unknown',  type: 'bar', stack: 'total', data: [d.unknown],  barMaxWidth: 14, itemStyle: { color: '#334155', borderRadius: [0, 7, 7, 0] } },
+        seg('Active', d.active, '#10b981'),
+        seg('Near EoS', d.nearEos, '#f59e0b'),
+        seg('EoL', d.eol, '#e11d48'),
+        seg('Unknown', d.unknown, '#475569'),
       ],
-      tooltip: { ...CHART_TOOLTIP, trigger: 'axis', axisPointer: { type: 'shadow' } },
+      tooltip: { ...CHART_TOOLTIP, trigger: 'item', formatter: (p: any) => `${p.seriesName}: <strong>${p.value}%</strong>` },
     };
   });
 
   readonly coverageChartOpt = computed((): EChartsOption => {
-    const grade = this.coverageStats().grade;
-    const pct   = this.coverageStats().pct;
+    const { grade, pct } = this.coverageStats();
     const color = this.coverageGradeColor();
+    // Uncovered devices are split into expiring (amber) and expired/uncovered (red) slices
+    const devices = this.devices();
+    const total = devices.length || 1;
+    const expiring = Math.round((devices.filter(d => d.contractStatus === 'expiring').length / total) * 100);
+    const lapsed = Math.max(0, 100 - pct - expiring);
     return {
       backgroundColor: 'transparent',
       series: [{
         type: 'pie',
-        radius: ['62%', '80%'],
+        radius: ['58%', '84%'],
         center: ['50%', '50%'],
         startAngle: 90,
-        itemStyle: { borderRadius: 5, borderColor: 'transparent', borderWidth: 2 },
+        itemStyle: { borderWidth: 0 },
         label: {
           show: true,
           position: 'center',
           formatter: () => grade,
-          fontSize: 20,
+          fontSize: 22,
           fontWeight: 700,
           color,
           fontFamily: 'Inter, system-ui, sans-serif',
         },
+        labelLine: { show: false },
+        emphasis: { scale: false },
         data: [
-          { value: pct,       name: 'Covered',   itemStyle: { color } },
-          { value: 100 - pct, name: 'Uncovered', itemStyle: { color: 'rgba(255,255,255,0.07)' } },
+          { value: pct,      name: 'Covered',        itemStyle: { color: '#10b981' } },
+          { value: expiring, name: 'Expiring',       itemStyle: { color: '#f59e0b' } },
+          { value: lapsed,   name: 'Expired / none', itemStyle: { color: '#e11d48' } },
         ],
       }],
       tooltip: {
@@ -219,16 +252,17 @@ export class HealthScorecardComponent {
 
   readonly connectivityChartOpt = computed((): EChartsOption => {
     const pts = this.connectivityPoints;
+    const teal = '#06b6d4';
     return {
       backgroundColor: 'transparent',
-      grid: { left: 4, right: 4, top: 4, bottom: 16, containLabel: false },
+      grid: { left: 4, right: 30, top: 8, bottom: 16, containLabel: false },
       xAxis: {
         type: 'category',
         data: pts.map(p => p.day),
         boundaryGap: false,
         axisLine: { show: false },
         axisTick: { show: false },
-        axisLabel: { color: '#475569', fontSize: 8, fontFamily: 'Inter, system-ui, sans-serif' },
+        axisLabel: { color: '#94a3b8', fontSize: 8, fontFamily: 'Inter, system-ui, sans-serif' },
       },
       yAxis: { type: 'value', min: 98.5, max: 100, show: false },
       tooltip: {
@@ -241,10 +275,27 @@ export class HealthScorecardComponent {
         type: 'line',
         data: pts.map(p => p.uptime),
         smooth: true,
-        lineStyle: { color: '#6366f1', width: 2 },
-        itemStyle: { color: '#6366f1' },
-        symbol: 'none',
-        areaStyle: { color: 'rgba(99,102,241,0.12)' },
+        lineStyle: { color: teal, width: 2 },
+        itemStyle: { color: teal, borderColor: '#0f172a', borderWidth: 1 },
+        symbol: 'circle',
+        symbolSize: 5,
+        areaStyle: {
+          color: {
+            type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: 'rgba(6,182,212,0.35)' },
+              { offset: 1, color: 'rgba(6,182,212,0.02)' },
+            ],
+          },
+        },
+        // 99.5% uptime target, as in the Figma chart
+        markLine: {
+          silent: true,
+          symbol: 'none',
+          lineStyle: { color: 'rgba(148,163,184,0.5)', type: 'dashed', width: 1 },
+          label: { show: true, position: 'end', formatter: '99.5%', color: '#94a3b8', fontSize: 8 },
+          data: [{ yAxis: 99.5 }],
+        },
       }],
     };
   });

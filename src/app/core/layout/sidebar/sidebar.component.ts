@@ -11,12 +11,13 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs/operators';
 
+import { RoleSwitcherComponent } from '@core/layout/role-switcher/role-switcher.component';
 import type { NavSection, UserProfile, UserRole } from '@core/models';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterModule, TitleCasePipe],
+  imports: [RouterModule, TitleCasePipe, RoleSwitcherComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   encapsulation: ViewEncapsulation.None
@@ -29,6 +30,8 @@ export class SidebarComponent {
   readonly open = input<boolean>(false);
   // Emitted when the drawer should close (close button or a nav link was activated)
   readonly closed = output<void>();
+  // Role picked from the drawer's role switcher (the header hides its own below 1024px)
+  readonly roleChange = output<UserRole>();
 
   onNavClick(event: Event): void {
     if ((event.target as HTMLElement).closest('a')) this.closed.emit();

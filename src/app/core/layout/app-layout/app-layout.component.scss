@@ -12,6 +12,10 @@
   --chrome-bottom-h: 56px;
   @apply grid h-dvh overflow-hidden;
   grid-template-columns: minmax(0, 1fr);
+  // One full-height row. Without this, extra grid children (e.g. the spotlight overlay host)
+  // spawned a second auto row that stole height and left the page background showing
+  // beneath the footer and sidebar.
+  grid-template-rows: minmax(0, 1fr);
 
   @media (min-width: 1024px) {
     grid-template-columns: 64px minmax(0, 1fr);
@@ -24,6 +28,9 @@
   @media (min-width: 1280px) {
     grid-template-columns: 240px minmax(0, 1fr);
   }
+
+  // The spotlight overlay positions itself fixed; its host must not take part in the grid
+  > app-spotlight-search { display: contents; }
 
   &__main {
     @apply flex flex-col overflow-hidden bg-bg-base min-w-0;

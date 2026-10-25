@@ -22,23 +22,32 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render the sidebar', () => {
-    const sidebar = fixture.nativeElement.querySelector('app-sidebar');
-    expect(sidebar).toBeTruthy();
+  it('should render the risk spotlight', () => {
+    expect(fixture.nativeElement.querySelector('app-risk-spotlight')).toBeTruthy();
   });
 
-  it('should render the main content area', () => {
-    const main = fixture.nativeElement.querySelector('.dashboard__main');
-    expect(main).toBeTruthy();
+  it('should render the metrics row', () => {
+    expect(fixture.nativeElement.querySelector('app-metric-cards')).toBeTruthy();
   });
 
-  it('should render the router outlet', () => {
-    const outlet = fixture.nativeElement.querySelector('router-outlet');
-    expect(outlet).toBeTruthy();
+  it('should render the network digest and health scorecard inside the shared row', () => {
+    const row = fixture.nativeElement.querySelector('.dashboard-page__row');
+    expect(row).toBeTruthy();
+    expect(row.querySelector('app-network-digest')).toBeTruthy();
+    expect(row.querySelector('app-health-scorecard')).toBeTruthy();
   });
 
-  it('should have header, pulse, and footer placeholders', () => {
-    const placeholders = fixture.nativeElement.querySelectorAll('.dashboard__placeholder');
-    expect(placeholders.length).toBe(3);
+  it('should keep the sections in design order', () => {
+    const order = Array.from(
+      fixture.nativeElement.querySelectorAll(
+        'app-risk-spotlight, app-metric-cards, app-network-digest, app-health-scorecard',
+      ),
+    ).map((el) => (el as HTMLElement).tagName.toLowerCase());
+    expect(order).toEqual([
+      'app-risk-spotlight',
+      'app-metric-cards',
+      'app-network-digest',
+      'app-health-scorecard',
+    ]);
   });
 });

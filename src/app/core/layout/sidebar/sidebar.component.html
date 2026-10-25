@@ -22,6 +22,16 @@
     </button>
   </div>
 
+  <!-- ── Role switcher (drawer only) ────────────────────────────────────── -->
+  <!-- The header hides its switcher below 1024px, so it lives here on small screens. -->
+  <div class="sidebar__role">
+    <span class="sidebar__role-label">Role</span>
+    <app-role-switcher
+      [selectedRole]="currentRole()"
+      (roleChange)="roleChange.emit($event)"
+    />
+  </div>
+
   <!-- ── Nav ────────────────────────────────────────────────────────────── -->
   <nav class="sidebar__nav" aria-label="Main navigation" (click)="onNavClick($event)">
     @for (section of navConfig(); track section.id) {

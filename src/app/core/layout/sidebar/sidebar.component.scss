@@ -234,4 +234,15 @@
   @media (min-width: 1024px) and (max-width: 1279px) {
     &__logo { background: #0b1120; }
   }
+
+  // Role switcher shown inside the drawer only (header switcher is hidden below 1024px)
+  &__role {
+    @apply hidden items-center justify-between shrink-0 px-4 py-3 border-b border-border-subtle;
+
+    @media (max-width: 1023px) { @apply flex; }
+  }
+
+  &__role-label {
+    @apply text-[11px] font-medium uppercase tracking-[0.06em] text-text-muted;
+  }
 }

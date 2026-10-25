@@ -64,6 +64,11 @@
     @media (min-width: 1280px) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
+
+    // When stretched next to the digest card (1024–1279px), rows split the height evenly
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      grid-auto-rows: minmax(0, 1fr);
+    }
   }
 
   &__panel {
@@ -100,7 +105,7 @@
     width: 100%;
 
     &--security     { height: 100px; }
-    &--lifecycle    { height: 60px; }
+    &--lifecycle    { height: 104px; }
     &--coverage     { height: 96px; }
     &--connectivity { height: 80px; }
   }
