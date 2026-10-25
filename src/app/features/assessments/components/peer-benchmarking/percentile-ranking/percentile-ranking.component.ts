@@ -63,6 +63,8 @@ export class PercentileRankingComponent {
       dataset: { source },
       xAxis: {
         type: 'value',
+        // An inverted category axis would otherwise move the % axis to the top
+        position: 'bottom',
         min: 0,
         max: 100,
         axisLabel: {
@@ -76,6 +78,8 @@ export class PercentileRankingComponent {
       },
       yAxis: {
         type: 'category',
+        // First dataset row (Security) at the top, as in the Figma frame
+        inverse: true,
         axisLabel: {
           color: '#94a3b8',
           fontSize: 12,
@@ -88,7 +92,7 @@ export class PercentileRankingComponent {
       series: [{
         type: 'bar',
         encode: { x: 'percentile', y: 'dimension' },
-        barMaxWidth: 14,
+        barMaxWidth: 18,
         itemStyle: {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           color: (params: any) => colors[params.dataIndex] ?? '#64748b',
