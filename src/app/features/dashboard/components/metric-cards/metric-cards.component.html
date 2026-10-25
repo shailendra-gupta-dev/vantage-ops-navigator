@@ -1,0 +1,13 @@
+<!-- Figma mobile 444:437 / tablet 414:1951 / compact 414:2898 -->
+<section class="metric-cards" aria-label="Key metrics">
+  @for (metric of metrics(); track metric.id) {
+    <div class="metric-cards__card">
+      <p class="metric-cards__label">{{ metric.label }}</p>
+      <p class="metric-cards__value">{{ metric.value }}</p>
+      <p class="metric-cards__trend" [class]="'metric-cards__trend metric-cards__trend--' + metric.tone">
+        <span class="metric-cards__trend-full">{{ metric.trend }}</span>
+        <span class="metric-cards__trend-short">{{ metric.trendShort }}</span>
+      </p>
+    </div>
+  }
+</section>

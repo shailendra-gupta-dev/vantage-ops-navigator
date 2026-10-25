@@ -3,7 +3,7 @@
 // Figma: Footer — border-t rgba(148,163,184,0.12) | px-[18.75px] pt-[10.375px] pb-[9.375px] | gap-[22.5px]
 .app-footer {
   @apply flex items-center shrink-0 border-t border-border-subtle;
-  background: rgba(15, 23, 42, 0.95);
+  background: #0f172a; // opaque: no sidebar/page blue bleeding through
   padding: 10.375px 18.75px 9.375px;
   gap: 22.5px;
 
@@ -90,5 +90,109 @@
   &__sep {
     color: #1e293b;
     @apply text-[11px];
+  }
+
+  // ═══ Responsive ═══════════════════════════════════════════════════════════
+  // Placed after the base rules so they win at equal specificity.
+  // Frames: mobile 444:571 | tablet portrait 414:2051 | compact desktop 414:2992.
+  // Desktop (≥1280px) is unchanged.
+
+  // Below 1280px: darker footer, light-grey text, text-only links (no icons),
+  // coloured status dots with grey labels, amber "Alerts" dot.
+  @media (max-width: 1279px) {
+    background: #0b1120;
+
+    &__copyright, &__poc, &__link, &__synced { color: #94a3b8; }
+
+    &__link img { display: none; }
+
+    &__synced img { display: none; }
+
+    &__indicator { color: #94a3b8; }
+
+    &__indicator--good .app-footer__dot { background: #10b981; }
+    &__indicator--warn .app-footer__dot { background: #f59e0b; }
+
+    &__time { color: #64748b; }
+  }
+
+  // Compact desktop 1024–1279px — one 40px row: copyright | links | status
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    padding: 12px 20px;
+    gap: 10px 12px;
+    flex-wrap: wrap;
+
+    &__left { gap: 6px; }
+
+    &__links { gap: 10px; flex-wrap: nowrap; }
+
+    &__link, &__copyright, &__poc { font-size: 10px; }
+
+    &__status { gap: 6px; }
+  }
+
+  // Tablet portrait 768–1023px — row 1: copyright · version · POC … links; row 2: status … sync + time
+  @media (min-width: 768px) and (max-width: 1023px) {
+    flex-wrap: wrap;
+    padding: 16px 20px 20px;
+    gap: 12px 10px;
+
+    &__left { order: 1; gap: 10px; }
+
+    &__links { order: 2; flex: 0 1 auto; margin-left: auto; justify-content: flex-end; gap: 12px; }
+
+    &__status {
+      order: 3;
+      width: 100%;
+      gap: 8px;
+
+      // first "·" (between Alerts and Synced) is dropped; Synced + time go to the right edge
+      .app-footer__sep:nth-child(4) { display: none; }
+
+      .app-footer__synced { margin-left: auto; }
+    }
+  }
+
+  // Mobile <768px — links, then status dots + sync + clock, then the copyright row
+  @media (max-width: 767px) {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 16px 16px 24px;
+    gap: 14px 12px;
+
+    &__links {
+      order: 1;
+      width: 100%;
+      flex: none;
+      justify-content: flex-start;
+      gap: 4px 16px;
+    }
+
+    &__link { font-size: 14px; min-height: 44px; }
+
+    // The status wrapper dissolves so its children can be ordered individually
+    &__status { display: contents; }
+
+    &__status .app-footer__sep { display: none; }
+
+    &__indicator { order: 2; font-size: 11px; }
+
+    &__synced { order: 2; font-size: 11px; img { display: inline-block; } }
+
+    &__left { order: 3; width: 100%; flex-wrap: wrap; gap: 8px; }
+
+    &__copyright, &__poc { font-size: 11px; }
+
+    // Clock stays on the status row, right after "Synced 2m ago"
+    &__time { order: 2; color: #94a3b8; }
+  }
+
+  // Permanent sidebar layouts (≥1024px): footer height matches the sidebar profile block,
+  // so the two top dividers line up. Wrapped links still fit inside it.
+  @media (min-width: 1024px) {
+    height: var(--chrome-bottom-h, 56px);
+    padding-top: 0;
+    padding-bottom: 0;
+    align-items: center;
   }
 }

@@ -1,0 +1,69 @@
+@reference "../../../../../styles.scss";
+
+// Figma: card bg #1e293b | border rgba(148,163,184,0.12) | rounded-[12px]
+// Mobile: 2×2 grid, gap-10, p-14 | Tablet: 2×2, gap-12, p-16 | Compact: 4 across, gap-12, p-14
+.metric-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+
+  &__card {
+    @apply flex flex-col min-w-0;
+    gap: 6px;
+    padding: 14px;
+    background: #1e293b;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 12px;
+  }
+
+  &__label {
+    @apply m-0 text-[11px] font-normal;
+    color: #64748b;
+  }
+
+  &__value {
+    @apply m-0 text-[26px] font-bold;
+    color: #e2e8f0;
+    line-height: 1.2;
+  }
+
+  &__trend {
+    @apply m-0 text-[11px] font-normal;
+
+    &--good     { color: #10b981; }
+    &--critical { color: #e11d48; }
+    &--info     { color: #06b6d4; }
+  }
+
+  &__trend-short { display: inline; }
+  &__trend-full  { display: none; }
+
+  // Tablet portrait 768–1023px
+  @media (min-width: 768px) {
+    gap: 12px;
+
+    &__card { padding: 16px; }
+
+    &__label, &__trend { font-size: 12px; }
+
+    &__trend-short { display: none; }
+    &__trend-full  { display: inline; }
+  }
+
+  // Compact desktop 1024–1279px: four across
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    &__card { gap: 4px; padding: 14px; }
+
+    &__label, &__trend { font-size: 11px; }
+  }
+
+  // Desktop 1280px+ — the desktop frame has no metrics row
+  @media (min-width: 1280px) {
+    display: none;
+  }
+}
+
+// The host element is a custom element; keep it out of the page's flex gap when the row is hidden.
+app-metric-cards { display: contents; }

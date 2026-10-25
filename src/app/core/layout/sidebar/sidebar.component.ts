@@ -4,7 +4,9 @@ import {
   computed,
   inject,
   input,
+  output,
 } from '@angular/core';
+import { TitleCasePipe } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs/operators';
@@ -14,7 +16,7 @@ import type { NavSection, UserProfile, UserRole } from '@core/models';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, TitleCasePipe],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   encapsulation: ViewEncapsulation.None
@@ -23,6 +25,14 @@ export class SidebarComponent {
   readonly currentRole = input.required<UserRole>();
   readonly navConfig = input.required<NavSection[]>();
   readonly profile = input.required<UserProfile>();
+  // Drawer state — only has a visual effect below 1024px
+  readonly open = input<boolean>(false);
+  // Emitted when the drawer should close (close button or a nav link was activated)
+  readonly closed = output<void>();
+
+  onNavClick(event: Event): void {
+    if ((event.target as HTMLElement).closest('a')) this.closed.emit();
+  }
 
   private readonly router = inject(Router);
 

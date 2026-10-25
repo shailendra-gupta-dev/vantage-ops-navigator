@@ -22,7 +22,7 @@ describe('HeaderComponent', () => {
   it('should create', () => expect(component).toBeTruthy());
 
   it('should render breadcrumb with default page title', () => {
-    const page = fixture.nativeElement.querySelector('.app-header__breadcrumb-page');
+    const page = fixture.nativeElement.querySelector('.app-header__breadcrumb-current');
     expect(page.textContent.trim()).toBe('Dashboard');
   });
 

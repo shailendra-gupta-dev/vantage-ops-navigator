@@ -1,0 +1,8 @@
+{
+  "metrics": [
+    { "id": "managed-devices",   "label": "Managed devices",   "value": "284", "trend": "+12 this month",   "trendShort": "+12 this month", "tone": "good" },
+    { "id": "critical-risks",    "label": "Critical risks",    "value": "7",   "trend": "2 need action",    "trendShort": "2 need action",  "tone": "critical" },
+    { "id": "contract-coverage", "label": "Contract coverage", "value": "92%", "trend": "+3.4% this quarter", "trendShort": "+3.4% this qtr", "tone": "good" },
+    { "id": "open-tac-cases",    "label": "Open TAC cases",    "value": "14",  "trend": "4 updated today",  "trendShort": "4 updated today", "tone": "info" }
+  ]
+}

@@ -30,7 +30,8 @@ import type { NavSection, UserProfile, UserRole } from '@core/models';
   ],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  host: { '(document:keydown.escape)': 'navOpen.set(false)' },
 })
 export class AppLayoutComponent {
   private readonly router = inject(Router);
@@ -44,13 +45,17 @@ export class AppLayoutComponent {
     { initialValue: [] as NavSection[] },
   );
 
-  readonly profile = signal<UserProfile>({
+  // The profile's role mirrors the role selected in the top bar's role switcher.
+  readonly profile = computed<UserProfile>(() => ({
     name: 'Shailendra G.',
-    role: 'engineer',
+    role: this.currentRole(),
     initials: 'SG',
-  });
+  }));
   
   readonly searchOpen = signal(false);
+
+  // Below 1024px the sidebar is an off-canvas drawer; this tracks whether it is open.
+  readonly navOpen = signal(false);
 
   private readonly activeUrl = toSignal(
     this.router.events.pipe(

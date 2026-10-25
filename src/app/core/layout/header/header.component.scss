@@ -1,17 +1,65 @@
 @reference "../../../../styles.scss";
 
 // Figma node 7:1393 — h-[45px] bg rgba(15,23,42,0.95) border-b rgba(148,163,184,0.12)
+// Responsive frames: mobile 414:1740 (56px) | tablet 414:1899 (64px) | compact 414:2846 (52px)
 .app-header {
   @apply flex items-center justify-between shrink-0 h-[45px]
          border-b border-border-subtle;
   background: rgba(15, 23, 42, 0.95);
   padding: 0 18.75px;
 
+  // ── Hamburger / brand (below 1024px only) ─────────────────────────────────
+  // Below 1024px the sidebar is an off-canvas drawer, so the header owns the toggle.
+  &__menu {
+    @apply items-center justify-center shrink-0 rounded-[8px]
+           text-text-secondary cursor-pointer transition-colors duration-150;
+    display: none;
+
+    &:hover { @apply text-text-primary bg-bg-elevated; }
+  }
+
+  &__brand {
+    @apply items-center min-w-0;
+    display: none;
+    gap: 8px;
+  }
+
+  // Figma LogoMark: 32px, gradient #4f46e5→#06b6d4, rounded-[8px], "V" 11px bold white
+  &__brand-mark {
+    @apply hidden items-center justify-center shrink-0 text-white font-bold text-[11px] rounded-[8px];
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+  }
+
+  &__brand-text {
+    @apply flex flex-col whitespace-nowrap;
+    gap: 1px;
+  }
+
+  &__brand-name {
+    @apply font-bold text-[13px] leading-none;
+    color: #e2e8f0;
+  }
+
+  &__brand-accent { color: inherit; }
+
+  &__brand-sub {
+    @apply font-normal text-[9px] leading-none;
+    color: #06b6d4;
+  }
+
   // ── Breadcrumb ────────────────────────────────────────────────────────────
   // Figma: gap-[7.5px] | root #475569 | sep #334155 | page #94a3b8 | 13px
   &__breadcrumb {
-    @apply flex items-center;
+    @apply flex items-center min-w-0;
     gap: 7.5px;
+  }
+
+  &__breadcrumb-short { display: none; }
+
+  &__breadcrumb-current {
+    @apply overflow-hidden text-ellipsis;
   }
 
   // Figma: logo replaces plain-text root — h-22px auto-width
@@ -105,5 +153,156 @@
            shrink-0 cursor-pointer select-none;
     width: 30px;
     height: 30px;
+  }
+
+  // ═══ Responsive ═══════════════════════════════════════════════════════════
+  // Kept after the base rules above so they win at equal specificity.
+
+  // Below 1280px the Figma frames use the darker #0b1120 header and a gradient avatar.
+  @media (max-width: 1279px) {
+    background: #0b1120;
+
+    &__avatar { background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%); }
+  }
+
+  // Compact desktop 1024–1279px — Figma 414:2846: h-52, "VANTAGE OPS / Dashboard",
+  // search 200×34, bell 32, avatar 30, role badge kept.
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    height: 52px;
+    padding: 0 16px 0 20px;
+
+    &__breadcrumb { gap: 6px; }
+
+    &__breadcrumb-long { display: none; }
+
+    &__breadcrumb-short {
+      display: inline;
+      @apply font-bold uppercase text-[12px];
+      color: #e2e8f0;
+    }
+
+    &__breadcrumb-sep { @apply text-[12px]; color: #94a3b8; }
+
+    &__breadcrumb-current { @apply text-[12px] font-normal; color: #94a3b8; }
+
+    &__actions { gap: 8px; }
+
+    &__search { width: 200px; height: 34px; padding: 0 12px; border-radius: 10px; gap: 8px; }
+
+    &__search-text { flex: 1; text-align: left; }
+
+    &__bell { width: 32px; height: 32px; }
+
+    &__bell-dot { top: 5px; left: 20px; }
+  }
+
+  // Tablet + mobile (<1024px) — sidebar becomes a drawer: hamburger + brand, own breadcrumb row.
+  @media (max-width: 1023px) {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    justify-content: flex-start;
+
+    &__menu { display: inline-flex; }
+
+    // Brand sits directly beside the hamburger; the controls are pushed right
+    &__brand { display: flex; margin-right: auto; }
+
+    &__breadcrumb { display: none; }
+
+    // Figma 768 and below have no role switcher in the header
+    &__actions app-role-switcher { display: none; }
+  }
+
+  // Tablet portrait 768–1023px — Figma 414:1899: h-64, px-20, 40px menu, brand text only
+  // (cyan "OPS"), search 220×36 with ⌘K hint, bell 36, avatar 32.
+  @media (min-width: 768px) and (max-width: 1023px) {
+    height: 64px;
+    padding: 0 20px;
+
+    &__menu { width: 40px; height: 40px; margin-left: -4px; margin-right: 8px; }
+
+    &__brand-name { font-size: 13px; }
+    &__brand-accent { color: #06b6d4; }
+    &__brand-sub { font-size: 8px; letter-spacing: 0.5px; color: #64748b; }
+
+    &__actions { gap: 8px; }
+
+    &__search { width: 220px; height: 36px; padding: 0 12px; border-radius: 10px; gap: 8px; }
+
+    &__search-icon { width: 14px; height: 14px; }
+
+    &__search-text { flex: 1; text-align: left; font-size: 13px; font-weight: 400; }
+
+    &__search-kbd { font-weight: 600; padding: 2px 5px; }
+
+    &__bell { width: 36px; height: 36px; }
+
+    &__bell-dot { top: 6px; left: 23px; }
+
+    &__avatar { width: 32px; height: 32px; }
+  }
+
+  // Mobile <768px — Figma 414:1740: h-56, hamburger 44, LogoMark + brand, icon-only
+  // search and bell (44 each), avatar 32.
+  @media (max-width: 767px) {
+    height: 56px;
+    padding: 0 8px 0 16px;
+
+    &__menu { width: 44px; height: 44px; margin-left: -8px; margin-right: 8px; }
+
+    &__brand-mark { display: flex; }
+
+    // Search collapses to a bare 44px icon button
+    &__search {
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      justify-content: center;
+      background: transparent;
+      border-color: transparent;
+      border-radius: 8px;
+
+      &:hover { @apply bg-bg-elevated; }
+    }
+
+    &__search-text { @apply sr-only; }
+
+    &__search-kbd { display: none; }
+
+    &__search-icon { width: 18px; height: 18px; margin: 0; }
+
+    &__actions { gap: 0; }
+
+    &__bell { width: 44px; height: 44px; border-radius: 8px; }
+
+    &__bell-dot { top: 9px; left: 28px; }
+
+    &__avatar { width: 32px; height: 32px; margin-left: 0; }
+  }
+}
+
+// ── Breadcrumb row (below 1024px) ───────────────────────────────────────────
+// Figma mobile 444:358 and tablet 414:1917 — a separate row under the header:
+// mobile "Vantage Ops Navigator  ›  Dashboard", tablet "Vantage Ops Navigator/Dashboard".
+.app-crumbs {
+  @apply hidden items-baseline shrink-0 whitespace-nowrap text-[12px];
+  padding: 10px 20px;
+  color: #475569;
+
+  &__sep::before { content: '/'; color: #334155; }
+
+  &__current { color: #94a3b8; }
+
+  @media (max-width: 1023px) {
+    @apply flex;
+  }
+
+  @media (max-width: 767px) {
+    padding: 10px 16px;
+
+    &__sep::before { content: '\00a0\00a0›\00a0\00a0'; color: #475569; white-space: pre; }
+
+    &__current { @apply font-medium; }
   }
 }
