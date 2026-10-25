@@ -28,10 +28,16 @@
     @apply flex flex-col min-w-0;
     gap: var(--dash-gap);
 
+    // Side by side: both cards stretch to the taller one, so the scorecard is exactly
+    // as tall as the digest card (and vice versa).
     @media (min-width: 1024px) and (max-width: 1279px) {
       display: grid;
       grid-template-columns: 380px minmax(0, 1fr);
-      align-items: start;
+      align-items: stretch;
+
+      > * { display: flex; flex-direction: column; min-width: 0; }
+
+      > * > * { flex: 1 1 auto; }
     }
   }
 
