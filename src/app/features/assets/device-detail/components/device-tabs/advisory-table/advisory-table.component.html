@@ -21,20 +21,22 @@
     </div>
   </div>
 
-  <div class="advisory-table__container">
-    <table class="advisory-table__table" role="grid">
-      <thead class="advisory-table__thead">
-        <tr>
-          <th class="advisory-table__th advisory-table__th--severity">Severity</th>
-          <th class="advisory-table__th advisory-table__th--cve">CVE ID</th>
-          <th class="advisory-table__th advisory-table__th--desc">Description</th>
-          <th class="advisory-table__th advisory-table__th--cvss">CVSS</th>
-          <th class="advisory-table__th advisory-table__th--fix">Fixed In</th>
-          <th class="advisory-table__th advisory-table__th--status">Status</th>
-          <th class="advisory-table__th advisory-table__th--actions">Actions</th>
+  <!-- Scrolls sideways on tablet widths: must be keyboard-focusable (WCAG 2.1.1, axe scrollable-region-focusable) -->
+  <div class="advisory-table__container" role="region" aria-label="Advisories table" tabindex="0">
+    <!-- Explicit table roles keep the semantics when the mobile card layout sets display:block (which drops them) -->
+    <table class="advisory-table__table" role="table" aria-label="Device advisories">
+      <thead class="advisory-table__thead" role="rowgroup">
+        <tr role="row">
+          <th class="advisory-table__th advisory-table__th--severity" scope="col" role="columnheader">Severity</th>
+          <th class="advisory-table__th advisory-table__th--cve" scope="col" role="columnheader">CVE ID</th>
+          <th class="advisory-table__th advisory-table__th--desc" scope="col" role="columnheader">Description</th>
+          <th class="advisory-table__th advisory-table__th--cvss" scope="col" role="columnheader">CVSS</th>
+          <th class="advisory-table__th advisory-table__th--fix" scope="col" role="columnheader">Fixed In</th>
+          <th class="advisory-table__th advisory-table__th--status" scope="col" role="columnheader">Status</th>
+          <th class="advisory-table__th advisory-table__th--actions" scope="col" role="columnheader">Actions</th>
         </tr>
       </thead>
-      <tbody class="advisory-table__tbody">
+      <tbody class="advisory-table__tbody" role="rowgroup">
         @if (filtered().length === 0) {
           <tr>
             <td class="advisory-table__empty" colspan="7">
@@ -46,14 +48,14 @@
           </tr>
         }
         @for (adv of filtered(); track adv.id) {
-          <tr class="advisory-table__row">
-            <td class="advisory-table__td advisory-table__td--sev" data-label="Severity">
+          <tr class="advisory-table__row" role="row">
+            <td class="advisory-table__td advisory-table__td--sev" data-label="Severity" role="cell">
               <span class="advisory-table__sev advisory-table__sev--{{ adv.severity }}">
                 <span class="advisory-table__sev-dot" aria-hidden="true"></span>
                 {{ adv.severity | titlecase }}
               </span>
             </td>
-            <td class="advisory-table__td advisory-table__td--cve" data-label="CVE ID">
+            <td class="advisory-table__td advisory-table__td--cve" data-label="CVE ID" role="cell">
               @if (adv.cveId) {
                 <a class="advisory-table__cve-link"
                    [href]="'https://advisories.meridiannet.io/cve/' + adv.cveId"
@@ -63,21 +65,21 @@
                 <span class="advisory-table__no-cve">—</span>
               }
             </td>
-            <td class="advisory-table__td advisory-table__td--desc" data-label="Description">
+            <td class="advisory-table__td advisory-table__td--desc" data-label="Description" role="cell">
               <span class="advisory-table__desc" [title]="adv.description">{{ adv.title }}</span>
             </td>
-            <td class="advisory-table__td" data-label="CVSS">
+            <td class="advisory-table__td" data-label="CVSS" role="cell">
               <span class="advisory-table__cvss" [style.color]="cvssColor(adv.cvss)">{{ adv.cvss }}</span>
             </td>
-            <td class="advisory-table__td" data-label="Fixed In">
+            <td class="advisory-table__td" data-label="Fixed In" role="cell">
               <span class="advisory-table__fix">{{ adv.fixedInVersion ?? 'N/A' }}</span>
             </td>
-            <td class="advisory-table__td" data-label="Status">
+            <td class="advisory-table__td" data-label="Status" role="cell">
               <span class="advisory-table__status advisory-table__status--{{ adv.status }}">
                 {{ adv.status | titlecase }}
               </span>
             </td>
-            <td class="advisory-table__td advisory-table__td--actions" data-label="Actions">
+            <td class="advisory-table__td advisory-table__td--actions" data-label="Actions" role="cell">
               <div class="advisory-table__action-icons">
                 <button class="advisory-table__icon-btn" type="button" aria-label="Acknowledge advisory">
                   <img src="assets/icons/check-icon.svg" alt="" aria-hidden="true">

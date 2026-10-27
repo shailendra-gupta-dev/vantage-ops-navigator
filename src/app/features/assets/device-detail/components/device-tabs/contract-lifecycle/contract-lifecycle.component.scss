@@ -6,7 +6,7 @@
   gap: 16px;
 
   &__panel {
-    background: var(--color-bg-surface);
+    background: #1e293b;
     border: 1px solid var(--color-border);
     border-radius: 12px;
     padding: 20px;
@@ -79,7 +79,7 @@
 
     &--active    { background: rgba(16, 190, 139, 0.12); color: var(--color-success); }
     &--expiring  { background: rgba(245, 158, 11, 0.12); color: var(--color-warning); }
-    &--expired   { background: rgba(225, 29, 72, 0.12);  color: var(--color-critical); }
+    &--expired   { background: rgba(225, 29, 72, 0.12);  color: var(--color-critical-text); }
     &--uncovered { background: rgba(100, 116, 139, 0.15); color: var(--color-text-muted); }
   }
 
@@ -89,7 +89,7 @@
     color: var(--color-success);
 
     &--warning  { color: var(--color-warning); }
-    &--critical { color: var(--color-critical); }
+    &--critical { color: var(--color-critical-text); }
   }
 
   &__panel-footer {
@@ -145,11 +145,11 @@
     border-radius: 50%;
     border: 2px solid;
     flex-shrink: 0;
-    background: var(--color-bg-surface);
+    background: #1e293b;
 
     &--ok       { border-color: var(--color-success); }
     &--warning  { border-color: var(--color-warning); }
-    &--critical { border-color: var(--color-critical); }
+    &--critical { border-color: var(--color-critical-text); }
   }
 
   &__milestone-line {
@@ -182,7 +182,7 @@
 
     &--ok       { color: var(--color-success); }
     &--warning  { color: var(--color-warning); }
-    &--critical { color: var(--color-critical); }
+    &--critical { color: var(--color-critical-text); }
   }
 
   &__migration {

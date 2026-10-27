@@ -38,6 +38,9 @@
 
   &__content {
     @apply flex-1 overflow-y-auto min-w-0;
+
+    // Keep the focus ring inside the scroll region so it is not clipped by overflow
+    &:focus-visible { outline-offset: -3px !important; }
   }
 
   // Below 1024px the Figma frames are one continuous page (header, breadcrumb, pulse,

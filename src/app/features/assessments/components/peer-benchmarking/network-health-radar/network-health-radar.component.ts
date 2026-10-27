@@ -75,10 +75,12 @@ export class NetworkHealthRadarComponent {
     const narrow = this.narrow();
     return {
       backgroundColor: 'transparent',
+      // Text alternative for the canvas (WCAG 1.1.1): ECharts generates role=img + an aria-label from the data
+      aria: { enabled: true, decal: { show: false } },
       tooltip: { ...CHART_TOOLTIP, trigger: 'item' },
       legend: {
         bottom: 4,
-        textStyle: { color: '#64748b', fontSize: 11, fontFamily: 'Inter, system-ui, sans-serif' },
+        textStyle: { color: '#94a3b8', fontSize: 11, fontFamily: 'Inter, system-ui, sans-serif' },
         itemWidth: 16,
         itemHeight: 2,
       },
@@ -88,7 +90,7 @@ export class NetworkHealthRadarComponent {
         center: ['50%', '48%'],
         radius: narrow ? '44%' : '62%',
         splitNumber: 3,
-        axisName: { color: '#64748b', fontSize: narrow ? 10 : 11, fontFamily: 'Inter, system-ui, sans-serif' },
+        axisName: { color: '#94a3b8', fontSize: narrow ? 10 : 11, fontFamily: 'Inter, system-ui, sans-serif' },
         splitLine: { lineStyle: { color: 'rgba(71,85,105,0.35)' } },
         splitArea: { show: false },
         axisLine: { lineStyle: { color: 'rgba(71,85,105,0.3)' } },

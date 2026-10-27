@@ -2,9 +2,9 @@
   <!-- Panel 1: Service Contract -->
   <div class="contract-lifecycle__panel">
     <div class="contract-lifecycle__panel-header">
-      <h3 class="contract-lifecycle__panel-title">Service Contract</h3>
+      <h2 class="contract-lifecycle__panel-title">Service Contract</h2>
     </div>
-    <div class="contract-lifecycle__table-wrap">
+    <div class="contract-lifecycle__table-wrap" role="region" aria-label="Service contract details" tabindex="0">
       <table class="contract-lifecycle__table">
         <thead class="contract-lifecycle__thead">
           <tr>
@@ -51,7 +51,7 @@
 
   <!-- Panel 2: End of Life Timeline -->
   <div class="contract-lifecycle__panel">
-    <h3 class="contract-lifecycle__panel-title">End of Life Timeline</h3>
+    <h2 class="contract-lifecycle__panel-title">End of Life Timeline</h2>
     <div class="contract-lifecycle__timeline">
       <div class="contract-lifecycle__timeline-track">
         @for (m of milestones(); track m.label; let i = $index; let last = $last) {
@@ -76,7 +76,7 @@
 
   <!-- Panel 3: Recommended Migration -->
   <div class="contract-lifecycle__panel">
-    <h3 class="contract-lifecycle__panel-title">Recommended Migration Path</h3>
+    <h2 class="contract-lifecycle__panel-title">Recommended Migration Path</h2>
     <div class="contract-lifecycle__migration">
       <div class="contract-lifecycle__migration-row">
         <span class="contract-lifecycle__migration-label">Recommended Platform</span>

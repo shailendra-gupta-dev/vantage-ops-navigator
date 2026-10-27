@@ -16,14 +16,14 @@
   // Figma: Inter Regular 11px #334155
   &__copyright {
     @apply text-[11px] font-normal whitespace-nowrap;
-    color: #334155;
+    color: #94a3b8;
   }
 
   // Figma: JetBrains Mono Bold 10px #6366f1 | bg rgba(79,70,229,0.1) | h-[18.75px] | rounded-[3.75px]
   &__version {
     @apply text-[10px] font-bold font-mono rounded-[3.75px] whitespace-nowrap;
     background: rgba(79, 70, 229, 0.1);
-    color: #6366f1;
+    color: #a5b4fc;
     height: 18.75px;
     padding: 0 5.63px;
     display: inline-flex;
@@ -83,7 +83,7 @@
   // Figma: JetBrains Mono Regular 10px #334155
   &__time {
     @apply text-[10px] font-mono whitespace-nowrap;
-    color: #334155;
+    color: #94a3b8;
   }
 
   // Shared separator
@@ -113,7 +113,7 @@
     &__indicator--good .app-footer__dot { background: #10b981; }
     &__indicator--warn .app-footer__dot { background: #f59e0b; }
 
-    &__time { color: #64748b; }
+    &__time { color: #94a3b8; }
   }
 
   // Compact desktop 1024–1279px — one 40px row: copyright | links | status

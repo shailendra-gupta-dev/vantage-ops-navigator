@@ -46,6 +46,8 @@ export class BestDimensionCardComponent {
     const d = this.chartData().bestDimension;
     return {
       backgroundColor: 'transparent',
+      // Text alternative for the canvas (WCAG 1.1.1): ECharts generates role=img + an aria-label from the data
+      aria: { enabled: true, decal: { show: false } },
       tooltip: {
         ...CHART_TOOLTIP,
         trigger: 'axis',
@@ -59,7 +61,7 @@ export class BestDimensionCardComponent {
         boundaryGap: false,
         axisLine: { show: false },
         axisTick: { show: false },
-        axisLabel: { color: '#334155', fontSize: 9, fontFamily: 'Inter, system-ui, sans-serif' },
+        axisLabel: { color: '#94a3b8', fontSize: 9, fontFamily: 'Inter, system-ui, sans-serif' },
       },
       yAxis: { type: 'value', min: 60, max: 100, show: false },
       series: [{

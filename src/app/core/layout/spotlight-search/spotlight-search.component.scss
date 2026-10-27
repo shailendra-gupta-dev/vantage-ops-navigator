@@ -57,7 +57,7 @@
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(148, 163, 184, 0.12);
     border-radius: 3.75px;
-    color: #475569;
+    color: #94a3b8;
     font-family: 'Menlo', 'Consolas', monospace;
     font-size: 11px;
     height: 26px;
@@ -92,7 +92,7 @@
 
   &__empty-hint {
     @apply text-center whitespace-nowrap m-0;
-    color: #64748b;
+    color: #94a3b8;
     font-size: 13px;
     line-height: 19.5px;
     padding-top: 11.25px;
@@ -109,7 +109,7 @@
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(148, 163, 184, 0.12);
     border-radius: 11.25px;
-    color: #64748b;
+    color: #94a3b8;
     font-size: 12px;
     font-weight: 500;
     line-height: 18px;
@@ -225,7 +225,7 @@
     line-height: 16.5px;
     padding: 0 7px;
 
-    &--critical { background: rgba(239, 68, 68, 0.1);  border-color: rgba(239, 68, 68, 0.3);  color: #ef4444; }
+    &--critical { background: rgba(239, 68, 68, 0.1);  border-color: rgba(239, 68, 68, 0.3);  color: #fb7185; }
     &--high     { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b; }
     &--medium   { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b; }
     &--healthy  { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10b981; }
@@ -233,7 +233,7 @@
 
   &__result-subtitle {
     @apply font-normal m-0;
-    color: #64748b;
+    color: #94a3b8;
     font-size: 11px;
     line-height: 16.5px;
   }
@@ -246,7 +246,7 @@
 
   &__meta-item {
     @apply flex items-center;
-    color: #475569;
+    color: #94a3b8;
     font-size: 10px;
     gap: 4px;
     line-height: 15px;
@@ -270,7 +270,7 @@
   }
 
   &__meta-advisories {
-    &--critical { color: #ef4444; }
+    &--critical { color: #fb7185; }
   }
 
   &__meta-sep {
@@ -305,7 +305,7 @@
 
   &__footer-count {
     @apply font-normal;
-    color: #475569;
+    color: #94a3b8;
     font-size: 11px;
     line-height: 16.5px;
   }
@@ -317,7 +317,7 @@
 
   &__footer-hint {
     @apply font-normal whitespace-nowrap;
-    color: #475569;
+    color: #94a3b8;
     font-size: 11px;
     line-height: 16.5px;
   }

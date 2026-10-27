@@ -1,5 +1,7 @@
 <div class="app-layout">
 
+  <a class="skip-link" href="#main-content" (click)="skipToMain($event)">Skip to main content</a>
+
   <!-- ── Sidebar ─────────────────────────────────────────────────────────── -->
   <!-- Drawer closes via its X button, Esc, the scrim, or activating a nav link -->
   <app-sidebar
@@ -7,14 +9,16 @@
     [navConfig]="navConfig()"
     [profile]="profile()"
     [open]="navOpen()"
-    (closed)="navOpen.set(false)"
+    [modal]="drawerMode()"
+    (closed)="closeNav()"
+    (navigated)="closeNav(false)"
     (roleChange)="currentRole.set($event)"
   />
 
   <!-- Scrim behind the open drawer (below 1024px) -->
   <div class="app-layout__scrim"
        [class.app-layout__scrim--visible]="navOpen()"
-       (click)="navOpen.set(false)"
+       (click)="closeNav()"
        aria-hidden="true"></div>
 
   <!-- ── Main column ────────────────────────────────────────────────────── -->
@@ -24,6 +28,7 @@
       [currentRole]="currentRole()"
       [profile]="profile()"
       [pageTitle]="pageTitle()"
+      [menuOpen]="navOpen()"
       (roleChange)="currentRole.set($event)"
       (searchOpen)="searchOpen.set(true)"
       (menuToggle)="navOpen.set(!navOpen())"
@@ -31,7 +36,9 @@
 
     <app-contract-pulse-strip />
 
-    <main class="app-layout__content" role="main">
+    <!-- tabindex="0": the content area scrolls (≥1024px), so it must be keyboard-focusable
+         (axe scrollable-region-focusable); it is also the skip link / route-change focus target. -->
+    <main #main id="main-content" class="app-layout__content" [attr.tabindex]="drawerMode() ? -1 : 0">
       <router-outlet />
     </main>
 

@@ -8,7 +8,7 @@
 
 /* ── Individual card ──────────────────────────────────────────────── */
 .actions-card {
-  background: var(--color-bg-surface);
+  background: #1e293b;
   border: 1px solid rgba(148, 163, 184, 0.12);
   border-radius: 12px;
   overflow: hidden;
@@ -158,7 +158,7 @@
 
     &--green { color: var(--color-success); }
     &--amber { color: var(--color-warning); }
-    &--red   { color: var(--color-critical); }
+    &--red   { color: var(--color-critical-text); }
   }
 
   &__device-name {

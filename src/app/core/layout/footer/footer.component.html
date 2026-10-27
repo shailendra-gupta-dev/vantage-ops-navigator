@@ -11,26 +11,26 @@
     <span class="app-footer__poc">POC Demo</span>
   </div>
 
-  <!-- Centre — nav links -->
+  <!-- Centre — nav links. Placeholder destinations in this POC: real <a href> so they are keyboard-focusable (WCAG 2.1.1) -->
   <!-- Figma: imgIcon26–30 (11px opacity-60) + Inter Medium 11px #475569 | gap-[11.25px] -->
   <nav class="app-footer__links" aria-label="Footer navigation">
-    <a class="app-footer__link">
+    <a class="app-footer__link" href="#" (click)="$event.preventDefault()">
       <img src="assets/icons/notebook-icon.svg" alt="" aria-hidden="true" width="11" height="11" />
       Documentation
     </a>
-    <a class="app-footer__link">
+    <a class="app-footer__link" href="#" (click)="$event.preventDefault()">
       <img src="assets/icons/open-book-icon.svg" alt="" aria-hidden="true" width="11" height="11" />
       API Reference
     </a>
-    <a class="app-footer__link">
+    <a class="app-footer__link" href="#" (click)="$event.preventDefault()">
       <img src="assets/icons/support-icon.svg" alt="" aria-hidden="true" width="11" height="11" />
       Support
     </a>
-    <a class="app-footer__link">
+    <a class="app-footer__link" href="#" (click)="$event.preventDefault()">
       <img src="assets/icons/privacy-icon.svg" alt="" aria-hidden="true" width="11" height="11" />
       Privacy Policy
     </a>
-    <a class="app-footer__link">
+    <a class="app-footer__link" href="#" (click)="$event.preventDefault()">
       <img src="assets/icons/changelog-icon.svg" alt="" aria-hidden="true" width="11" height="11" />
       Changelog
     </a>

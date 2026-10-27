@@ -8,7 +8,7 @@
   margin-top: 16px;
 
   &__card {
-    background: var(--color-bg-surface);
+    background: #1e293b;
     border: 1px solid rgba(148, 163, 184, 0.12);
     border-radius: 12px;
     padding: 14px 16px;
@@ -27,7 +27,7 @@
     font-weight: 700;
     line-height: 1;
 
-    &--critical { color: var(--color-critical); }
+    &--critical { color: var(--color-critical-text); }
     &--warning  { color: var(--color-warning); }
     &--healthy  { color: var(--color-success); }
   }
@@ -84,7 +84,7 @@
 
     &--active    { color: var(--color-success); }
     &--expiring  { color: var(--color-warning); }
-    &--expired   { color: var(--color-critical); }
+    &--expired   { color: var(--color-critical-text); }
     &--uncovered { color: var(--color-text-muted); }
   }
 

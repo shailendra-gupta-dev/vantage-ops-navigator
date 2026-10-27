@@ -3,9 +3,11 @@
 import {
   
   Component,
+  ElementRef,
   ViewEncapsulation,
   input,
   output,
+  viewChild,
 } from '@angular/core';
 
 import { RoleSwitcherComponent } from '@core/layout/role-switcher/role-switcher.component';
@@ -27,4 +29,13 @@ export class HeaderComponent {
   readonly roleChange  = output<UserRole>();
   readonly searchOpen  = output<void>();
   readonly menuToggle  = output<void>();
+  /** Whether the navigation drawer is open — reflected in the hamburger's aria-expanded. */
+  readonly menuOpen    = input<boolean>(false);
+
+  private readonly menuButton = viewChild<ElementRef<HTMLButtonElement>>('menuButton');
+
+  /** Return focus to the hamburger after the drawer closes (WCAG 2.4.3). */
+  focusMenu(): void {
+    this.menuButton()?.nativeElement.focus();
+  }
 }

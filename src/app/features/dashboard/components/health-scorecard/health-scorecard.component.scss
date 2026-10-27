@@ -35,7 +35,7 @@
     padding: 2px 7.5px;
     border-radius: 3.75px;
     background: rgba(100, 116, 139, 0.2);
-    color: #64748b;
+    color: #94a3b8;
     font-size: 9px;
     letter-spacing: 0.36px;
 
@@ -44,7 +44,7 @@
 
   &__header-desc {
     font-size: 11px;
-    color: #475569;
+    color: #94a3b8;
   }
 
   // ── 4-panel grid ───────────────────────────────────────────────────────────
@@ -95,7 +95,7 @@
   &__panel-sub {
     @apply text-center;
     font-size: 10px;
-    color: #475569;
+    color: #94a3b8;
     margin-top: 2px;
     white-space: nowrap;
   }
@@ -129,7 +129,7 @@
 
   &__legend-label {
     font-size: 9px;
-    color: #64748b;
+    color: #94a3b8;
   }
 
   // ═══ Responsive ═══════════════════════════════════════════════════════════

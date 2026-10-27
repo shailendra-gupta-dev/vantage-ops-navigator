@@ -1,12 +1,16 @@
 <div class="device-tabs">
   <div class="device-tabs__bar" role="tablist" aria-label="Device information tabs">
-    @for (tab of tabs(); track tab.id) {
+    @for (tab of tabs(); track tab.id; let i = $index) {
       <button
         class="device-tabs__tab"
+        [id]="tabId(tab.id)"
         [class.device-tabs__tab--active]="activeTab() === tab.id"
         role="tab"
+        aria-controls="device-tabpanel"
         [attr.aria-selected]="activeTab() === tab.id"
+        [attr.tabindex]="activeTab() === tab.id ? 0 : -1"
         (click)="activeTab.set(tab.id)"
+        (keydown)="onTabKeydown($event, i)"
         type="button">
         {{ tab.label }}
         @if (tab.badge) {
@@ -16,7 +20,7 @@
     }
   </div>
 
-  <div class="device-tabs__content" role="tabpanel">
+  <div class="device-tabs__content" id="device-tabpanel" role="tabpanel" tabindex="0" [attr.aria-labelledby]="tabId(activeTab())">
     @switch (activeTab()) {
       @case ('advisories') {
         <app-advisory-table [device]="device()" [advisories]="advisories()" />

@@ -4,7 +4,7 @@
   <!-- ── Header ───────────────────────────────────────────────────────────── -->
   <div class="health-scorecard__header">
     <div class="health-scorecard__header-left">
-      <span class="health-scorecard__heading">Health Scorecard</span>
+      <h2 class="health-scorecard__heading">Health Scorecard</h2>
       <span class="health-scorecard__in-dev">
         <img src="assets/icons/caution-board-icon.svg" alt="" aria-hidden="true" width="9" height="9" />
         IN DEV
@@ -25,7 +25,7 @@
       } @placeholder {
         <div class="health-scorecard__chart health-scorecard__chart--security"></div>
       }
-      <div class="health-scorecard__panel-label">Security</div>
+      <h3 class="health-scorecard__panel-label">Security</h3>
       <div class="health-scorecard__panel-sub">{{ securitySubtitle() }}</div>
     </div>
 
@@ -46,7 +46,7 @@
         <span class="health-scorecard__legend-dot health-scorecard__legend-dot--unknown"></span>
         <span class="health-scorecard__legend-label">Unknown</span>
       </div>
-      <div class="health-scorecard__panel-label">Lifecycle</div>
+      <h3 class="health-scorecard__panel-label">Lifecycle</h3>
       <div class="health-scorecard__panel-sub">{{ lifecycleSubtitle() }}</div>
     </div>
 
@@ -57,7 +57,7 @@
       } @placeholder {
         <div class="health-scorecard__chart health-scorecard__chart--coverage"></div>
       }
-      <div class="health-scorecard__panel-label">Coverage</div>
+      <h3 class="health-scorecard__panel-label">Coverage</h3>
       <div class="health-scorecard__panel-sub">{{ coverageStats().pct }}% of devices covered</div>
     </div>
 
@@ -68,7 +68,7 @@
       } @placeholder {
         <div class="health-scorecard__chart health-scorecard__chart--connectivity"></div>
       }
-      <div class="health-scorecard__panel-label">Connectivity</div>
+      <h3 class="health-scorecard__panel-label">Connectivity</h3>
       <div class="health-scorecard__panel-sub">7-day avg uptime 99.4%</div>
     </div>
 

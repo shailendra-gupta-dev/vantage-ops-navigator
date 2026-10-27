@@ -14,7 +14,7 @@
     @apply flex items-center text-text-muted text-[11px] font-medium shrink-0;
     gap: 5.625px;
     letter-spacing: 0.44px;
-    color: #64748b;
+    color: #94a3b8;
   }
 
   &__label-icon { @apply shrink-0; }
@@ -65,7 +65,8 @@
     height: 5.625px;
   }
 
-  &__pill-days { @apply opacity-80; }
+  // Full opacity: 80% of the pill's text colour fell below 4.5:1 on the red pill (WCAG 1.4.3)
+  &__pill-days { opacity: 1; }
 
   // ── Dismiss button ─────────────────────────────────────────────────────────
   &__dismiss {

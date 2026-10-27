@@ -57,6 +57,12 @@ export class SpotlightSearchComponent {
   });
 
   constructor() {
+    // Keep the keyboard-highlighted option in view while arrowing through a long list.
+    effect(() => {
+      const i = this.activeIndex();
+      if (i >= 0) queueMicrotask(() => document.getElementById(this.optionId(i))?.scrollIntoView({ block: 'nearest' }));
+    });
+
     effect(() => {
       if (this.isOpen()) {
         setTimeout(() => this.searchInput()?.nativeElement.focus(), 0);
@@ -78,6 +84,18 @@ export class SpotlightSearchComponent {
     this.activeIndex.set(-1);
   }
 
+  /** Id of option `i` — referenced by the input's aria-activedescendant. */
+  optionId(index: number): string {
+    return `spotlight-option-${index}`;
+  }
+
+  /** Spoken (polite live region) whenever the result count changes — WCAG 4.1.3 Status Messages. */
+  readonly statusMessage = computed((): string => {
+    if (this.query().trim().length < 2) return '';
+    const n = this.results().length;
+    return n === 0 ? 'No devices found' : `${n} device${n === 1 ? '' : 's'} found`;
+  });
+
   onKeyDown(event: KeyboardEvent): void {
     const count = this.results().length;
     if (!count) return;
@@ -87,7 +105,17 @@ export class SpotlightSearchComponent {
     } else if (event.key === 'ArrowUp') {
       event.preventDefault();
       this.activeIndex.set(Math.max(this.activeIndex() - 1, -1));
+    } else if (event.key === 'Enter') {
+      // The footer advertises "↵ open": Enter opens the highlighted result (or the first one).
+      event.preventDefault();
+      const device = this.results()[Math.max(this.activeIndex(), 0)];
+      if (device) this.openResult(device);
     }
+  }
+
+  /** Clicking the dimmed backdrop (not the panel) dismisses the overlay. */
+  onBackdropClick(event: MouseEvent): void {
+    if (event.target === event.currentTarget) this.close();
   }
 
   clearQuery(): void {

@@ -149,7 +149,7 @@
   &__cvss-label {
     font-size: 11px;
     font-weight: 500;
-    color: #64748b;
+    color: #94a3b8;
     white-space: nowrap;
     flex-shrink: 0;
   }
@@ -183,7 +183,7 @@
 
   &__attr-key {
     font-size: 11px;
-    color: #475569;
+    color: #94a3b8;
   }
 
   &__attr-val {
@@ -240,7 +240,7 @@
   &__last-checked {
     @apply flex items-center shrink-0;
     gap: 5.625px;
-    color: #475569;
+    color: #94a3b8;
     font-size: 11px;
     white-space: nowrap;
 

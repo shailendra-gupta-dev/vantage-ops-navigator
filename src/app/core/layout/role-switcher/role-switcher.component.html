@@ -1,8 +1,11 @@
 <div class="role-switcher">
 
-  <button class="role-switcher__trigger" (click)="toggle()" type="button"
-          [attr.aria-expanded]="isOpen()" aria-haspopup="listbox">
+  <!-- Name = "Role: Engineer": the visible text ("Engineer") is part of the accessible name (WCAG 2.5.3) -->
+  <button #trigger class="role-switcher__trigger" (click)="toggle()" (keydown)="onTriggerKeydown($event)" type="button"
+          [attr.aria-expanded]="isOpen()" aria-haspopup="listbox"
+          [attr.aria-controls]="isOpen() ? uid + '-listbox' : null">
     <span class="role-switcher__dot" aria-hidden="true"></span>
+    <span class="sr-only">Role:</span>
     <span class="role-switcher__label">{{ selectedRole() | titlecase }}</span>
     <span class="role-switcher__chevron" aria-hidden="true">
       <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor">
@@ -13,13 +16,21 @@
   </button>
 
   @if (isOpen()) {
-    <ul class="role-switcher__menu" role="listbox" [attr.aria-label]="'Select role'">
-      @for (role of roles; track role) {
+    <ul #listbox class="role-switcher__menu" role="listbox" tabindex="-1"
+        [id]="uid + '-listbox'" aria-label="Select role"
+        [attr.aria-activedescendant]="optionId(activeIndex())"
+        (keydown)="onListKeydown($event)">
+      @for (role of roles; track role; let i = $index) {
         <li class="role-switcher__option"
+            [id]="optionId(i)"
             [class.role-switcher__option--active]="role === selectedRole()"
+            [class.role-switcher__option--highlight]="i === activeIndex()"
             role="option"
+            tabindex="-1"
             [attr.aria-selected]="role === selectedRole()"
-            (click)="select(role)">
+            (click)="select(role)"
+            (keydown.enter)="select(role)"
+            (mouseenter)="activeIndex.set(i)">
           <span class="role-switcher__option-label">{{ role | titlecase }}</span>
           @if (role === selectedRole()) {
             <svg class="role-switcher__check" width="12" height="12" viewBox="0 0 12 12"

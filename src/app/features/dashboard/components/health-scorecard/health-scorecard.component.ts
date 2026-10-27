@@ -135,6 +135,8 @@ export class HealthScorecardComponent {
     stops.push([1, 'rgba(255,255,255,0.07)']);
     return {
       backgroundColor: 'transparent',
+      // Text alternative for the canvas (WCAG 1.1.1): ECharts generates role=img + an aria-label from the data
+      aria: { enabled: true, decal: { show: false } },
       tooltip: {
         ...CHART_TOOLTIP,
         trigger: 'item',
@@ -187,6 +189,8 @@ export class HealthScorecardComponent {
     });
     return {
       backgroundColor: 'transparent',
+      // Text alternative for the canvas (WCAG 1.1.1): ECharts generates role=img + an aria-label from the data
+      aria: { enabled: true, decal: { show: false } },
       grid: { left: 30, right: 6, top: 6, bottom: 2, containLabel: false },
       xAxis: { type: 'category', data: [''], show: false },
       yAxis: {
@@ -196,7 +200,7 @@ export class HealthScorecardComponent {
         interval: 20,
         axisLine: { show: false },
         axisTick: { show: false },
-        axisLabel: { color: '#64748b', fontSize: 8, formatter: '{value}%', fontFamily: 'Inter, system-ui, sans-serif' },
+        axisLabel: { color: '#94a3b8', fontSize: 8, formatter: '{value}%', fontFamily: 'Inter, system-ui, sans-serif' },
         splitLine: { lineStyle: { color: 'rgba(148,163,184,0.12)' } },
       },
       series: [
@@ -219,6 +223,8 @@ export class HealthScorecardComponent {
     const lapsed = Math.max(0, 100 - pct - expiring);
     return {
       backgroundColor: 'transparent',
+      // Text alternative for the canvas (WCAG 1.1.1): ECharts generates role=img + an aria-label from the data
+      aria: { enabled: true, decal: { show: false } },
       series: [{
         type: 'pie',
         radius: ['58%', '84%'],
@@ -255,6 +261,8 @@ export class HealthScorecardComponent {
     const teal = '#06b6d4';
     return {
       backgroundColor: 'transparent',
+      // Text alternative for the canvas (WCAG 1.1.1): ECharts generates role=img + an aria-label from the data
+      aria: { enabled: true, decal: { show: false } },
       grid: { left: 4, right: 30, top: 8, bottom: 16, containLabel: false },
       xAxis: {
         type: 'category',

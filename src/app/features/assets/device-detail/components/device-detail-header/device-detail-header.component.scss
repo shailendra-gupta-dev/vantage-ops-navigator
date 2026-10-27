@@ -136,7 +136,7 @@
     &--critical {
       background: rgba(225, 29, 72, 0.15);
       border: 1px solid rgba(225, 29, 72, 0.4);
-      color: var(--color-critical);
+      color: var(--color-critical-text);
       animation: pulse-critical 2.5s infinite;
     }
 
