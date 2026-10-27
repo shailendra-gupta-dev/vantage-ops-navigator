@@ -22,7 +22,7 @@
   /* Text colours */
   --color-text-primary: #F0F4FA;
   --color-text-secondary: #99ADC7;
-  --color-text-muted: #5C6F88;
+  --color-text-muted: #94A3B8;   /* was #5C6F88 (3.5:1) — now ≥4.5:1 on every dark surface (WCAG 1.4.3) */
 
   /* Border colours */
   --color-border-subtle: #1E324F;
@@ -51,7 +51,8 @@
   color-scheme: dark;
 
   /* ── Semantic aliases used by device-detail components ── */
-  --color-critical:     #E11D48;
+  --color-critical:     #E11D48;   /* fills/borders/icons only */
+  --color-critical-text: #FB7185;  /* text on dark surfaces: #E11D48 is only ~3.1–3.9:1 (WCAG 1.4.3) */
   --color-critical-bg:  rgba(225, 29, 72, 0.12);
 
   --color-high:         #F97316;
@@ -80,4 +81,60 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+/* ═══ Accessibility (WCAG 2.2 AA) ═══════════════════════════════════════════════════ */
+
+/* 2.4.7 Focus Visible + 2.4.13 Focus Appearance: every focusable control gets a clear 2px ring
+   (≥3:1 against all dark surfaces). !important beats component-level `outline: none`. */
+:focus-visible {
+  outline: 2px solid #a5b4fc !important;
+  outline-offset: 2px !important;
+}
+
+/* 2.4.11 Focus Not Obscured: below 1024px the header is sticky (≤64px tall); keep focused
+   elements and anchor targets clear of it when the browser scrolls them into view. */
+html {
+  scroll-padding-top: 8px;
+}
+
+@media (max-width: 1023px) {
+  html {
+    scroll-padding-top: 80px;
+  }
+}
+
+/* 2.4.1 Bypass Blocks: skip link, visible only while focused. */
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #e2e8f0;
+  color: #0b1120;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* 2.3.3 / user preference: honour "reduce motion" (also keeps automated contrast checks stable). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    /* `none`, not a ~0ms duration: a tiny transition still starts from the old value, so state
+       changes (skip link appearing, drawer opening) would lag by a frame. Nothing here listens
+       for transitionend. */
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }

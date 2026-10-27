@@ -14,6 +14,7 @@ interface DisplayDigestItem extends DigestItem {
   emoji: string;
   badgeLabel: string;
   badgeColor: string;
+  badgeTextColor: string;
   timeLabel: string;
 }
 
@@ -40,16 +41,19 @@ export class NetworkDigestComponent {
   );
 
   readonly items = computed<DisplayDigestItem[]>(() =>
-    this.rawItems().map(item => ({
-      ...item,
-      emoji: this.severityEmoji(item.severity),
-      badgeLabel: item.isNew !== false ? 'NEW' : 'UPD',
-      badgeColor:
-        item.isNew !== false
-          ? this.severityBadgeColor(item.severity)
-          : '#06b6d4',
-      timeLabel: this.formatTime(item.publishedAt),
-    })),
+    this.rawItems().map(item => {
+      const badgeColor =
+        item.isNew !== false ? this.severityBadgeColor(item.severity) : '#06b6d4';
+      return {
+        ...item,
+        emoji: this.severityEmoji(item.severity),
+        badgeLabel: item.isNew !== false ? 'NEW' : 'UPD',
+        badgeColor,
+        // White only passes 4.5:1 on the red badge; amber and cyan need dark text (WCAG 1.4.3)
+        badgeTextColor: badgeColor === '#e11d48' ? '#ffffff' : '#0b1120',
+        timeLabel: this.formatTime(item.publishedAt),
+      };
+    }),
   );
 
   private severityEmoji(s: Severity): string {

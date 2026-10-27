@@ -82,7 +82,8 @@
            text-[9px] font-semibold tracking-[0.04em] leading-none;
 
     &--live {
-      @apply bg-status-good text-white;
+      @apply bg-status-good;
+      color: #04261c;   // dark text: white on #10be8b is only 2.4:1 (WCAG 1.4.3)
     }
 
     &--dev {
@@ -128,7 +129,7 @@
   }
 
   &__avatar {
-    @apply flex items-center justify-center size-7 rounded-full bg-brand-blue
+    @apply flex items-center justify-center size-7 rounded-full bg-[#0369a1]
            text-white text-[11px] font-semibold shrink-0;
   }
 
@@ -154,7 +155,7 @@
     @apply hidden items-center justify-center shrink-0 rounded-[8px] text-white font-bold text-[11px];
     width: 32px;
     height: 32px;
-    background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, #4f46e5 0%, #0e7490 100%);
   }
 
   // Drawer close button (hidden once the sidebar is permanent)
@@ -179,6 +180,9 @@
     z-index: 50;
     width: 240px;
     transform: translateX(-100%);
+    // The closed drawer is removed from the tab order / accessibility tree with the `inert`
+    // attribute (see the template) — not with a visibility transition, whose first frame is still
+    // "hidden" and would make an immediate focus() on the opening drawer fail.
     transition: transform 0.2s ease;
 
     &--open {
@@ -202,8 +206,11 @@
 
     &__profile { @apply justify-center px-0; }
 
+    // Labels/badges stay in the accessibility tree (visually hidden) so rail links keep their
+    // accessible names; display:none would leave them as nameless icon links (WCAG 2.4.4 / 4.1.2).
     &__item-label,
-    &__badge,
+    &__badge { @apply sr-only; }
+
     &__item-arrow,
     &__children,
     &__profile-info { display: none; }
@@ -214,7 +221,7 @@
     &__avatar {
       width: 36px;
       height: 36px;
-      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      background: linear-gradient(135deg, #4f46e5 0%, #0e7490 100%);
     }
   }
 

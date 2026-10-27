@@ -50,7 +50,7 @@
 
   &__card-desc {
     @apply text-center w-full;
-    color: #64748b;
+    color: #94a3b8;
     font-size: 13px;
     line-height: 19.5px;
     padding-top: 8px;
@@ -74,7 +74,7 @@
 
   &__card-infobox-heading {
     @apply font-semibold;
-    color: #64748b;
+    color: #94a3b8;
     font-size: 11px;
     letter-spacing: 0.44px;
     line-height: 16.5px;
@@ -97,13 +97,13 @@
 
   &__card-bullet {
     @apply shrink-0;
-    color: #334155;
+    color: #94a3b8;
     font-size: 12px;
     line-height: 18px;
   }
 
   &__card-list-item > span:last-child {
-    color: #475569;
+    color: #94a3b8;
     font-size: 12px;
     line-height: 18px;
   }

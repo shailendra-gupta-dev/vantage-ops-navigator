@@ -29,7 +29,7 @@
     @apply hidden items-center justify-center shrink-0 text-white font-bold text-[11px] rounded-[8px];
     width: 32px;
     height: 32px;
-    background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, #4f46e5 0%, #0e7490 100%);
   }
 
   &__brand-text {
@@ -72,7 +72,7 @@
 
   &__breadcrumb-sep {
     @apply text-[13px] font-normal;
-    color: #334155;
+    color: #94a3b8;
   }
 
   &__breadcrumb-page {
@@ -149,7 +149,7 @@
   // Figma: size-[30px] rounded-full bg-brand-blue | Inter 11px semibold white
   &__avatar {
     @apply flex items-center justify-center rounded-full
-           bg-brand-blue text-white text-[11px] font-semibold
+           bg-[#0369a1] text-white text-[11px] font-semibold
            shrink-0 cursor-pointer select-none;
     width: 30px;
     height: 30px;
@@ -162,7 +162,7 @@
   @media (max-width: 1279px) {
     background: #0b1120;
 
-    &__avatar { background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%); }
+    &__avatar { background: linear-gradient(135deg, #4f46e5 0%, #0e7490 100%); }
   }
 
   // Compact desktop 1024–1279px — Figma 414:2846: h-52, "VANTAGE OPS / Dashboard",
@@ -224,7 +224,7 @@
 
     &__brand-name { font-size: 13px; }
     &__brand-accent { color: #06b6d4; }
-    &__brand-sub { font-size: 8px; letter-spacing: 0.5px; color: #64748b; }
+    &__brand-sub { font-size: 8px; letter-spacing: 0.5px; color: #94a3b8; }
 
     &__actions { gap: 8px; }
 
@@ -288,9 +288,9 @@
 .app-crumbs {
   @apply hidden items-baseline shrink-0 whitespace-nowrap text-[12px];
   padding: 10px 20px;
-  color: #475569;
+  color: #94a3b8;
 
-  &__sep::before { content: '/'; color: #334155; }
+  &__sep::before { content: '/'; color: #94a3b8; }
 
   &__current { color: #94a3b8; }
 
@@ -301,7 +301,7 @@
   @media (max-width: 767px) {
     padding: 10px 16px;
 
-    &__sep::before { content: '\00a0\00a0›\00a0\00a0'; color: #475569; white-space: pre; }
+    &__sep::before { content: '\00a0\00a0›\00a0\00a0'; color: #94a3b8; white-space: pre; }
 
     &__current { @apply font-medium; }
   }

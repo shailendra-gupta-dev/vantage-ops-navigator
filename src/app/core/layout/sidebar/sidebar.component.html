@@ -1,4 +1,11 @@
-<aside class="sidebar" [class.sidebar--open]="open()">
+<!-- Below 1024px the open drawer is a modal dialog: focus is trapped and background content is inert to AT.
+     Closed, it is visibility:hidden (CSS) so its links are not tabbable (WCAG 2.4.3 / 2.4.11). -->
+<div id="app-sidebar" class="sidebar" [class.sidebar--open]="open()"
+       [attr.role]="modal() && open() ? 'dialog' : 'complementary'"
+       [attr.aria-modal]="modal() && open() ? 'true' : null"
+       [attr.aria-label]="modal() && open() ? 'Navigation menu' : 'Sidebar'"
+       [attr.inert]="modal() && !open() ? '' : null"
+       [cdkTrapFocus]="modal() && open()">
 
   <!-- ── Logo ───────────────────────────────────────────────────────────── -->
   <div class="sidebar__logo">
@@ -13,7 +20,7 @@
     </a>
 
     <!-- Close — only visible in the off-canvas drawer (below 1024px) -->
-    <button class="sidebar__close" type="button" (click)="closed.emit()"
+    <button #closeButton class="sidebar__close" type="button" (click)="closed.emit()"
             aria-label="Close navigation menu">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor"
            stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
@@ -33,7 +40,7 @@
   </div>
 
   <!-- ── Nav ────────────────────────────────────────────────────────────── -->
-  <nav class="sidebar__nav" aria-label="Main navigation" (click)="onNavClick($event)">
+  <nav class="sidebar__nav" aria-label="Main navigation">
     @for (section of navConfig(); track section.id) {
       @if (section.roles.includes(currentRole())) {
 
@@ -42,6 +49,9 @@
              [class.sidebar__section--active]="isActive(section.path)()">
           <a [routerLink]="section.path"
              class="sidebar__item sidebar__item--section"
+             [attr.title]="section.label"
+             (click)="navigated.emit()"
+             [attr.aria-current]="isActive(section.path)() ? (section.children.length ? 'true' : 'page') : null"
              [class.sidebar__item--active]="isActive(section.path)()">
 
             <!-- Icon — pre-colored Figma asset: active (indigo) / inactive (slate) -->
@@ -80,6 +90,8 @@
                   <li>
                     <a [routerLink]="child.path"
                        class="sidebar__child"
+                       (click)="navigated.emit()"
+                       [attr.aria-current]="isChildActive(child.path)() ? 'page' : null"
                        [class.sidebar__child--active]="isChildActive(child.path)()">
                       <span class="sidebar__child-label">{{ child.label }}</span>
                       @if (child.badge === 'dev') {
@@ -106,4 +118,4 @@
     </div>
   </div>
 
-</aside>
+</div>

@@ -18,7 +18,7 @@
 
   &__label {
     @apply m-0 text-[11px] font-normal;
-    color: #64748b;
+    color: #94a3b8;
   }
 
   &__value {
@@ -31,7 +31,7 @@
     @apply m-0 text-[11px] font-normal;
 
     &--good     { color: #10b981; }
-    &--critical { color: #e11d48; }
+    &--critical { color: #fb7185; }
     &--info     { color: #06b6d4; }
   }
 

@@ -1,6 +1,12 @@
 @reference "../../../../../../../styles.scss";
 
 .activity-log {
+  // Same card as the other device tabs (Figma card: #1e293b, 1px border, 12px radius)
+  background: #1e293b;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 12px;
+  padding: 20px;
+
   &__list {
     list-style: none;
     padding: 0;

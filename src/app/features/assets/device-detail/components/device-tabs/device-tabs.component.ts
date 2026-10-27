@@ -32,4 +32,30 @@ export class DeviceTabsComponent {
     { id: 'contract-lifecycle' as DeviceTab, label: 'Contract & Lifecycle', badge: null },
     { id: 'activity-log'       as DeviceTab, label: 'Activity Log',         badge: this.activityLog().length || null },
   ]);
+
+  tabId(id: DeviceTab): string {
+    return `device-tab-${id}`;
+  }
+
+  /**
+   * WAI-ARIA tabs keyboard model (WCAG 2.1.1): ←/→ move between tabs (wrapping), Home/End jump to
+   * the first/last tab. Selection follows focus; only the active tab is in the Tab order
+   * (roving tabindex), so Tab moves on to the panel instead of through every tab.
+   */
+  onTabKeydown(event: KeyboardEvent, index: number): void {
+    const tabs = this.tabs();
+    let next: number;
+    switch (event.key) {
+      case 'ArrowRight': next = (index + 1) % tabs.length; break;
+      case 'ArrowLeft':  next = (index - 1 + tabs.length) % tabs.length; break;
+      case 'Home':       next = 0; break;
+      case 'End':        next = tabs.length - 1; break;
+      default: return;
+    }
+    event.preventDefault();
+    const id = tabs[next]?.id;
+    if (!id) return;
+    this.activeTab.set(id);
+    queueMicrotask(() => document.getElementById(this.tabId(id))?.focus());
+  }
 }

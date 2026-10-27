@@ -52,6 +52,8 @@ export class PercentileRankingComponent {
     const colors = this.dimColors;
     return {
       backgroundColor: 'transparent',
+      // Text alternative for the canvas (WCAG 1.1.1): ECharts generates role=img + an aria-label from the data
+      aria: { enabled: true, decal: { show: false } },
       grid: { left: 56, right: 32, top: 8, bottom: 20, containLabel: false },
       tooltip: {
         ...CHART_TOOLTIP,
@@ -110,7 +112,7 @@ export class PercentileRankingComponent {
           silent: true,
           data: [{ xAxis: 50 }],
           lineStyle: { type: 'dashed', color: 'rgba(51,65,85,0.9)' },
-          label: { formatter: 'Median', color: '#334155', fontSize: 9 },
+          label: { formatter: 'Median', color: '#94a3b8', fontSize: 9 },
         },
       }],
     };

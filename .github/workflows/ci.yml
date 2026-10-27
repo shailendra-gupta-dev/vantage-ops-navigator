@@ -1,8 +1,11 @@
 name: CI
 
-# Unit tests + production build for every pull request into master. The Pages
-# deploy workflow (deploy.yml) publishes after merge; this catches failing tests,
-# broken builds and component-style budget errors before they reach master.
+# For every pull request into master:
+#   build          unit tests + production build
+#   accessibility  WCAG 2.2 AA: Angular template a11y lint, then an axe-core audit of every screen at
+#                  four breakpoints plus keyboard/behaviour tests (see docs/accessibility.md)
+# The Pages deploy workflow (deploy.yml) publishes after merge; these catch failing tests, broken
+# builds, style budget errors and accessibility regressions before they reach master.
 on:
   pull_request:
     branches: [master]
@@ -35,3 +38,34 @@ jobs:
 
       - name: Build (production, GitHub Pages base href)
         run: npx ng build --configuration production --base-href /vantage-ops-navigator/
+
+  accessibility:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 26
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Template accessibility lint
+        run: npm run lint:a11y
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: WCAG 2.2 audit (axe-core + keyboard tests)
+        run: npm run a11y
+
+      - name: Upload accessibility report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7

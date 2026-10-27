@@ -44,11 +44,13 @@ export class NeedsFocusCardComponent {
     const d = this.chartData().needsFocus;
     return {
       backgroundColor: 'transparent',
+      // Text alternative for the canvas (WCAG 1.1.1): ECharts generates role=img + an aria-label from the data
+      aria: { enabled: true, decal: { show: false } },
       grid: { left: 0, right: 0, top: 4, bottom: 20, containLabel: false },
       tooltip: { ...CHART_TOOLTIP, trigger: 'axis', axisPointer: { type: 'shadow' } },
       legend: {
         bottom: 0,
-        textStyle: { color: '#64748b', fontSize: 9, fontFamily: 'Inter, system-ui, sans-serif' },
+        textStyle: { color: '#94a3b8', fontSize: 9, fontFamily: 'Inter, system-ui, sans-serif' },
         itemWidth: 10,
         itemHeight: 6,
       },

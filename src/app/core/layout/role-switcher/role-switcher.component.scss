@@ -51,6 +51,13 @@
     &--active {
       @apply text-text-primary;
     }
+
+    // Keyboard highlight (aria-activedescendant): visible, not colour-only (also gets the focus ring)
+    &--highlight {
+      @apply bg-bg-elevated text-text-primary;
+      outline: 2px solid #a5b4fc;
+      outline-offset: -2px;
+    }
   }
 
   &__check {

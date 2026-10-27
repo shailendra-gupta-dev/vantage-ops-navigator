@@ -6,7 +6,7 @@
     <div class="network-digest__header-left">
       <span class="network-digest__icon" aria-hidden="true">📬</span>
       <div class="network-digest__header-info">
-        <span class="network-digest__title">My Network Digest</span>
+        <h2 class="network-digest__title">My Network Digest</h2>
         <span class="network-digest__subtitle">Since Tuesday 9:00 AM</span>
       </div>
     </div>
@@ -22,9 +22,11 @@
     @for (item of items(); track item.id; let last = $last) {
       <div class="network-digest__item" [class.network-digest__item--last]="last" role="listitem">
         <span class="network-digest__item-emoji" aria-hidden="true">{{ item.emoji }}</span>
+        <!-- The coloured dot above is decorative; state the severity in text (WCAG 1.1.1 / 1.4.1) -->
+        <span class="sr-only">{{ item.severity }} severity.</span>
         <div class="network-digest__item-body">
           <div class="network-digest__item-meta">
-            <span class="network-digest__item-badge" [style.background]="item.badgeColor">
+            <span class="network-digest__item-badge" [style.background]="item.badgeColor" [style.color]="item.badgeTextColor">
               {{ item.badgeLabel }}
             </span>
             <span class="network-digest__item-time">{{ item.timeLabel }}</span>

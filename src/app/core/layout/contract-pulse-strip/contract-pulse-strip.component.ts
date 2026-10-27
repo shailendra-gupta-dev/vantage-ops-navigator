@@ -26,6 +26,15 @@ const MOCK_CONTRACTS: ContractPill[] = [
   encapsulation: ViewEncapsulation.None
 })
 export class ContractPulseStripComponent {
+  /** Colour alone must not carry meaning (WCAG 1.4.1): spoken equivalent of the pill colour. */
+  urgencyLabel(urgency: string): string {
+    switch (urgency) {
+      case 'red':   return 'urgent';
+      case 'amber': return 'expiring soon';
+      default:      return 'on track';
+    }
+  }
+
   readonly contracts  = input<ContractPill[]>(MOCK_CONTRACTS);
   readonly dismissed  = output<void>();
 

@@ -39,7 +39,7 @@ export class AdvisoryTableComponent {
   ];
 
   cvssColor(score: number): string {
-    if (score >= 9.0) return 'var(--color-critical)';
+    if (score >= 9.0) return 'var(--color-critical-text)';
     if (score >= 7.0) return 'var(--color-high)';
     if (score >= 4.0) return 'var(--color-warning)';
     return 'var(--color-info)';

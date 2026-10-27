@@ -1,6 +1,6 @@
 <!-- Figma node 7:1425 — ContractPulseStrip -->
 @if (!isDismissed()) {
-  <div class="pulse-strip">
+  <section class="pulse-strip" aria-label="Contract pulse">
 
     <!-- Left — label -->
     <!-- Figma: warning icon 12px + Inter Medium 11px #64748b tracking-[0.44px] -->
@@ -23,6 +23,7 @@
           <span class="pulse-strip__pill-dot" aria-hidden="true"></span>
           <span class="pulse-strip__pill-label">{{ contract.label }}</span>
           <span class="pulse-strip__pill-days">{{ contract.daysLeft }}d</span>
+          <span class="sr-only">, {{ contract.daysLeft }} days left, {{ urgencyLabel(contract.urgency) }}</span>
         </div>
       }
     </div>
@@ -36,5 +37,5 @@
       </svg>
     </button>
 
-  </div>
+  </section>
 }
